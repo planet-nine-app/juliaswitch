@@ -105,36 +105,31 @@ class Network {
         })
     }
     
-    class func getValue(baseURL: String, callback: @escaping (Error?, Data?) -> Void) async {
+    class func associate(baseURL: String, user: User, signedPrompt: PostPrompt, callback: @escaping (Error?, Data?) -> Void) async {
         let sessionless = Sessionless()
         let timestamp = "".getTime()
-        let uuid = Persistence.getUUID()
-        let message = """
-        {"timestamp":"\(timestamp)","uuid":"\(uuid)"}
-        """
+        let uuid = user.uuid
         
-        guard let signature = sessionless.sign(message: message) else { return }
+        guard let payload = PostAssociate(timestamp: timestamp, newTimestamp: signedPrompt.timestamp, newUUID: signedPrompt.uuid, newPubKey: signedPrompt.pubKey, prompt: signedPrompt.prompt, newSignature: signedPrompt.signature, signature: "").toData() else { return }
         
-        let urlString = "timestamp=\(timestamp)&uuid=\(uuid)&signature=\(signature)"
-        guard let urlEncodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
-        
-        await Network.get(urlString: "\(baseURL)/value?\(urlEncodedString)", callback: callback)
+        await Network.post(urlString: "\(baseURL)/user/\(user.uuid)/associate", payload: payload, callback: callback)
     }
     
-    class func setValue(value: String, baseURL: String, callback: @escaping (Error?, Data?) -> Void) async {
+    class func sendMessage(baseURL: String, user: User, content: String, receiverUUID: String, callback: @escaping (Error?, Data?) -> Void) async {
         let sessionless = Sessionless()
-        let message = """
-        {"timestamp":"\("".getTime())","uuid":"\(Persistence.getUUID())","value":"\(value)"}
-        """
         
+        guard let payload = PostableMessage(timestamp: "".getTime(), senderUUID: user.uuid, receiverUUID: receiverUUID, content: content).toData() else { return }
+        
+        await Network.post(urlString: "\(baseURL)/message", payload: payload, callback: callback)
+    }
+    
+    class func getMessages(baseURL: String, user: User, callback: @escaping (Error?, Data?) -> Void) async {
+        let sessionless = Sessionless()
+        let timestamp = "".getTime()
+        let message = "\(timestamp)\(user.uuid)"
         guard let signature = sessionless.sign(message: message) else { return }
         
-        let payload = """
-        {"timestamp":"\("".getTime())","uuid":"\(Persistence.getUUID())","value":"\(value)","signature":"\(signature)"}
-        """
-        
-        guard let data = payload.data(using: .utf8) else { return }
-        await Network.post(urlString: "\(baseURL)/value", payload: data, callback: callback)
+        await Network.get(urlString: "\(baseURL)/messages/user/\(user.uuid)?timestamp=\(timestamp)&signature=\(signature)", callback: callback)
     }
 }
 

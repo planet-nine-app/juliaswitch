@@ -12,7 +12,6 @@ import SwiftData
 struct JuliaChatApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
             User.self,
             Message.self,
         ])

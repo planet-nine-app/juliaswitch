@@ -10,55 +10,37 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-    @Query private var user: User
+    //@Query private var user: User
+    @State private var viewState = 0
+    
+    func viewForState(viewState: Int) -> any View {
+        switch viewState {
+        case 0: return WelcomeView() /*return Button("To 1", role: .none) {
+            self.viewState += 1
+        }*/
+        case 1: return Button("To 2", role: .none) {
+            self.viewState += 2
+        }
+        default: return Button("To 0", role: .none) {
+            self.viewState = 0
+        }
+        }
+    }
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-#if os(macOS)
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-#endif
-            .toolbar {
-#if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-#endif
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
+        switch viewState {
+        case 0: WelcomeView() /*return Button("To 1", role: .none) {
+            self.viewState += 1
+        }*/
+        case 1: Button("To 2", role: .none) {
+            self.viewState += 2
+        }
+        default: Button("To 0", role: .none) {
+            self.viewState = 0
+        }
         }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
 }
 
 #Preview {

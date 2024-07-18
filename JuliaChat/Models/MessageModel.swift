@@ -22,17 +22,23 @@ struct PostableMessage: Codable {
         self.content = content
         self.signature = ""
         
-        if let signature = sign() {
-            self.signature = signature
-        }
+        self.signature = self.sign()
     }
     
     func toString() -> String {
         return "\(timestamp)\(senderUUID)\(receiverUUID)\(content)"
     }
     
-    func sign() -> String? {
-        return Sessionless().sign(message: self.toString())
+    func sign() -> String {
+        return Sessionless().sign(message: self.toString()) ?? ""
+    }
+    
+    func toData() -> Data? {
+        let json = """
+            {"timestamp":"\(timestamp)","senderUUID":"\(senderUUID)","receiverUUID":"\(receiverUUID)","content":"\(content)","signature":"\(signature)"}
+        """
+        
+        return json.data(using: .utf8)
     }
 }
 
