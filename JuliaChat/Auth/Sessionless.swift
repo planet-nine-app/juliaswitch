@@ -47,7 +47,7 @@ public class Sessionless {
     }
     
     func getPathToCrypto() -> URL? {
-        let sessionlessBundle = Bundle(for: Sessionless.self)
+        /*let sessionlessBundle = Bundle(for: Sessionless.self)
         guard let resourceURL = sessionlessBundle.resourceURL?.appending(path: "Sessionless.bundle"),
               let resourceBundle = Bundle(url: resourceURL),
               let cryptoPathURL = resourceBundle.url(forResource: "crypto", withExtension: "js") else {
@@ -55,7 +55,12 @@ public class Sessionless {
             return nil
         }
         print(cryptoPathURL.absoluteString)
-        return cryptoPathURL
+        return cryptoPathURL*/
+        guard let resourceURL = Bundle.main.url(forResource: "crypto", withExtension: "js") else {
+            print("no dice")
+            return nil
+        }
+        return resourceURL
     }
     
     func getJSContext() -> JSContext? {

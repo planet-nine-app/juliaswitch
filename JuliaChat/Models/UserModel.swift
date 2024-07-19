@@ -9,38 +9,74 @@ import Foundation
 import SwiftData
 
 @Model()
-class KeyTuple {
-    var uuid: String
-    var pubKey: String
+class KeyTuple: Codable {
+    var uuid = ""
+    var pubKey = ""
     
     init(uuid: String, pubKey: String) {
         self.uuid = uuid
         self.pubKey = pubKey
     }
+    
+    required init(from decoder: Decoder) throws {
+        // what goes here?
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        // what goes here?
+    }
 }
 
 @Model()
-class UserKeys {
-    var interactingKeys: [KeyTuple]
-    var coordinatingKeys: [KeyTuple]
+class UserKeys: Codable {
+    var interactingKeys = [KeyTuple]()
+    var coordinatingKeys = [KeyTuple]()
     
     init(interactingKeys: [KeyTuple], coordinatingKeys: [KeyTuple]) {
         self.interactingKeys = interactingKeys
         self.coordinatingKeys = coordinatingKeys
     }
+    
+    required init(from decoder: Decoder) throws {
+        // what goes here?
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        // what goes here?
+    }
 }
 
 @Model()
-class User {
+class User: Codable {
     @Attribute(.unique) var uuid = ""
-    var keys = [UserKeys]()
+    var keys = UserKeys(interactingKeys: [], coordinatingKeys: [])
     var messages = [Message]()
+    var pubKey = ""
     var handle = ""
     
-    init(uuid: String = "", keys: [UserKeys] = [UserKeys](), messages: [Message] = [Message]()) {
+    enum ConfigKeys: String, CodingKey {
+        case uuid
+        case keys
+        case messages
+        case pubKey
+        case handle
+    }
+    
+    init(uuid: String = "", keys: UserKeys = UserKeys(interactingKeys: [], coordinatingKeys: []), messages: [Message] = [Message]()) {
         self.uuid = uuid
         self.keys = keys
         self.messages = messages
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: ConfigKeys.self)
+        self.uuid = try values.decodeIfPresent(String.self, forKey: ConfigKeys.uuid)!
+        self.keys = try values.decodeIfPresent([UserKeys], forKey: <#T##KeyedDecodingContainer<ConfigKeys>.Key#>)
+       
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        // what goes here?
     }
 }
 
@@ -49,10 +85,15 @@ struct RegisterUser: Codable {
     let pubKey: String
     let handle: String
     var signature = ""
+    let user: User
     
     init(pubKey: String, handle: String) {
         self.pubKey = pubKey
         self.handle = handle
+        
+        self.user = User()
+        self.user.pubKey = pubKey
+        self.user.handle = handle
         
         self.signature = self.sign()
     }
@@ -73,6 +114,7 @@ struct RegisterUser: Codable {
         return json.data(using: .utf8)
     }
 }
+
 
 
 

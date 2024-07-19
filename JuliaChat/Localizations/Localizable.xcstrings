@@ -1,0 +1,158 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Enter Text" : {
+
+    },
+    "handleHelpText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This handle will be shared with your connections. It doesn't need to be unique, nor does it need to have anything to do with you. It's also optional.\\nIf you leave it blank, we'll call you Walking One, as that is what you call yourselves."
+          }
+        }
+      }
+    },
+    "letsGo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let's Go"
+          }
+        }
+      }
+    },
+    "onboarding1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Greetings walking one..."
+          }
+        }
+      }
+    },
+    "onboarding2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We here on Planet Nine are concerned..."
+          }
+        }
+      }
+    },
+    "onboarding3" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your planet is infested by the scourge of the galaxy. Our enemy..."
+          }
+        }
+      }
+    },
+    "onboarding4" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In your language they call themselves, The Advertisements."
+          }
+        }
+      }
+    },
+    "onboarding5" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "They watch your every move through digital space, but there are limits to their power."
+          }
+        }
+      }
+    },
+    "onboarding6" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "They can only know you by your digital fingerprints. Bits of code tying numbers and addresses together."
+          }
+        }
+      }
+    },
+    "onboarding7" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "But here's the thing, walking one..."
+          }
+        }
+      }
+    },
+    "onboarding8" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are not a number."
+          }
+        }
+      }
+    },
+    "onboarding9" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "And you are not an address."
+          }
+        }
+      }
+    },
+    "onboarding10" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We are Planet Nine, a vanguard of The Advancement. We give you this simple chat app to start. No tracking, no reading your contacts, no invasion of privacy. "
+          }
+        }
+      }
+    },
+    "onboarding11" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We will only ask for one piece of info, and that is: what should we call you?"
+          }
+        }
+      }
+    },
+    "To 0" : {
+
+    },
+    "To 2" : {
+
+    }
+  },
+  "version" : "1.0"
+}

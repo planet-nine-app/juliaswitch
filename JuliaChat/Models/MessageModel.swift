@@ -43,11 +43,11 @@ struct PostableMessage: Codable {
 }
 
 @Model()
-class Message {
-    var timestamp: String
-    var senderUUID: String
-    var receiverUUID: String
-    var content: String
+class Message: Codable {
+    var timestamp = ""
+    var senderUUID = ""
+    var receiverUUID = ""
+    var content = ""
     
     init(timestamp: String, senderUUID: String, receiverUUID: String, content: String) {
         self.timestamp = timestamp
@@ -55,4 +55,14 @@ class Message {
         self.receiverUUID = receiverUUID
         self.content = content
     }
+    
+    required init(from decoder: Decoder) throws {
+        // what goes here?
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        // what goes here?
+    }
+    
+    
 }
