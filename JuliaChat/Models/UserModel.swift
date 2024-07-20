@@ -8,8 +8,8 @@
 import Foundation
 import SwiftData
 
-@Model()
-class KeyTuple: Codable {
+//@Model()
+struct KeyTuple: Codable {
     var uuid = ""
     var pubKey = ""
     
@@ -18,38 +18,52 @@ class KeyTuple: Codable {
         self.pubKey = pubKey
     }
     
-    required init(from decoder: Decoder) throws {
-        // what goes here?
+    enum ConfigKeys: String, CodingKey {
+        case uuid
+        case pubKey
+    }
+    
+    /*required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: ConfigKeys.self)
+        self.uuid = try values.decode(String.self, forKey: .uuid)
+        self.pubKey = try values.decode(String.self, forKey: .pubKey)
     }
     
     func encode(to encoder: Encoder) throws {
         // what goes here?
-    }
+    }*/
 }
 
-@Model()
-class UserKeys: Codable {
-    var interactingKeys = [KeyTuple]()
-    var coordinatingKeys = [KeyTuple]()
+//@Model()
+struct AssociatedKeys: Codable {
+    var interactingKeys = [String: KeyTuple]()
+    var coordinatingKeys = [String: KeyTuple]()
     
-    init(interactingKeys: [KeyTuple], coordinatingKeys: [KeyTuple]) {
+    init(interactingKeys: [String: KeyTuple], coordinatingKeys: [String: KeyTuple]) {
         self.interactingKeys = interactingKeys
         self.coordinatingKeys = coordinatingKeys
     }
     
-    required init(from decoder: Decoder) throws {
-        // what goes here?
+    enum ConfigKeys: String, CodingKey {
+        case interactingKeys
+        case coordinatingKeys
+    }
+    
+    /*required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: ConfigKeys.self)
+        self.interactingKeys = try values.decodeIfPresent([KeyTuple].self, forKey: .interactingKeys)!
+        self.coordinatingKeys = try values.decodeIfPresent([KeyTuple].self, forKey: .coordinatingKeys)!
     }
     
     func encode(to encoder: Encoder) throws {
         // what goes here?
-    }
+    }*/
 }
 
 @Model()
 class User: Codable {
     @Attribute(.unique) var uuid = ""
-    var keys = UserKeys(interactingKeys: [], coordinatingKeys: [])
+    var keys = AssociatedKeys(interactingKeys: [:], coordinatingKeys: [:])
     var messages = [Message]()
     var pubKey = ""
     var handle = ""
@@ -62,7 +76,7 @@ class User: Codable {
         case handle
     }
     
-    init(uuid: String = "", keys: UserKeys = UserKeys(interactingKeys: [], coordinatingKeys: []), messages: [Message] = [Message]()) {
+    init(uuid: String = "", keys: AssociatedKeys = AssociatedKeys(interactingKeys: [:], coordinatingKeys: [:]), messages: [Message] = [Message]()) {
         self.uuid = uuid
         self.keys = keys
         self.messages = messages
@@ -70,9 +84,11 @@ class User: Codable {
     
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: ConfigKeys.self)
-        self.uuid = try values.decodeIfPresent(String.self, forKey: ConfigKeys.uuid)!
-        self.keys = try values.decodeIfPresent([UserKeys], forKey: <#T##KeyedDecodingContainer<ConfigKeys>.Key#>)
-       
+        self.uuid = try values.decodeIfPresent(String.self, forKey: .uuid)!
+        self.keys = try values.decodeIfPresent(AssociatedKeys.self, forKey: .keys)!
+        self.messages = try values.decodeIfPresent([Message].self, forKey: .messages)!
+        self.pubKey = try values.decode(String.self, forKey: .pubKey)
+        self.handle = try values.decode(String.self, forKey: .handle)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -94,6 +110,7 @@ struct RegisterUser: Codable {
         self.user = User()
         self.user.pubKey = pubKey
         self.user.handle = handle
+        self.user.messages = [Message]()
         
         self.signature = self.sign()
     }
@@ -109,8 +126,11 @@ struct RegisterUser: Codable {
     
     func toData() -> Data? {
         let json = """
-            {"timestamp":"\(timestamp)","pubKey":"\(pubKey)","handle":"\(handle)","signature":"\(signature)"}
+            {"timestamp":"\(timestamp)","pubKey":"\(pubKey)","handle":"\(handle)","user":{"pubKey":"\(pubKey)","handle":"\(handle)","messages":[]},"signature":"\(signature)"}
         """
+        print(signature)
+        print(self.toString())
+        print(pubKey)
         return json.data(using: .utf8)
     }
 }

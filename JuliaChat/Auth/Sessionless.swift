@@ -98,11 +98,20 @@ public class Sessionless {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: keyService,
             kSecAttrAccount as String: keyAccount,
-            kSecValueData as String: data
+            kSecValueData as String: data,
         ]
-        let status = SecItemAdd(query as CFDictionary, nil)
         
-        return status == errSecSuccess
+        let updateAttributes: [String: Any] = [
+            kSecValueData as String: data,
+        ]
+        let addStatus = SecItemAdd(query as CFDictionary, nil)
+        let updateStatus = SecItemUpdate(query as CFDictionary, updateAttributes as CFDictionary)
+        
+        print("IS THIS THE PROBLEM?!?!??! \(addStatus == errSecSuccess || updateStatus == errSecSuccess)")
+        print(addStatus)
+        print(updateStatus)
+        
+        return addStatus == errSecSuccess || updateStatus == errSecSuccess
     }
     
     public func getKeys() -> Keys? {

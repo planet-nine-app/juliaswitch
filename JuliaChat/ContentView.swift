@@ -46,5 +46,9 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .environment(\.locale, .init(identifier: "en"))
-        .modelContainer(for: Item.self, inMemory: true)
+        /*
+         .modelContainer(for: KeyTuple.self, inMemory: true)
+        .modelContainer(for: AssociatedKeys.self, inMemory: true)*/
+        .modelContainer(for: Message.self, inMemory: true)
+        .modelContainer(for: User.self, inMemory: true)
 }

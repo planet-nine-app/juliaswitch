@@ -74,12 +74,15 @@ struct PlanetNineView: View {
                                         return
                                     }
                                     guard let data = data else { return }
+                                    print(String(data: data, encoding: .utf8))
                                     do {
                                         let user = try JSONDecoder().decode(User.self, from: data)
                                         print("SUCCESS")
                                         print(user)
                                         print(user.uuid)
                                     } catch {
+                                        print("Decoding failed ")
+                                        print(error)
                                         return
                                     }
                                 })
