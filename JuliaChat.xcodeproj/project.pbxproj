@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA51893C2C4C2D54008EB941 /* ConnectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51893B2C4C2D54008EB941 /* ConnectionsView.swift */; };
+		CA51893E2C4C3A2B008EB941 /* JuliaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51893D2C4C3A2B008EB941 /* JuliaButton.swift */; };
+		CA5189402C4C5FF3008EB941 /* JuliaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51893F2C4C5FF3008EB941 /* JuliaTextField.swift */; };
 		CA7EFB1B2C41C7C6009A8FDD /* JuliaChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7EFB1A2C41C7C6009A8FDD /* JuliaChatApp.swift */; };
 		CA7EFB1D2C41C7C6009A8FDD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7EFB1C2C41C7C6009A8FDD /* ContentView.swift */; };
 		CA7EFB1F2C41C7C6009A8FDD /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7EFB1E2C41C7C6009A8FDD /* Item.swift */; };
@@ -18,7 +21,6 @@
 		CACD59122C47935B00813D20 /* PromptModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACD59112C47935B00813D20 /* PromptModel.swift */; };
 		CACD59142C486F8600813D20 /* AssociateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACD59132C486F8600813D20 /* AssociateModel.swift */; };
 		CACD59172C48DD1200813D20 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACD59162C48DD1200813D20 /* WelcomeView.swift */; };
-		CACD59192C48DD1F00813D20 /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACD59182C48DD1F00813D20 /* ContactsView.swift */; };
 		CACD591B2C48DD2C00813D20 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACD591A2C48DD2C00813D20 /* ChatView.swift */; };
 		CACD591D2C48DFDD00813D20 /* PlanetNineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACD591C2C48DFDD00813D20 /* PlanetNineView.swift */; };
 		CACD59202C4A312B00813D20 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CACD591F2C4A312B00813D20 /* Localizable.xcstrings */; };
@@ -27,6 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA51893B2C4C2D54008EB941 /* ConnectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsView.swift; sourceTree = "<group>"; };
+		CA51893D2C4C3A2B008EB941 /* JuliaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuliaButton.swift; sourceTree = "<group>"; };
+		CA51893F2C4C5FF3008EB941 /* JuliaTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuliaTextField.swift; sourceTree = "<group>"; };
 		CA7EFB172C41C7C6009A8FDD /* JuliaChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JuliaChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA7EFB1A2C41C7C6009A8FDD /* JuliaChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuliaChatApp.swift; sourceTree = "<group>"; };
 		CA7EFB1C2C41C7C6009A8FDD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -40,7 +45,6 @@
 		CACD59112C47935B00813D20 /* PromptModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptModel.swift; sourceTree = "<group>"; };
 		CACD59132C486F8600813D20 /* AssociateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociateModel.swift; sourceTree = "<group>"; };
 		CACD59162C48DD1200813D20 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
-		CACD59182C48DD1F00813D20 /* ContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsView.swift; sourceTree = "<group>"; };
 		CACD591A2C48DD2C00813D20 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		CACD591C2C48DFDD00813D20 /* PlanetNineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetNineView.swift; sourceTree = "<group>"; };
 		CACD591F2C4A312B00813D20 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -124,9 +128,11 @@
 			isa = PBXGroup;
 			children = (
 				CACD59162C48DD1200813D20 /* WelcomeView.swift */,
-				CACD59182C48DD1F00813D20 /* ContactsView.swift */,
 				CACD591A2C48DD2C00813D20 /* ChatView.swift */,
 				CACD591C2C48DFDD00813D20 /* PlanetNineView.swift */,
+				CA51893B2C4C2D54008EB941 /* ConnectionsView.swift */,
+				CA51893D2C4C3A2B008EB941 /* JuliaButton.swift */,
+				CA51893F2C4C5FF3008EB941 /* JuliaTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -228,10 +234,12 @@
 				CACD590B2C41CF4E00813D20 /* UserModel.swift in Sources */,
 				CACD59172C48DD1200813D20 /* WelcomeView.swift in Sources */,
 				CACD591D2C48DFDD00813D20 /* PlanetNineView.swift in Sources */,
+				CA51893C2C4C2D54008EB941 /* ConnectionsView.swift in Sources */,
 				CACD59102C478CF600813D20 /* Network.swift in Sources */,
+				CA5189402C4C5FF3008EB941 /* JuliaTextField.swift in Sources */,
 				CAE7E7702C41CA62002B761A /* Sessionless.swift in Sources */,
+				CA51893E2C4C3A2B008EB941 /* JuliaButton.swift in Sources */,
 				CACD59142C486F8600813D20 /* AssociateModel.swift in Sources */,
-				CACD59192C48DD1F00813D20 /* ContactsView.swift in Sources */,
 				CACD59122C47935B00813D20 /* PromptModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -36,10 +36,10 @@ struct KeyTuple: Codable {
 
 //@Model()
 struct AssociatedKeys: Codable {
-    var interactingKeys = [String: KeyTuple]()
-    var coordinatingKeys = [String: KeyTuple]()
+    var interactingKeys = [String: String]()
+    var coordinatingKeys = [String: String]()
     
-    init(interactingKeys: [String: KeyTuple], coordinatingKeys: [String: KeyTuple]) {
+    init(interactingKeys: [String: String], coordinatingKeys: [String: String]) {
         self.interactingKeys = interactingKeys
         self.coordinatingKeys = coordinatingKeys
     }
@@ -67,6 +67,7 @@ class User: Codable {
     var messages = [Message]()
     var pubKey = ""
     var handle = ""
+    var pendingPrompts = [String: Prompt]()
     
     enum ConfigKeys: String, CodingKey {
         case uuid
@@ -74,6 +75,7 @@ class User: Codable {
         case messages
         case pubKey
         case handle
+        case pendingPrompts
     }
     
     init(uuid: String = "", keys: AssociatedKeys = AssociatedKeys(interactingKeys: [:], coordinatingKeys: [:]), messages: [Message] = [Message]()) {
@@ -89,6 +91,7 @@ class User: Codable {
         self.messages = try values.decodeIfPresent([Message].self, forKey: .messages)!
         self.pubKey = try values.decode(String.self, forKey: .pubKey)
         self.handle = try values.decode(String.self, forKey: .handle)
+        self.pendingPrompts = try values.decode([String: Prompt].self, forKey: .pendingPrompts)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -126,7 +129,7 @@ struct RegisterUser: Codable {
     
     func toData() -> Data? {
         let json = """
-            {"timestamp":"\(timestamp)","pubKey":"\(pubKey)","handle":"\(handle)","user":{"pubKey":"\(pubKey)","handle":"\(handle)","messages":[]},"signature":"\(signature)"}
+            {"timestamp":"\(timestamp)","pubKey":"\(pubKey)","handle":"\(handle)","user":{"pubKey":"\(pubKey)","handle":"\(handle)","messages":[],"pendingPrompts":{}},"signature":"\(signature)"}
         """
         print(signature)
         print(self.toString())

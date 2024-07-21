@@ -26,6 +26,17 @@
         }
       }
     },
+    "noConnections" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We do not want your contacts walking one. To connect here, you will need to connect in reality."
+          }
+        }
+      }
+    },
     "onboarding1" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -148,9 +159,6 @@
       }
     },
     "To 0" : {
-
-    },
-    "To 2" : {
 
     }
   },

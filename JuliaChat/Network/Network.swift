@@ -33,13 +33,21 @@ class Network {
     
     class func post(urlString: String, payload: Data, callback: @escaping (Error?, Data?) -> Void) async {
         guard let url = URL(string: urlString) else { return }
+        print("postin'")
+        print(payload)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
-            let (data, _) = try await URLSession.shared.upload(for: request, from: payload)
+            let (data, response) = try await URLSession.shared.upload(for: request, from: payload)
+            guard let httpResponse = response as? HTTPURLResponse else { return }
+            if httpResponse.statusCode > 300 {
+                callback(NetworkError.networkError, nil)
+                return
+            }
             callback(nil, data)
+            
         } catch {
             callback(error, nil)
         }
@@ -52,7 +60,12 @@ class Network {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
-            let (data, _) = try await URLSession.shared.upload(for: request, from: payload)
+            let (data, response) = try await URLSession.shared.upload(for: request, from: payload)
+            guard let httpResponse = response as? HTTPURLResponse else { return }
+            if httpResponse.statusCode > 300 {
+                callback(NetworkError.networkError, nil)
+                return
+            }
             callback(nil, data)
         } catch {
             callback(error, nil)
@@ -85,10 +98,11 @@ class Network {
         }
     }
     
-    class func checkForPrompt(baseURL: String, user: User, callback: @escaping (Error?, Data?) -> Void) async {
+    class func getPrompt(baseURL: String, user: User, callback: @escaping (Error?, Data?) -> Void) async {
         let sessionless = Sessionless()
         let timestamp = "".getTime()
-        let signature = "\(timestamp)\(user.uuid)"
+        let message = "\(timestamp)\(user.uuid)"
+        let signature = sessionless.sign(message: message) ?? ""
         await Network.get(urlString: "\(baseURL)/user/\(user.uuid)/associate/prompt?timestamp=\(timestamp)&signature=\(signature)", callback: {err, data in
             callback(err, data)
         })
@@ -106,9 +120,7 @@ class Network {
     }
     
     class func associate(baseURL: String, user: User, signedPrompt: PostPrompt, callback: @escaping (Error?, Data?) -> Void) async {
-        let sessionless = Sessionless()
         let timestamp = "".getTime()
-        let uuid = user.uuid
         
         guard let payload = PostAssociate(timestamp: timestamp, newTimestamp: signedPrompt.timestamp, newUUID: signedPrompt.uuid, newPubKey: signedPrompt.pubKey, prompt: signedPrompt.prompt, newSignature: signedPrompt.signature, signature: "").toData() else { return }
         

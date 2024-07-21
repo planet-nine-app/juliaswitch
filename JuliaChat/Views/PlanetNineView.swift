@@ -8,27 +8,11 @@
 import SwiftUI
 
 struct PlanetNineView: View {
+    @Environment(\.modelContext) var modelContext
     let backgroundImage = ImageResource(name: "space", bundle: Bundle.main)
-    @State var displayText = "onboarding1"
-    @State var onboardingState = 1
+    @Binding public var displayText: String
     @State var enteredText = ""
     let baseURL = "http://localhost:3000"
-    
-    func changeText() {
-        if onboardingState >= 11 {
-            return
-        }
-        onboardingState += 1
-        displayText = "onboarding\(onboardingState)"
-    }
-    
-    struct ExampleTextField: View {
-        @Binding var enteredText: String
-        
-        var body: some View {
-            TextField("Enter Text", text: $enteredText)
-        }
-    }
     
     struct CustomButtonStyle: ButtonStyle {
         
@@ -56,48 +40,8 @@ struct PlanetNineView: View {
                         .frame(width: w - 32, height: w - 32, alignment: .center)
                         .background(.black)
                         .clipShape(Circle())
-                    
-                    if onboardingState > 10 {
-                        ExampleTextField(enteredText: $enteredText)
-                            .frame(width: w - 128, height: 64, alignment: .center)
-                            .background(.white)
-                        Text(LocalizedStringKey("handleHelpText"))
-                            .frame(width: w - 128, height: 64, alignment: .center)
-                            .padding(.all, 16)
-                        Button() {
-                            print("button pressed")
-                            Task {
-                                await Network.register(baseURL: baseURL, handle: enteredText, callback: { err, data in
-                                    if let err = err {
-                                        print("error")
-                                        print(err)
-                                        return
-                                    }
-                                    guard let data = data else { return }
-                                    print(String(data: data, encoding: .utf8))
-                                    do {
-                                        let user = try JSONDecoder().decode(User.self, from: data)
-                                        print("SUCCESS")
-                                        print(user)
-                                        print(user.uuid)
-                                    } catch {
-                                        print("Decoding failed ")
-                                        print(error)
-                                        return
-                                    }
-                                })
-                            }
-                        } label: {
-                            Text(LocalizedStringKey("letsGo"))
-                        }
-                        .buttonStyle(CustomButtonStyle())
-                        .background(.green)
-                    }
                 }
                 .position(x: w / 2, y: 250)
-            }
-            .onTapGesture {
-                changeText()
             }
         }
     }

@@ -16,6 +16,7 @@ struct JuliaChatApp: App {
 //            KeyTuple.self,
 //            AssociatedKeys.self,
             Message.self,
+            Prompt.self,
             User.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
