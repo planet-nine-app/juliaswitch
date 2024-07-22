@@ -95,7 +95,23 @@ class User: Codable {
     }
     
     func encode(to encoder: Encoder) throws {
-        // what goes here?
+        var container = encoder.container(keyedBy: ConfigKeys.self)
+        try container.encode(uuid, forKey: .uuid)
+        try container.encode(keys, forKey: .keys)
+        try container.encode(messages, forKey: .messages)
+        try container.encode(pubKey, forKey: .pubKey)
+        try container.encode(handle, forKey: .handle)
+        try container.encode(pendingPrompts, forKey: .pendingPrompts)
+    }
+    
+    func promptsAsArray() -> [Prompt] {
+        var prompts = [Prompt]()
+        for (prompt, pendingPrompt) in self.pendingPrompts {
+            print("got prompt: \(prompt)")
+            print("and pendingPrompt: \(pendingPrompt)")
+            prompts.append(pendingPrompt)
+        }
+        return prompts
     }
 }
 

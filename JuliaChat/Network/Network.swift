@@ -46,6 +46,7 @@ class Network {
                 callback(NetworkError.networkError, nil)
                 return
             }
+            print("data here is \(data)")
             callback(nil, data)
             
         } catch {
@@ -96,6 +97,14 @@ class Network {
         await Network.put(urlString: "\(baseURL)/user/create", payload: payload) { err, data in
             callback(err, data)
         }
+    }
+    
+    class func getUser(baseURL: String, user: User, callback: @escaping (Error?, Data?) -> Void) async {
+        let sessionless = Sessionless()
+        let timestamp = "".getTime()
+        let signature = sessionless.sign(message: "\(timestamp)\(user.uuid)") ?? ""
+        
+        await Network.get(urlString: "\(baseURL)/user/\(user.uuid)?timestamp=\(timestamp)&signature=\(signature)", callback: callback)
     }
     
     class func getPrompt(baseURL: String, user: User, callback: @escaping (Error?, Data?) -> Void) async {

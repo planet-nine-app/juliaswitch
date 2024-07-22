@@ -38,8 +38,10 @@ struct ConnectionsView: View {
                                     if let data = data {
                                         if String(data: data, encoding: .utf8)?.contains("true") == true {
                                             print("Great success")
+                                            return
                                         } else {
                                             print("Terrible failure")
+                                            return
                                         }
                                     }
                                     print("no data")
@@ -75,6 +77,20 @@ struct ConnectionsView: View {
                             }
                         }
                         .transition(.move(edge: .trailing))
+                        if !users[0].pendingPrompts.isEmpty {
+                            let _ = print(users[0].pendingPrompts["AFRV"]?.timestamp)
+                            let _ = print(users[0].promptsAsArray()[0].timestamp)
+                            ForEach(users[0].promptsAsArray()) { prompt in
+                                if prompt.newPubKey != nil {
+                                    let _ = print("boom! add that button")
+                                    JuliaButton(label: "Accept \(prompt.prompt)") {
+                                        print("Accept the prompt here")
+                                    }
+                                } else {
+                                    let _ = print("If it's getting here, what heck is \(prompt.toString())")
+                                }
+                            }
+                        }
                     }
                     
                     JuliaButton(label: "handlePrompts") {

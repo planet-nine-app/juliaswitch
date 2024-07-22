@@ -20,9 +20,10 @@ class Prompt: Codable {
     enum ConfigKeys: String, CodingKey {
         case timestamp
         case prompter
-        case prompt
-        case newPubKey
+        case newTimestamp
         case newUUID
+        case newPubKey
+        case prompt
         case newSignature
     }
     
@@ -32,16 +33,30 @@ class Prompt: Codable {
     
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: ConfigKeys.self)
-        self.timestamp = try values.decodeIfPresent(String.self, forKey: .timestamp)!
-        self.prompter = try values.decodeIfPresent(String.self, forKey: .prompter)!
-        self.prompt = try values.decodeIfPresent(String.self, forKey: .prompt)
-        self.newPubKey = try values.decode(String.self, forKey: .newPubKey)
-        self.newUUID = try values.decode(String.self, forKey: .newUUID)
-        self.newSignature = try values.decode(String.self, forKey: .newSignature)
+        print("trying to init prompt: \(values)")
+        self.timestamp = try values.decodeIfPresent(String.self, forKey: .timestamp) ?? "no timestamp"
+        print(self.timestamp)
+        self.prompter = try values.decodeIfPresent(String.self, forKey: .prompter) ?? "no prompter"
+        self.prompt = try values.decodeIfPresent(String.self, forKey: .prompt) ?? "no prompt"
+        self.newPubKey = try? values.decode(String.self, forKey: .newPubKey)
+        self.newUUID = try? values.decode(String.self, forKey: .newUUID)
+        self.newSignature = try? values.decode(String.self, forKey: .newSignature)
     }
     
     func encode(to encoder: Encoder) throws {
-        // what goes here?
+        var container = encoder.container(keyedBy: ConfigKeys.self)
+        try container.encode(timestamp, forKey: .timestamp)
+        try container.encode(prompter, forKey: .prompter)
+        try container.encodeIfPresent(prompt, forKey: .prompt)
+        try container.encodeIfPresent(newPubKey, forKey: .newPubKey)
+        try container.encodeIfPresent(newUUID, forKey: .newUUID)
+        try container.encodeIfPresent(newSignature, forKey: .newSignature)
+    }
+    
+    func toString() -> String {
+        return """
+        "{"timestamp":"\(timestamp)","prompter":"\(prompter)","prompt":"\(prompt)","newPubKey":"\(newPubKey)","newUUID":"\(newUUID)","newSignature":"\(newSignature)"}"
+        """
     }
 }
 
