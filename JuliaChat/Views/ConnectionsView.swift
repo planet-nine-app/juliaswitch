@@ -85,6 +85,22 @@ struct ConnectionsView: View {
                                     let _ = print("boom! add that button")
                                     JuliaButton(label: "Accept \(prompt.prompt)") {
                                         print("Accept the prompt here")
+                                        let postPrompt = PostPrompt(timestamp: prompt.timestamp, uuid: prompt.newUUID ?? "", pubKey: prompt.newPubKey ?? "", prompt: prompt.prompt ?? "", signature: prompt.newSignature ?? "")
+                                        Task {
+                                            await Network.associate(baseURL: "http://localhost:3000", user: users[0], signedPrompt: postPrompt) { err, data in
+                                                if let err = err {
+                                                    print("ERROROROROR")
+                                                    print(err)
+                                                    return
+                                                }
+                                                if let data = data {
+                                                    print("SUCCESS")
+                                                    print(String(data: data, encoding: .utf8))
+                                                    return
+                                                }
+                                                print("No data")
+                                            }
+                                        }
                                     }
                                 } else {
                                     let _ = print("If it's getting here, what heck is \(prompt.toString())")
@@ -99,6 +115,13 @@ struct ConnectionsView: View {
                 }
                 .frame(width: 160, height: 48, alignment: .center)
                 .position(x: w / 2, y: h * 0.75)
+                HStack {
+                    ForEach(users[0].connections(), id: \.uuid) { tuple in
+                        ConnectionView(label: tuple.uuid) {
+                            print("Tapped a connection")
+                        }
+                    }
+                }
             }
             .onAppear {
                 let user = users[0]

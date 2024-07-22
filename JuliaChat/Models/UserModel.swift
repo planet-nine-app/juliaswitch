@@ -9,13 +9,17 @@ import Foundation
 import SwiftData
 
 //@Model()
-struct KeyTuple: Codable {
+struct KeyTuple: Identifiable {
+    var id: ObjectIdentifier
+    
     var uuid = ""
     var pubKey = ""
+    let data = Data()
     
     init(uuid: String, pubKey: String) {
         self.uuid = uuid
         self.pubKey = pubKey
+        self.id = ObjectIdentifier(KeyTuple.self)
     }
     
     enum ConfigKeys: String, CodingKey {
@@ -112,6 +116,15 @@ class User: Codable {
             prompts.append(pendingPrompt)
         }
         return prompts
+    }
+    
+    func connections() -> [KeyTuple] {
+        var connections = [KeyTuple]()
+        for (key, value) in self.keys.interactingKeys {
+            let tuple = KeyTuple(uuid: key, pubKey: value)
+            connections.append(tuple)
+        }
+        return connections
     }
 }
 
