@@ -35,34 +35,47 @@ struct PostableMessage: Codable {
     
     func toData() -> Data? {
         let json = """
-            {"timestamp":"\(timestamp)","senderUUID":"\(senderUUID)","receiverUUID":"\(receiverUUID)","content":"\(content)","signature":"\(signature)"}
+            {"timestamp":"\(timestamp)","senderUUID":"\(senderUUID)","receiverUUID":"\(receiverUUID)","message":"\(content)","signature":"\(signature)"}
         """
         
         return json.data(using: .utf8)
     }
 }
 
-@Model()
-class Message: Codable {
+struct Message: Codable {
     var timestamp = ""
     var senderUUID = ""
     var receiverUUID = ""
-    var content = ""
+    var message = ""
+    
+//    enum CodingKeys: String, CodingKey {
+//            case timestamp
+//            case senderUUID
+//            case receiverUUID
+//            case message
+//        }
     
     init(timestamp: String, senderUUID: String, receiverUUID: String, content: String) {
         self.timestamp = timestamp
         self.senderUUID = senderUUID
         self.receiverUUID = receiverUUID
-        self.content = content
+        self.message = content
     }
     
-    required init(from decoder: Decoder) throws {
-        // what goes here?
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        // what goes here?
-    }
-    
-    
+//    required init(from decoder: Decoder) throws {
+//            let container = try decoder.container(keyedBy: CodingKeys.self)
+//            timestamp = try container.decode(String.self, forKey: .timestamp)
+//            senderUUID = try container.decode(String.self, forKey: .senderUUID)
+//            receiverUUID = try container.decode(String.self, forKey: .receiverUUID)
+//            message = try container.decode(String.self, forKey: .message)
+//        }
+//        
+//        func encode(to encoder: Encoder) throws {
+//            var container = encoder.container(keyedBy: CodingKeys.self)
+//            try container.encode(timestamp, forKey: .timestamp)
+//            try container.encode(senderUUID, forKey: .senderUUID)
+//            try container.encode(receiverUUID, forKey: .receiverUUID)
+//            try container.encode(message, forKey: .message)
+//        }
+//    
 }

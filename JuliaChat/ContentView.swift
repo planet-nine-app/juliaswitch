@@ -12,6 +12,7 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var users: [User]
     @State private var viewState = 0
+    @State var receiverUUID = ""
     
     func updateViewState(newState: Int) {
         viewState = newState
@@ -19,10 +20,11 @@ struct ContentView: View {
     
     func viewForState(viewState: Int) -> any View {
         switch viewState {
-        case 0: return WelcomeView() /*return Button("To 1", role: .none) {
+        case 0: return WelcomeView(viewState: $viewState) /*return Button("To 1", role: .none) {
             self.viewState += 1
         }*/
-        case 1: return ConnectionsView()
+        case 1: return ConnectionsView(viewState: $viewState, receiverUUID: $receiverUUID)
+        case 2: return ChatView(viewState: $viewState, receiverUUID: $receiverUUID)
             
         default: return Button("To 0", role: .none) {
             self.viewState = 0
@@ -33,7 +35,7 @@ struct ContentView: View {
     var body: some View {
         
         switch viewState {
-        case 0: WelcomeView()
+        case 0: WelcomeView(viewState: $viewState)
             .onAppear {
             if users.count > 0 {
                 let _ = print("there's a user now")
@@ -43,7 +45,7 @@ struct ContentView: View {
         } /*return Button("To 1", role: .none) {
             self.viewState += 1
         }*/
-        case 1: ConnectionsView()
+        case 1: ConnectionsView(viewState: $viewState, receiverUUID: $receiverUUID)
                 .task {
                     await Network.getUser(baseURL: "http://localhost:3000", user: users[0]) { err, data in
                         if let err = err {
@@ -68,6 +70,7 @@ struct ContentView: View {
                         }
                     }
                 }
+        case 2: ChatView(viewState: $viewState, receiverUUID: $receiverUUID)
         default: Button("To 0", role: .none) {
             self.viewState = 0
         }
@@ -82,6 +85,5 @@ struct ContentView: View {
         /*
          .modelContainer(for: KeyTuple.self, inMemory: true)
         .modelContainer(for: AssociatedKeys.self, inMemory: true)*/
-        .modelContainer(for: Message.self, inMemory: true)
         .modelContainer(for: User.self, inMemory: true)
 }

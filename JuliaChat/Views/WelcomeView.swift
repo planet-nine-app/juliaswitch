@@ -12,6 +12,7 @@ struct WelcomeView: View {
     @State var displayText = "onboarding1"
     @State var onboardingState = 1
     @State var enteredText = ""
+    @Binding var viewState: Int
     
     func changeText() {
         if onboardingState >= 11 {

@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct DialogBoxStyle: ViewModifier {
+struct DialogBoxTextFieldStyle: ViewModifier {
+    
     
     func body(content: Content) -> some View {
         content
@@ -27,16 +28,16 @@ struct DialogBoxStyle: ViewModifier {
     }
 }
 
-struct DialogBoxView: View {
-    let content: String
-
+struct DialogBoxTextFieldView: View {
+    @Binding var enteredText: String
+    
     
     
     var body: some View {
             ZStack {
                 Rectangle()
-                    .modifier(DialogBoxStyle())
-                Text(content: content)
+                    .modifier(DialogBoxTextFieldStyle())
+                JuliaTextField(enteredText: $enteredText)
             }
     }
 }

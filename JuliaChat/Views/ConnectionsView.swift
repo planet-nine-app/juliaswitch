@@ -14,6 +14,9 @@ struct ConnectionsView: View {
     @State var displayText: String = "noConnections"
     @State var promptsOpen: Bool = false
     @State var enteredText: String = ""
+    @Binding var viewState: Int
+    @Binding var receiverUUID: String
+    
     let backgroundImage = ImageResource(name: "space", bundle: Bundle.main)
 
     var body: some View {
@@ -113,12 +116,15 @@ struct ConnectionsView: View {
                         promptsOpen = !promptsOpen
                     }
                 }
+                .background(.blue)
                 .frame(width: 160, height: 48, alignment: .center)
                 .position(x: w / 2, y: h * 0.75)
                 HStack {
                     ForEach(users[0].connections(), id: \.uuid) { tuple in
                         ConnectionView(label: tuple.uuid) {
                             print("Tapped a connection")
+                            receiverUUID = tuple.uuid
+                            viewState = 2
                         }
                     }
                 }

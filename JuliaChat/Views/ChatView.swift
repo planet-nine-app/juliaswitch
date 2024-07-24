@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ChatView: View {
     @Environment(\.modelContext) var modelContext
+    @Query private var users: [User]
     let backgroundImage = ImageResource(name: "space", bundle: Bundle.main)
-    @Binding public var displayText: String
     @State var enteredText = ""
+    @Binding var viewState: Int
+    @Binding var receiverUUID: String
     
     struct CustomButtonStyle: ButtonStyle {
         
@@ -28,11 +31,42 @@ struct ChatView: View {
         GeometryReader { geometry in
             let w = geometry.size.width
             let h = geometry.size.height
-            let _ = print(w)
+            
             ZStack {
                 Image(backgroundImage)
-                DialogBoxView(enteredText: $enteredText)
+                
+                VStack {
+                    VStack {
+                        List(users[0].messages) { message in
+                            DialogBoxView(content: message.message)
+                        }
+                    }
+                    Spacer()
+                    //Text("FOO")
+                    HStack {
+                        DialogBoxView(enteredText: $enteredText)
+                        JuliaButton(label: "Send") {
+                            Task {
+                                await Network.sendMessage(baseURL: "http://localhost:3000", user: users[0], content: enteredText, receiverUUID: receiverUUID) { err, data in
+                                    if let err = err {
+                                        print("EROROROR")
+                                        print(err)
+                                        return
+                                    }
+                                    if let data = data {
+                                        print("Maybe success")
+                                        print(String(data: data, encoding: .utf8))
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+                .frame(width: w, height: h)
+                .background(.blue)
             }
+            .frame(width: w, height: h)
         }
     }
 }

@@ -15,7 +15,6 @@ struct JuliaChatApp: App {
         let schema = Schema([
 //            KeyTuple.self,
 //            AssociatedKeys.self,
-            Message.self,
             Prompt.self,
             User.self,
         ])
