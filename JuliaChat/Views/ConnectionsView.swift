@@ -81,8 +81,7 @@ struct ConnectionsView: View {
                         }
                         .transition(.move(edge: .trailing))
                         if !users[0].pendingPrompts.isEmpty {
-                            let _ = print(users[0].pendingPrompts["AFRV"]?.timestamp)
-                            let _ = print(users[0].promptsAsArray()[0].timestamp)
+                           
                             ForEach(users[0].promptsAsArray()) { prompt in
                                 if prompt.newPubKey != nil {
                                     let _ = print("boom! add that button")
@@ -90,18 +89,27 @@ struct ConnectionsView: View {
                                         print("Accept the prompt here")
                                         let postPrompt = PostPrompt(timestamp: prompt.timestamp, uuid: prompt.newUUID ?? "", pubKey: prompt.newPubKey ?? "", prompt: prompt.prompt ?? "", signature: prompt.newSignature ?? "")
                                         Task {
-                                            await Network.associate(baseURL: "http://localhost:3000", user: users[0], signedPrompt: postPrompt) { err, data in
-                                                if let err = err {
+                                            await Network.associate(baseURL: "http://localhost:3000", user: users[0], signedPrompt: postPrompt) { error, data in
+                                                if let error = error {
                                                     print("ERROROROROR")
-                                                    print(err)
+                                                    print(error)
                                                     return
                                                 }
                                                 if let data = data {
-                                                    print("SUCCESS")
                                                     print(String(data: data, encoding: .utf8))
-                                                    return
+                                                    do {
+                                                        let user = try JSONDecoder().decode(User.self, from: data)
+                                                        print("SUCCESS")
+                                                        print(user)
+                                                        print(user.uuid)
+                                                        modelContext.insert(user)
+                                                        try? modelContext.save()
+                                                    } catch {
+                                                        print("Decoding or saving failed ")
+                                                        print(error)
+                                                        return
+                                                    }
                                                 }
-                                                print("No data")
                                             }
                                         }
                                     }

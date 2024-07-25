@@ -12,8 +12,7 @@ struct DialogBoxStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .frame(width: 160, height: 160)
-            .background(Color.green)
-            .foregroundColor(.white)
+            .foregroundColor(.green)
             .cornerRadius(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 24)
@@ -36,7 +35,7 @@ struct DialogBoxView: View {
             ZStack {
                 Rectangle()
                     .modifier(DialogBoxStyle())
-                Text(content: content)
+                Text(content)
             }
     }
 }

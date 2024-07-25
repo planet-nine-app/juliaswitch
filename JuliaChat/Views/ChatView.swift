@@ -44,7 +44,7 @@ struct ChatView: View {
                     Spacer()
                     //Text("FOO")
                     HStack {
-                        DialogBoxView(enteredText: $enteredText)
+                        DialogBoxTextFieldView(enteredText: $enteredText)
                         JuliaButton(label: "Send") {
                             Task {
                                 await Network.sendMessage(baseURL: "http://localhost:3000", user: users[0], content: enteredText, receiverUUID: receiverUUID) { err, data in

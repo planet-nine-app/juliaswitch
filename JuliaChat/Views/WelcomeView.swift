@@ -56,6 +56,7 @@ struct WelcomeView: View {
                                         print(user.uuid)
                                         modelContext.insert(user)
                                         try? modelContext.save()
+                                        viewState = 1
                                     } catch {
                                         print("Decoding or saving failed ")
                                         print(error)

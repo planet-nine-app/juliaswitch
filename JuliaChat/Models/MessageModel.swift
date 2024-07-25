@@ -42,40 +42,46 @@ struct PostableMessage: Codable {
     }
 }
 
-struct Message: Codable {
+struct Message: Codable, Identifiable {
+    var id: String
+    
     var timestamp = ""
     var senderUUID = ""
     var receiverUUID = ""
     var message = ""
     
-//    enum CodingKeys: String, CodingKey {
-//            case timestamp
-//            case senderUUID
-//            case receiverUUID
-//            case message
-//        }
+    enum CodingKeys: String, CodingKey {
+            case timestamp
+            case senderUUID
+            case receiverUUID
+            case message
+            case id
+        }
     
     init(timestamp: String, senderUUID: String, receiverUUID: String, content: String) {
         self.timestamp = timestamp
         self.senderUUID = senderUUID
         self.receiverUUID = receiverUUID
         self.message = content
+        self.id = "\(timestamp)\(receiverUUID)\(senderUUID)"
     }
     
-//    required init(from decoder: Decoder) throws {
-//            let container = try decoder.container(keyedBy: CodingKeys.self)
-//            timestamp = try container.decode(String.self, forKey: .timestamp)
-//            senderUUID = try container.decode(String.self, forKey: .senderUUID)
-//            receiverUUID = try container.decode(String.self, forKey: .receiverUUID)
-//            message = try container.decode(String.self, forKey: .message)
-//        }
-//        
-//        func encode(to encoder: Encoder) throws {
-//            var container = encoder.container(keyedBy: CodingKeys.self)
-//            try container.encode(timestamp, forKey: .timestamp)
-//            try container.encode(senderUUID, forKey: .senderUUID)
-//            try container.encode(receiverUUID, forKey: .receiverUUID)
-//            try container.encode(message, forKey: .message)
-//        }
-//    
+    init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            timestamp = try container.decode(String.self, forKey: .timestamp)
+            senderUUID = try container.decode(String.self, forKey: .senderUUID)
+            receiverUUID = try container.decode(String.self, forKey: .receiverUUID)
+            message = try container.decode(String.self, forKey: .message)
+            id = "\(timestamp)\(receiverUUID)\(senderUUID)"
+        }
+        
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(timestamp, forKey: .timestamp)
+            try container.encode(senderUUID, forKey: .senderUUID)
+            try container.encode(receiverUUID, forKey: .receiverUUID)
+            try container.encode(message, forKey: .message)
+            try container.encode(id, forKey: .id)
+        }
+    
 }
