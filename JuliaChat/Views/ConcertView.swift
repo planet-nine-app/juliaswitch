@@ -85,11 +85,12 @@ struct ConcertView: View {
                 }
                 .frame(width: w, height: h)
                 .background(.blue)
+                if popupChosen {
+                    CheckoutView(viewState: $viewState)
+                }
             }
             .frame(width: w, height: h)
-            if popupChosen {
-               CheckoutView()
-            }
+            
         }
     }
 }

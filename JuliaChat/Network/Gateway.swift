@@ -146,7 +146,7 @@ public struct Spell: Codable {
     }
 }
 
-public struct User: Codable {
+public struct GatewayUser: Codable {
     let uuid: String
 }
 

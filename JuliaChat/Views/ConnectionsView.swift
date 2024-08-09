@@ -14,6 +14,8 @@ struct ConnectionsView: View {
     @State var displayText: String = "noConnections"
     @State var promptsOpen: Bool = false
     @State var enteredText: String = ""
+    @State var music: Bool = false
+    @State var venue: Bool = false
     @Binding var viewState: Int
     @Binding var receiverUUID: String
     
@@ -32,24 +34,31 @@ struct ConnectionsView: View {
                         JuliaButton(label: "enterPrompt") {
                             // Enter prompt
                             print("prompt is: \(enteredText)")
-                            Task {
-                                await Network.postPrompt(baseURL: "http://localhost:3000", user: users[0], prompt: enteredText) { err, data in
-                                    if let err = err {
-                                        print(err)
-                                        return
-                                    }
-                                    if let data = data {
-                                        if String(data: data, encoding: .utf8)?.contains("true") == true {
-                                            print("Great success")
-                                            return
-                                        } else {
-                                            print("Terrible failure")
-                                            return
-                                        }
-                                    }
-                                    print("no data")
-                                }
+                            if enteredText.lowercased() == "music" {
+                                music = true
                             }
+                            if enteredText.lowercased() == "venue" {
+                                venue = true
+                            }
+                            
+//                            Task {
+//                                await Network.postPrompt(baseURL: "http://localhost:3000", user: users[0], prompt: enteredText) { err, data in
+//                                    if let err = err {
+//                                        print(err)
+//                                        return
+//                                    }
+//                                    if let data = data {
+//                                        if String(data: data, encoding: .utf8)?.contains("true") == true {
+//                                            print("Great success")
+//                                            return
+//                                        } else {
+//                                            print("Terrible failure")
+//                                            return
+//                                        }
+//                                    }
+//                                    print("no data")
+//                                }
+//                            }
                         }
                         .transition(.slide)
                         JuliaButton(label: "getPrompt") {
@@ -121,8 +130,8 @@ struct ConnectionsView: View {
                     }
                     
                     JuliaButton(label: "handlePrompts") {
-                        //promptsOpen = !promptsOpen
-                        Task {
+                        promptsOpen = !promptsOpen
+                        /*Task {
                             await Network.registerPlanetNineUser(baseURL: "http://localhost:3001", handle: enteredText, callback: { err, data in
                                 if let err = err {
                                     print("error")
@@ -145,18 +154,34 @@ struct ConnectionsView: View {
                                     return
                                 }
                             })
-                        }
+                        }*/
                     }
                 }
                 .background(.blue)
                 .frame(width: 160, height: 48, alignment: .center)
                 .position(x: w / 2, y: h * 0.75)
-                HStack {
-                    ForEach(users[0].connections(), id: \.uuid) { tuple in
-                        ConnectionView(label: tuple.uuid) {
-                            print("Tapped a connection")
-                            receiverUUID = tuple.uuid
-                            viewState = 2
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(users[0].connections(), id: \.uuid) { tuple in
+                            ConnectionView(label: tuple.uuid) {
+                                print("Tapped a connection")
+                                receiverUUID = tuple.uuid
+                                viewState = 2
+                            }
+                            if music {
+                                ConnectionView(label: "Concerts, Inc.") {
+                                    print("Tapped a connection")
+                                    receiverUUID = tuple.uuid
+                                    viewState = 2
+                                }
+                            }
+                            if venue {
+                                ConnectionView(label: "Crystal Ballrom") {
+                                    print("Tapped a connection")
+                                    receiverUUID = tuple.uuid
+                                    viewState = 4
+                                }
+                            }
                         }
                     }
                 }

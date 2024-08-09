@@ -9,6 +9,25 @@ import SwiftUI
 import SwiftData
 import StripePaymentSheet
 
+struct PaymentDialogStyle: ViewModifier {
+    
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: 160, maxHeight: 60)
+            .background(.white)
+            .cornerRadius(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 24)
+                    .stroke(   LinearGradient(
+                        colors: [.blue, .orange, .blue],
+                        startPoint: .top,
+                        endPoint: .bottom),
+                        lineWidth: 8)
+                    )
+                    .cornerRadius(24)
+    }
+}
+
 class MyBackendModel: ObservableObject {
     
   @Published var paymentSheet: PaymentSheet?
@@ -67,6 +86,7 @@ class MyBackendModel: ObservableObject {
   }
 
   func onPaymentCompletion(result: PaymentSheetResult) {
+      print("payment completed")
     self.paymentResult = result
   }
 }
@@ -75,28 +95,52 @@ struct CheckoutView: View {
     @Environment(\.modelContext) var modelContext
     @Query private var planetNineUsers: [PlanetNineUser]
   @ObservedObject var model = MyBackendModel()
+    @Binding var viewState: Int
 
   var body: some View {
     VStack {
         let _ = print("paymentSheet? \(paymentSheet)")
       if let paymentSheet = model.paymentSheet {
-        PaymentSheet.PaymentButton(
-          paymentSheet: paymentSheet,
-          onCompletion: model.onPaymentCompletion
-        ) {
-          Text("Buy")
-        }
+          ZStack {
+              PaymentSheet.PaymentButton(
+                paymentSheet: paymentSheet,
+                onCompletion: model.onPaymentCompletion
+              ) {
+                  Text("Buy")
+              }
+          }
+          .modifier(PaymentDialogStyle())
       } else {
-        Text("Loading…")
+          ZStack {
+              Text("Loading…")
+          }
+          .modifier(PaymentDialogStyle())
+
       }
       if let result = model.paymentResult {
+          let _ = print("result exists")
+          let _ = print(result)
         switch result {
         case .completed:
           Text("Payment complete")
+                .onAppear {
+                    viewState = 3
+                }
         case .failed(let error):
           Text("Payment failed: \(error.localizedDescription)")
+                .onAppear {
+                    viewState = 3
+                }
         case .canceled:
           Text("Payment canceled.")
+                .onAppear {
+                    viewState = 3
+                }
+        default:
+            Text("Default")
+                .onAppear {
+                    viewState = 3
+                }
         }
       }
     }.onAppear { model.preparePaymentSheet(uuid: planetNineUsers[0].uuid) }
