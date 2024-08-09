@@ -32,6 +32,7 @@ struct WelcomeView: View {
                     .onTapGesture {
                         changeText()
                     }
+                
                 if onboardingState > 10 {
                     VStack {
                         JuliaTextField(enteredText: $enteredText)
@@ -71,6 +72,8 @@ struct WelcomeView: View {
                     .frame(width: w / 2, height: h * 0.75, alignment: .center)
                 }
             }
+        //    .contentShape(Rectangle())
+        //    .background(.blue)
         }
     }
 }

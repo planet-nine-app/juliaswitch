@@ -18,6 +18,9 @@
 		CA7EFB1F2C41C7C6009A8FDD /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7EFB1E2C41C7C6009A8FDD /* Item.swift */; };
 		CA7EFB212C41C7C8009A8FDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA7EFB202C41C7C8009A8FDD /* Assets.xcassets */; };
 		CA7EFB252C41C7C8009A8FDD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA7EFB242C41C7C8009A8FDD /* Preview Assets.xcassets */; };
+		CA86A09E2C5DBE0D0096819C /* StripePaymentSheet in Frameworks */ = {isa = PBXBuildFile; productRef = CA86A09D2C5DBE0D0096819C /* StripePaymentSheet */; };
+		CA86A0A02C5DC2C10096819C /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA86A09F2C5DC2C10096819C /* PaymentView.swift */; };
+		CA86A0A22C5DF85D0096819C /* PlanetNineUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA86A0A12C5DF85D0096819C /* PlanetNineUser.swift */; };
 		CACD590B2C41CF4E00813D20 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACD590A2C41CF4E00813D20 /* UserModel.swift */; };
 		CACD590D2C4245D800813D20 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACD590C2C4245D800813D20 /* MessageModel.swift */; };
 		CACD59102C478CF600813D20 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACD590F2C478CF600813D20 /* Network.swift */; };
@@ -45,6 +48,8 @@
 		CA7EFB202C41C7C8009A8FDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA7EFB222C41C7C8009A8FDD /* JuliaChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JuliaChat.entitlements; sourceTree = "<group>"; };
 		CA7EFB242C41C7C8009A8FDD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CA86A09F2C5DC2C10096819C /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		CA86A0A12C5DF85D0096819C /* PlanetNineUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetNineUser.swift; sourceTree = "<group>"; };
 		CACD590A2C41CF4E00813D20 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		CACD590C2C4245D800813D20 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		CACD590F2C478CF600813D20 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -63,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA86A09E2C5DBE0D0096819C /* StripePaymentSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				CACD590A2C41CF4E00813D20 /* UserModel.swift */,
+				CA86A0A12C5DF85D0096819C /* PlanetNineUser.swift */,
 				CACD590C2C4245D800813D20 /* MessageModel.swift */,
 				CACD59112C47935B00813D20 /* PromptModel.swift */,
 				CACD59132C486F8600813D20 /* AssociateModel.swift */,
@@ -142,6 +149,7 @@
 				CA5189412C4E2429008EB941 /* ConnectionView.swift */,
 				CA34DD6C2C4E2E9D0018DBC0 /* DialogBoxView.swift */,
 				CA34DD6E2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift */,
+				CA86A09F2C5DC2C10096819C /* PaymentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -179,6 +187,9 @@
 			dependencies = (
 			);
 			name = JuliaChat;
+			packageProductDependencies = (
+				CA86A09D2C5DBE0D0096819C /* StripePaymentSheet */,
+			);
 			productName = JuliaChat;
 			productReference = CA7EFB172C41C7C6009A8FDD /* JuliaChat.app */;
 			productType = "com.apple.product-type.application";
@@ -207,6 +218,9 @@
 				Base,
 			);
 			mainGroup = CA7EFB0E2C41C7C6009A8FDD;
+			packageReferences = (
+				CA86A09C2C5DBE0D0096819C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */,
+			);
 			productRefGroup = CA7EFB182C41C7C6009A8FDD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -243,9 +257,11 @@
 				CACD591B2C48DD2C00813D20 /* ChatView.swift in Sources */,
 				CA34DD6F2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift in Sources */,
 				CACD590B2C41CF4E00813D20 /* UserModel.swift in Sources */,
+				CA86A0A22C5DF85D0096819C /* PlanetNineUser.swift in Sources */,
 				CACD59172C48DD1200813D20 /* WelcomeView.swift in Sources */,
 				CACD591D2C48DFDD00813D20 /* PlanetNineView.swift in Sources */,
 				CA51893C2C4C2D54008EB941 /* ConnectionsView.swift in Sources */,
+				CA86A0A02C5DC2C10096819C /* PaymentView.swift in Sources */,
 				CACD59102C478CF600813D20 /* Network.swift in Sources */,
 				CA5189422C4E2429008EB941 /* ConnectionView.swift in Sources */,
 				CA5189402C4C5FF3008EB941 /* JuliaTextField.swift in Sources */,
@@ -469,6 +485,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CA86A09C2C5DBE0D0096819C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stripe/stripe-ios-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 23.28.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CA86A09D2C5DBE0D0096819C /* StripePaymentSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA86A09C2C5DBE0D0096819C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripePaymentSheet;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CA7EFB0F2C41C7C6009A8FDD /* Project object */;
 }

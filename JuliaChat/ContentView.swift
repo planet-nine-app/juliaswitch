@@ -70,7 +70,8 @@ struct ContentView: View {
                         }
                     }
                 }
-        case 2: ChatView(viewState: $viewState, receiverUUID: $receiverUUID)
+        case 2: /*ChatView(viewState: $viewState, receiverUUID: $receiverUUID)*/
+            StripeBottomSheet()
         default: Button("To 0", role: .none) {
             self.viewState = 0
         }

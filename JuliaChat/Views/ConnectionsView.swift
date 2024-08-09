@@ -121,7 +121,31 @@ struct ConnectionsView: View {
                     }
                     
                     JuliaButton(label: "handlePrompts") {
-                        promptsOpen = !promptsOpen
+                        //promptsOpen = !promptsOpen
+                        Task {
+                            await Network.registerPlanetNineUser(baseURL: "http://localhost:3001", handle: enteredText, callback: { err, data in
+                                if let err = err {
+                                    print("error")
+                                    print(err)
+                                    return
+                                }
+                                guard let data = data else { return }
+                                print(String(data: data, encoding: .utf8))
+                                do {
+                                    let pnUser  = try JSONDecoder().decode(PlanetNineUser.self, from: data)
+                                    print("SUCCESS")
+                                    print(pnUser)
+                                    print(pnUser.uuid)
+                                    modelContext.insert(pnUser)
+                                    try? modelContext.save()
+                                    viewState = 1
+                                } catch {
+                                    print("Decoding or saving failed ")
+                                    print(error)
+                                    return
+                                }
+                            })
+                        }
                     }
                 }
                 .background(.blue)
