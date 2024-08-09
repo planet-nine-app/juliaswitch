@@ -71,7 +71,8 @@ struct ContentView: View {
                     }
                 }
         case 2: /*ChatView(viewState: $viewState, receiverUUID: $receiverUUID)*/
-            StripeBottomSheet()
+            //StripeBottomSheet()
+            ConcertView(viewState: $viewState, receiverUUID: $receiverUUID)
         default: Button("To 0", role: .none) {
             self.viewState = 0
         }

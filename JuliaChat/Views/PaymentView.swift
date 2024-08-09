@@ -6,6 +6,8 @@ import StripePaymentSheet
 struct StripeBottomSheet: UIViewControllerRepresentable {
     @Environment(\.modelContext) var modelContext
     @Query private var planetNineUsers: [PlanetNineUser]
+    @Binding var popupChosen: Bool
+    @Binding var chosenPopup: Popup
     typealias UIViewType = UIView
     
     func makeUIViewController(context: Context) -> some UIViewController {
@@ -19,7 +21,10 @@ struct StripeBottomSheet: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        guard popupChosen == true else { return }
+        guard let cvc = uiViewController as? CheckoutViewController else { return }
         
+        cvc.didTapCheckoutButton()
     }
 }
 
@@ -32,7 +37,8 @@ class CheckoutViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-      view.backgroundColor = .blue
+      //view.backgroundColor = .blue
+      //view.isUserInteractionEnabled = false
       
       guard let uuid = uuid else { return }
       let timestamp = "".getTime()
@@ -56,6 +62,7 @@ class CheckoutViewController: UIViewController {
       checkoutButton.heightAnchor.constraint(equalToConstant: 200).isActive = true
       checkoutButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
       checkoutButton.setTitle("HEYOOOOOO", for: .normal)
+      checkoutButton.isHidden = true
 
     // MARK: Fetch the PaymentIntent client secret, Ephemeral Key secret, Customer ID, and publishable key
     var request = URLRequest(url: backendCheckoutUrl)

@@ -111,6 +111,27 @@ class Network {
         }
     }
     
+    class func registerPopupsPleaseUser(baseURL: String, callback: @escaping (Error?, Data?) -> Void) async {
+        let sessionless = Sessionless()
+        let keys = sessionless.getKeys()
+        
+        guard let publicKey = keys?.publicKey,
+        let payload = RegisterPopupsPleaseUser(pubKey: publicKey).toData() else { return }
+        
+        await Network.put(urlString: "\(baseURL)/user/create", payload: payload) { err, data in
+            callback(err, data)
+        }
+    }
+    
+    class func getPopups(baseURL: String, popupsUUID: String, callback: @escaping (Error?, Data?) -> Void) async {
+        let sessionless = Sessionless()
+        let timestamp = "".getTime()
+        
+        let signature = sessionless.sign(message: timestamp) ?? ""
+        
+        await Network.get(urlString: "\(baseURL)/popups?signature=\(signature)&timestamp=\(timestamp)&uuid=\(popupsUUID)", callback: callback)
+    }
+    
     class func getUser(baseURL: String, user: User, callback: @escaping (Error?, Data?) -> Void) async {
         let sessionless = Sessionless()
         let timestamp = "".getTime()

@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Buy" : {
+
+    },
     "Enter Text" : {
 
     },
@@ -25,6 +28,9 @@
           }
         }
       }
+    },
+    "Loading…" : {
+
     },
     "noConnections" : {
       "extractionState" : "manual",
@@ -157,6 +163,15 @@
           }
         }
       }
+    },
+    "Payment canceled." : {
+
+    },
+    "Payment complete" : {
+
+    },
+    "Payment failed: %@" : {
+
     },
     "To 0" : {
 

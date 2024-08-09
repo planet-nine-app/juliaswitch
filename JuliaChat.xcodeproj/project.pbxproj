@@ -13,6 +13,11 @@
 		CA51893E2C4C3A2B008EB941 /* JuliaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51893D2C4C3A2B008EB941 /* JuliaButton.swift */; };
 		CA5189402C4C5FF3008EB941 /* JuliaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51893F2C4C5FF3008EB941 /* JuliaTextField.swift */; };
 		CA5189422C4E2429008EB941 /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5189412C4E2429008EB941 /* ConnectionView.swift */; };
+		CA6526112C65F74D003570CB /* BLEMAGICPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA65260F2C65F74D003570CB /* BLEMAGICPeripheral.swift */; };
+		CA6526122C65F74D003570CB /* BLEUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6526102C65F74D003570CB /* BLEUtils.swift */; };
+		CA6526132C65F74D003570CB /* BLETwoWayCentral.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA65260D2C65F74D003570CB /* BLETwoWayCentral.swift */; };
+		CA6526142C65F74D003570CB /* BLETwoWayPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA65260E2C65F74D003570CB /* BLETwoWayPeripheral.swift */; };
+		CA6526162C65F762003570CB /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6526152C65F762003570CB /* Gateway.swift */; };
 		CA7EFB1B2C41C7C6009A8FDD /* JuliaChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7EFB1A2C41C7C6009A8FDD /* JuliaChatApp.swift */; };
 		CA7EFB1D2C41C7C6009A8FDD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7EFB1C2C41C7C6009A8FDD /* ContentView.swift */; };
 		CA7EFB1F2C41C7C6009A8FDD /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7EFB1E2C41C7C6009A8FDD /* Item.swift */; };
@@ -21,6 +26,11 @@
 		CA86A09E2C5DBE0D0096819C /* StripePaymentSheet in Frameworks */ = {isa = PBXBuildFile; productRef = CA86A09D2C5DBE0D0096819C /* StripePaymentSheet */; };
 		CA86A0A02C5DC2C10096819C /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA86A09F2C5DC2C10096819C /* PaymentView.swift */; };
 		CA86A0A22C5DF85D0096819C /* PlanetNineUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA86A0A12C5DF85D0096819C /* PlanetNineUser.swift */; };
+		CACC8B8E2C65BDEB00D7B549 /* PopupsPleaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACC8B8D2C65BDEB00D7B549 /* PopupsPleaseUser.swift */; };
+		CACC8B902C65C08500D7B549 /* PopupsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACC8B8F2C65C08500D7B549 /* PopupsModel.swift */; };
+		CACC8B922C65CD7600D7B549 /* ConcertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACC8B912C65CD7600D7B549 /* ConcertView.swift */; };
+		CACC8B942C65D12800D7B549 /* ConcertDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACC8B932C65D12800D7B549 /* ConcertDialogView.swift */; };
+		CACC8B962C65DA8000D7B549 /* PaymentSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACC8B952C65DA8000D7B549 /* PaymentSwiftUIView.swift */; };
 		CACD590B2C41CF4E00813D20 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACD590A2C41CF4E00813D20 /* UserModel.swift */; };
 		CACD590D2C4245D800813D20 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACD590C2C4245D800813D20 /* MessageModel.swift */; };
 		CACD59102C478CF600813D20 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACD590F2C478CF600813D20 /* Network.swift */; };
@@ -41,6 +51,11 @@
 		CA51893D2C4C3A2B008EB941 /* JuliaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuliaButton.swift; sourceTree = "<group>"; };
 		CA51893F2C4C5FF3008EB941 /* JuliaTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuliaTextField.swift; sourceTree = "<group>"; };
 		CA5189412C4E2429008EB941 /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
+		CA65260D2C65F74D003570CB /* BLETwoWayCentral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLETwoWayCentral.swift; sourceTree = "<group>"; };
+		CA65260E2C65F74D003570CB /* BLETwoWayPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLETwoWayPeripheral.swift; sourceTree = "<group>"; };
+		CA65260F2C65F74D003570CB /* BLEMAGICPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEMAGICPeripheral.swift; sourceTree = "<group>"; };
+		CA6526102C65F74D003570CB /* BLEUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEUtils.swift; sourceTree = "<group>"; };
+		CA6526152C65F762003570CB /* Gateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gateway.swift; sourceTree = "<group>"; };
 		CA7EFB172C41C7C6009A8FDD /* JuliaChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JuliaChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA7EFB1A2C41C7C6009A8FDD /* JuliaChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuliaChatApp.swift; sourceTree = "<group>"; };
 		CA7EFB1C2C41C7C6009A8FDD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,6 +65,11 @@
 		CA7EFB242C41C7C8009A8FDD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CA86A09F2C5DC2C10096819C /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		CA86A0A12C5DF85D0096819C /* PlanetNineUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetNineUser.swift; sourceTree = "<group>"; };
+		CACC8B8D2C65BDEB00D7B549 /* PopupsPleaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupsPleaseUser.swift; sourceTree = "<group>"; };
+		CACC8B8F2C65C08500D7B549 /* PopupsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupsModel.swift; sourceTree = "<group>"; };
+		CACC8B912C65CD7600D7B549 /* ConcertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertView.swift; sourceTree = "<group>"; };
+		CACC8B932C65D12800D7B549 /* ConcertDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertDialogView.swift; sourceTree = "<group>"; };
+		CACC8B952C65DA8000D7B549 /* PaymentSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSwiftUIView.swift; sourceTree = "<group>"; };
 		CACD590A2C41CF4E00813D20 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		CACD590C2C4245D800813D20 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		CACD590F2C478CF600813D20 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -125,6 +145,8 @@
 				CACD590C2C4245D800813D20 /* MessageModel.swift */,
 				CACD59112C47935B00813D20 /* PromptModel.swift */,
 				CACD59132C486F8600813D20 /* AssociateModel.swift */,
+				CACC8B8D2C65BDEB00D7B549 /* PopupsPleaseUser.swift */,
+				CACC8B8F2C65C08500D7B549 /* PopupsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -132,7 +154,12 @@
 		CACD590E2C478CE200813D20 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				CA65260F2C65F74D003570CB /* BLEMAGICPeripheral.swift */,
+				CA65260D2C65F74D003570CB /* BLETwoWayCentral.swift */,
+				CA65260E2C65F74D003570CB /* BLETwoWayPeripheral.swift */,
+				CA6526102C65F74D003570CB /* BLEUtils.swift */,
 				CACD590F2C478CF600813D20 /* Network.swift */,
+				CA6526152C65F762003570CB /* Gateway.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -148,8 +175,11 @@
 				CA51893F2C4C5FF3008EB941 /* JuliaTextField.swift */,
 				CA5189412C4E2429008EB941 /* ConnectionView.swift */,
 				CA34DD6C2C4E2E9D0018DBC0 /* DialogBoxView.swift */,
+				CACC8B932C65D12800D7B549 /* ConcertDialogView.swift */,
 				CA34DD6E2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift */,
 				CA86A09F2C5DC2C10096819C /* PaymentView.swift */,
+				CACC8B912C65CD7600D7B549 /* ConcertView.swift */,
+				CACC8B952C65DA8000D7B549 /* PaymentSwiftUIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -252,22 +282,32 @@
 				CA34DD6D2C4E2E9D0018DBC0 /* DialogBoxView.swift in Sources */,
 				CA7EFB1D2C41C7C6009A8FDD /* ContentView.swift in Sources */,
 				CACD590D2C4245D800813D20 /* MessageModel.swift in Sources */,
+				CACC8B942C65D12800D7B549 /* ConcertDialogView.swift in Sources */,
+				CA6526162C65F762003570CB /* Gateway.swift in Sources */,
 				CA7EFB1F2C41C7C6009A8FDD /* Item.swift in Sources */,
+				CACC8B8E2C65BDEB00D7B549 /* PopupsPleaseUser.swift in Sources */,
 				CA7EFB1B2C41C7C6009A8FDD /* JuliaChatApp.swift in Sources */,
 				CACD591B2C48DD2C00813D20 /* ChatView.swift in Sources */,
 				CA34DD6F2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift in Sources */,
 				CACD590B2C41CF4E00813D20 /* UserModel.swift in Sources */,
 				CA86A0A22C5DF85D0096819C /* PlanetNineUser.swift in Sources */,
+				CACC8B922C65CD7600D7B549 /* ConcertView.swift in Sources */,
 				CACD59172C48DD1200813D20 /* WelcomeView.swift in Sources */,
+				CA6526112C65F74D003570CB /* BLEMAGICPeripheral.swift in Sources */,
 				CACD591D2C48DFDD00813D20 /* PlanetNineView.swift in Sources */,
 				CA51893C2C4C2D54008EB941 /* ConnectionsView.swift in Sources */,
+				CA6526122C65F74D003570CB /* BLEUtils.swift in Sources */,
 				CA86A0A02C5DC2C10096819C /* PaymentView.swift in Sources */,
+				CACC8B902C65C08500D7B549 /* PopupsModel.swift in Sources */,
 				CACD59102C478CF600813D20 /* Network.swift in Sources */,
 				CA5189422C4E2429008EB941 /* ConnectionView.swift in Sources */,
+				CA6526142C65F74D003570CB /* BLETwoWayPeripheral.swift in Sources */,
 				CA5189402C4C5FF3008EB941 /* JuliaTextField.swift in Sources */,
 				CAE7E7702C41CA62002B761A /* Sessionless.swift in Sources */,
 				CA51893E2C4C3A2B008EB941 /* JuliaButton.swift in Sources */,
+				CA6526132C65F74D003570CB /* BLETwoWayCentral.swift in Sources */,
 				CACD59142C486F8600813D20 /* AssociateModel.swift in Sources */,
+				CACC8B962C65DA8000D7B549 /* PaymentSwiftUIView.swift in Sources */,
 				CACD59122C47935B00813D20 /* PromptModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
