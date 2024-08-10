@@ -19,6 +19,7 @@
 		CA6526142C65F74D003570CB /* BLETwoWayPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA65260E2C65F74D003570CB /* BLETwoWayPeripheral.swift */; };
 		CA6526162C65F762003570CB /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6526152C65F762003570CB /* Gateway.swift */; };
 		CA6526182C66868F003570CB /* TicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6526172C66868F003570CB /* TicketView.swift */; };
+		CA65261C2C66AEC5003570CB /* MagicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA65261B2C66AEC5003570CB /* MagicView.swift */; };
 		CA7EFB1B2C41C7C6009A8FDD /* JuliaChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7EFB1A2C41C7C6009A8FDD /* JuliaChatApp.swift */; };
 		CA7EFB1D2C41C7C6009A8FDD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7EFB1C2C41C7C6009A8FDD /* ContentView.swift */; };
 		CA7EFB1F2C41C7C6009A8FDD /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7EFB1E2C41C7C6009A8FDD /* Item.swift */; };
@@ -58,6 +59,7 @@
 		CA6526102C65F74D003570CB /* BLEUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEUtils.swift; sourceTree = "<group>"; };
 		CA6526152C65F762003570CB /* Gateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gateway.swift; sourceTree = "<group>"; };
 		CA6526172C66868F003570CB /* TicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketView.swift; sourceTree = "<group>"; };
+		CA65261B2C66AEC5003570CB /* MagicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicView.swift; sourceTree = "<group>"; };
 		CA7EFB172C41C7C6009A8FDD /* JuliaChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JuliaChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA7EFB1A2C41C7C6009A8FDD /* JuliaChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuliaChatApp.swift; sourceTree = "<group>"; };
 		CA7EFB1C2C41C7C6009A8FDD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				CACC8B912C65CD7600D7B549 /* ConcertView.swift */,
 				CACC8B952C65DA8000D7B549 /* PaymentSwiftUIView.swift */,
 				CA6526172C66868F003570CB /* TicketView.swift */,
+				CA65261B2C66AEC5003570CB /* MagicView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				CA6526112C65F74D003570CB /* BLEMAGICPeripheral.swift in Sources */,
 				CACD591D2C48DFDD00813D20 /* PlanetNineView.swift in Sources */,
 				CA51893C2C4C2D54008EB941 /* ConnectionsView.swift in Sources */,
+				CA65261C2C66AEC5003570CB /* MagicView.swift in Sources */,
 				CA6526122C65F74D003570CB /* BLEUtils.swift in Sources */,
 				CA86A0A02C5DC2C10096819C /* PaymentView.swift in Sources */,
 				CACC8B902C65C08500D7B549 /* PopupsModel.swift in Sources */,

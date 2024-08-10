@@ -15,7 +15,7 @@ struct ConnectionsView: View {
     @State var promptsOpen: Bool = false
     @State var enteredText: String = ""
     @State var music: Bool = false
-    @State var venue: Bool = false
+    @State var magic: Bool = false
     @Binding var viewState: Int
     @Binding var receiverUUID: String
     
@@ -37,12 +37,12 @@ struct ConnectionsView: View {
                             if enteredText.lowercased() == "music" {
                                 music = true
                             }
-                            if enteredText.lowercased() == "venue" {
-                                venue = true
+                            if enteredText.lowercased() == "magic" {
+                                magic = true
                             }
                             
 //                            Task {
-//                                await Network.postPrompt(baseURL: "http://localhost:3000", user: users[0], prompt: enteredText) { err, data in
+//                                await Network.post`Prompt(baseURL: "http://localhost:3000", user: users[0], prompt: enteredText) { err, data in
 //                                    if let err = err {
 //                                        print(err)
 //                                        return
@@ -175,8 +175,8 @@ struct ConnectionsView: View {
                                     viewState = 2
                                 }
                             }
-                            if venue {
-                                ConnectionView(label: "Crystal Ballrom") {
+                            if magic {
+                                ConnectionView(label: "MAGIC") {
                                     print("Tapped a connection")
                                     receiverUUID = tuple.uuid
                                     viewState = 4

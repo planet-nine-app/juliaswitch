@@ -11,7 +11,7 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var users: [User]
-    @State private var viewState = 3
+    @State private var viewState = 0
     @State var receiverUUID = ""
     
     func updateViewState(newState: Int) {
@@ -74,6 +74,7 @@ struct ContentView: View {
             //StripeBottomSheet()
             ConcertView(viewState: $viewState, receiverUUID: $receiverUUID)
         case 3: TicketView()
+        case 4: MagicView()
         default: Button("To 0", role: .none) {
             self.viewState = 0
         }
