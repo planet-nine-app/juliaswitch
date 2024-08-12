@@ -11,6 +11,12 @@ enum NetworkError: Error {
     case networkError
 }
 
+enum ServiceURLs: String {
+    case julia = "http://localhost:3000"
+    case planetNine = "http://localhost:3001"
+    case pref = "http://localhost:3002"
+}
+
 class Network {
     class func get(urlString: String, callback: @escaping (Error?, Data?) -> Void) async {
         guard let url = URL(string: urlString) else { return }

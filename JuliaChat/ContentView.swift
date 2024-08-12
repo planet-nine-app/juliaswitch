@@ -47,31 +47,18 @@ struct ContentView: View {
         }*/
         case 1: ConnectionsView(viewState: $viewState, receiverUUID: $receiverUUID)
                 .task {
-                    await Network.getUser(baseURL: "http://localhost:3000", user: users[0]) { err, data in
+                    await Julia.syncKeys(user: users[0]) { err, user in
                         if let err = err {
-                            print("ERORORORO")
-                            print(err)
+                            print("Oh noooo!")
                             return
                         }
-                        if let data = data {
-                            print(String(data: data, encoding: .utf8))
-                            do {
-                                let user = try JSONDecoder().decode(User.self, from: data)
-                                print("SUCCESS")
-                                print(user)
-                                print(user.uuid)
-                                modelContext.insert(user)
-                                try? modelContext.save()
-                            } catch {
-                                print("Decoding or saving failed ")
-                                print(error)
-                                return
-                            }
-                        }
+                        guard let user = user else { return }
+                        modelContext.insert(user)
+                        try? modelContext.save()
                     }
                 }
-        case 2: /*ChatView(viewState: $viewState, receiverUUID: $receiverUUID)*/
-            StripeBottomSheet()
+        case 2: ChatView(viewState: $viewState, receiverUUID: $receiverUUID)
+            //StripeBottomSheet()
         default: Button("To 0", role: .none) {
             self.viewState = 0
         }

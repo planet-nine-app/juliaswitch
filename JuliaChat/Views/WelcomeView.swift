@@ -42,28 +42,16 @@ struct WelcomeView: View {
                         JuliaButton(label: "letsGo") {
                             print("button pressed")
                             Task {
-                                await Network.register(baseURL: "http://localhost:3000", handle: enteredText, callback: { err, data in
+                                await Julia.createUser(handle: enteredText) { err, user in
                                     if let err = err {
-                                        print("error")
-                                        print(err)
                                         return
                                     }
-                                    guard let data = data else { return }
-                                    print(String(data: data, encoding: .utf8))
-                                    do {
-                                        let user = try JSONDecoder().decode(User.self, from: data)
-                                        print("SUCCESS")
-                                        print(user)
-                                        print(user.uuid)
-                                        modelContext.insert(user)
-                                        try? modelContext.save()
-                                        viewState = 1
-                                    } catch {
-                                        print("Decoding or saving failed ")
-                                        print(error)
-                                        return
-                                    }
-                                })
+                                    guard let user = user else { return }
+                                    
+                                    modelContext.insert(user)
+                                    try? modelContext.save()
+                                    viewState = 1
+                                }
                             }
                         }
                         .background(.green)
