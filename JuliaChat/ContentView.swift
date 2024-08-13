@@ -11,7 +11,7 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var users: [User]
-    @State private var viewState = 3
+    @State private var viewState = 1
     @State var receiverUUID = ""
     
     func updateViewState(newState: Int) {

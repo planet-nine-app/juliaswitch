@@ -109,7 +109,7 @@ struct ConnectionsView: View {
                 .position(x: w / 2, y: h * 0.75)
                 HStack {
                     ForEach(users[0].connections(), id: \.uuid) { tuple in
-                        ConnectionView(label: tuple.uuid) {
+                        ConnectionView(label: tuple.uuid, imageName: "julia") {
                             print("Tapped a connection")
                             receiverUUID = tuple.uuid
                             viewState = 2

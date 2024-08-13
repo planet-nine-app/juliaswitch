@@ -7,42 +7,74 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct ConnectionView: View {
     let onPress: () -> Void
     let label: String
+    let imageName: String
     
-    struct ConnectionButtonStyle: ButtonStyle {
-        
-        func makeBody(configuration: Configuration) -> some View {
-            configuration.label
-                .frame(width: 160, height: 160, alignment: .center)
-                .background(.green)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .opacity(configuration.isPressed ? 0.5 : 1)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 24)
-                        .stroke(   LinearGradient(
-                            colors: [.purple, .green, .purple],
-                            startPoint: .top,
-                            endPoint: .bottom),
-                            lineWidth: 8)
+    struct CircularConnectionStyle: ViewModifier {
+        func body(content: Content) -> some View {
+            content
+                .frame(width: 120, height: 120)
+                .background(
+                    Circle()
+                        .fill(
+                            LinearGradient(
+                                colors: [.green, .blue],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
                         )
-                        .cornerRadius(24)
+                )
+                .overlay(
+                    Circle()
+                        .stroke(
+                            LinearGradient(
+                                colors: [.purple, .green, .purple],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            ),
+                            lineWidth: 4
+                        )
+                )
+                .shadow(color: .purple.opacity(0.5), radius: 10, x: 0, y: 5)
         }
     }
     
     var body: some View {
-        Button() {
-            onPress()
-        } label: {
+        VStack {
+            Button(action: onPress) {
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(30)
+                    .foregroundColor(.white)
+            }
+            .buttonStyle(PlainButtonStyle())
+            .modifier(CircularConnectionStyle())
+            
             Text(label)
-        }.buttonStyle(ConnectionButtonStyle())
+                .font(.headline)
+                .foregroundColor(.white)
+                .shadow(color: .purple.opacity(0.7), radius: 3, x: 0, y: 2)
+        }
     }
     
-    init(label: String, onPress: @escaping () -> Void) {
+    init(label: String, imageName: String, onPress: @escaping () -> Void) {
         self.onPress = onPress
         self.label = label
+        self.imageName = imageName
+    }
+}
+
+struct ConnectionView_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            ConnectionView(label: "Connect", imageName: "network", onPress: {})
+        }
     }
 }
 
