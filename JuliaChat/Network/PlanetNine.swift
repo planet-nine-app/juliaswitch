@@ -20,7 +20,7 @@ class PlanetNine {
     class func createUser(uiHandler: @escaping (Error?, PlanetNineUser?) -> Void) async {
         let handler = ResponseHandler.handlerForModel(for: PlanetNineUser.self, completion: uiHandler)
         
-        await Network.register(baseURL: ServiceURLs.planetNine.rawValue, handle: handle, callback: handler)
+        await Network.registerPlanetNineUser(baseURL: ServiceURLs.planetNine.rawValue, callback: handler)
     }
     
     class func getPlanetNineUser(planetNineUser: PlanetNineUser, uiHandler: @escaping (Error?, PlanetNineUser?) -> Void) async {

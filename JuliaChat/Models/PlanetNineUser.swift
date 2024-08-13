@@ -68,13 +68,11 @@ class PlanetNineUser: Codable {
 struct RegisterPlanetNineUser: Codable {
     var timestamp = "".getTime()
     let pubKey: String
-    let handle: String
     var paymentMethods = [PaymentMethod]()
     var signature = ""
     
-    init(pubKey: String, handle: String) {
+    init(pubKey: String) {
         self.pubKey = pubKey
-        self.handle = handle
                 
         self.signature = self.sign()
     }
@@ -90,7 +88,7 @@ struct RegisterPlanetNineUser: Codable {
     
     func toData() -> Data? {
         let json = """
-            {"timestamp":"\(timestamp)","pubKey":"\(pubKey)","handle":"\(handle)","user":{"pubKey":"\(pubKey)","handle":"\(handle)","paymentMethods":[]},"signature":"\(signature)"}
+            {"timestamp":"\(timestamp)","pubKey":"\(pubKey)","user":{"pubKey":"\(pubKey)","paymentMethods":[]},"signature":"\(signature)"}
         """
         print(signature)
         print(self.toString())

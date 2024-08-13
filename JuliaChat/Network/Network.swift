@@ -105,12 +105,12 @@ class Network {
         }
     }
     
-    class func registerPlanetNineUser(baseURL: String, handle: String, callback: @escaping (Error?, Data?) -> Void) async {
+    class func registerPlanetNineUser(baseURL: String, callback: @escaping (Error?, Data?) -> Void) async {
         let sessionless = Sessionless()
         let keys = sessionless.getKeys() 
         
         guard let publicKey = keys?.publicKey,
-        let payload = RegisterPlanetNineUser(pubKey: publicKey, handle: "TEST USER").toData() else { return }
+        let payload = RegisterPlanetNineUser(pubKey: publicKey).toData() else { return }
         
         await Network.put(urlString: "\(baseURL)/user/create", payload: payload) { err, data in
             callback(err, data)
