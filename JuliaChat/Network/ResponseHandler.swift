@@ -9,7 +9,8 @@ import Foundation
 import SwiftData
 
 class ResponseHandler {
-    class func handlerForModel<T: Codable & PersistentModel>(
+    
+    class func handlerForModel<T: Codable>(
         for type: T.Type,
         completion: @escaping (Error?, T?) -> Void
     ) -> (Error?, Data?) -> Void {

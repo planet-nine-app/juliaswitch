@@ -33,21 +33,11 @@ struct ConnectionsView: View {
                             // Enter prompt
                             print("prompt is: \(enteredText)")
                             Task {
-                                await Network.postPrompt(baseURL: "http://localhost:3000", user: users[0], prompt: enteredText) { err, data in
+                                await Julia.postPrompt(user: users[0], prompt: enteredText) { err, success in
                                     if let err = err {
-                                        print(err)
+                                        print("uierr")
                                         return
                                     }
-                                    if let data = data {
-                                        if String(data: data, encoding: .utf8)?.contains("true") == true {
-                                            print("Great success")
-                                            return
-                                        } else {
-                                            print("Terrible failure")
-                                            return
-                                        }
-                                    }
-                                    print("no data")
                                 }
                             }
                         }
@@ -56,25 +46,14 @@ struct ConnectionsView: View {
                             // Call network to get prompt
                             print("get prompt tapped")
                             Task {
-                                await Network.getPrompt(baseURL: "http://localhost:3000", user: users[0]) { error, data in
-                                    if let error = error {
-                                        print(error)
+                                await Julia.getPrompt(user: users[0]) { err, user in
+                                    if let err = err {
+                                        print("uierr")
                                         return
                                     }
-                                    if let data = data {
-                                        print(String(data: data, encoding: .utf8))
-                                        do {
-                                            let user = try JSONDecoder().decode(User.self, from: data)
-                                            print("SUCCESS")
-                                            print(user)
-                                            print(user.uuid)
-                                            modelContext.insert(user)
-                                            try? modelContext.save()
-                                        } catch {
-                                            print("Decoding or saving failed ")
-                                            print(error)
-                                            return
-                                        }
+                                    if let user = user {
+                                        modelContext.insert(user)
+                                        try? modelContext.save()
                                     }
                                 }
                             }
@@ -89,26 +68,14 @@ struct ConnectionsView: View {
                                         print("Accept the prompt here")
                                         let postPrompt = PostPrompt(timestamp: prompt.timestamp, uuid: prompt.newUUID ?? "", pubKey: prompt.newPubKey ?? "", prompt: prompt.prompt ?? "", signature: prompt.newSignature ?? "")
                                         Task {
-                                            await Network.associate(baseURL: "http://localhost:3000", user: users[0], signedPrompt: postPrompt) { error, data in
-                                                if let error = error {
-                                                    print("ERROROROROR")
-                                                    print(error)
+                                            await Julia.associate(user: users[0], signedPrompt: postPrompt) { err, user in
+                                                if let err = err {
+                                                    print("uierr")
                                                     return
                                                 }
-                                                if let data = data {
-                                                    print(String(data: data, encoding: .utf8))
-                                                    do {
-                                                        let user = try JSONDecoder().decode(User.self, from: data)
-                                                        print("SUCCESS")
-                                                        print(user)
-                                                        print(user.uuid)
-                                                        modelContext.insert(user)
-                                                        try? modelContext.save()
-                                                    } catch {
-                                                        print("Decoding or saving failed ")
-                                                        print(error)
-                                                        return
-                                                    }
+                                                if let user = user {
+                                                    modelContext.insert(user)
+                                                    try? modelContext.save()
                                                 }
                                             }
                                         }
@@ -121,31 +88,20 @@ struct ConnectionsView: View {
                     }
                     
                     JuliaButton(label: "handlePrompts") {
-                        //promptsOpen = !promptsOpen
-                        Task {
-                            await Network.registerPlanetNineUser(baseURL: "http://localhost:3001", handle: enteredText, callback: { err, data in
+                        promptsOpen = !promptsOpen
+                        /*Task {
+                            await PlanetNine.createUser { err, planetNineUser in
                                 if let err = err {
-                                    print("error")
-                                    print(err)
+                                    print("uierr")
                                     return
                                 }
-                                guard let data = data else { return }
-                                print(String(data: data, encoding: .utf8))
-                                do {
-                                    let pnUser  = try JSONDecoder().decode(PlanetNineUser.self, from: data)
-                                    print("SUCCESS")
-                                    print(pnUser)
-                                    print(pnUser.uuid)
-                                    modelContext.insert(pnUser)
+                                if let planetNineUser = planetNineUser {
+                                    modelContext.insert(planetNineUser)
                                     try? modelContext.save()
                                     viewState = 1
-                                } catch {
-                                    print("Decoding or saving failed ")
-                                    print(error)
-                                    return
                                 }
-                            })
-                        }
+                            }
+                        }*/
                     }
                 }
                 .background(.blue)
