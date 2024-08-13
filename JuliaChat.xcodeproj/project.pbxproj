@@ -11,6 +11,7 @@
 		CA1FE2002C6A935F00C3414B /* Julia.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE1FF2C6A935F00C3414B /* Julia.swift */; };
 		CA1FE2022C6A936B00C3414B /* PlanetNine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE2012C6A936B00C3414B /* PlanetNine.swift */; };
 		CA1FE2042C6A937400C3414B /* Pref.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE2032C6A937400C3414B /* Pref.swift */; };
+		CA1FE2062C6B33AF00C3414B /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE2052C6B33AF00C3414B /* ImagePickerView.swift */; };
 		CA34DD6D2C4E2E9D0018DBC0 /* DialogBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA34DD6C2C4E2E9D0018DBC0 /* DialogBoxView.swift */; };
 		CA34DD6F2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA34DD6E2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift */; };
 		CA51893C2C4C2D54008EB941 /* ConnectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51893B2C4C2D54008EB941 /* ConnectionsView.swift */; };
@@ -43,6 +44,7 @@
 		CA1FE1FF2C6A935F00C3414B /* Julia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Julia.swift; sourceTree = "<group>"; };
 		CA1FE2012C6A936B00C3414B /* PlanetNine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetNine.swift; sourceTree = "<group>"; };
 		CA1FE2032C6A937400C3414B /* Pref.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pref.swift; sourceTree = "<group>"; };
+		CA1FE2052C6B33AF00C3414B /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		CA34DD6C2C4E2E9D0018DBC0 /* DialogBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBoxView.swift; sourceTree = "<group>"; };
 		CA34DD6E2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBoxTextFieldView.swift; sourceTree = "<group>"; };
 		CA51893B2C4C2D54008EB941 /* ConnectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsView.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				CA34DD6C2C4E2E9D0018DBC0 /* DialogBoxView.swift */,
 				CA34DD6E2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift */,
 				CA86A09F2C5DC2C10096819C /* PaymentView.swift */,
+				CA1FE2052C6B33AF00C3414B /* ImagePickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				CACD591B2C48DD2C00813D20 /* ChatView.swift in Sources */,
 				CA34DD6F2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift in Sources */,
 				CACD590B2C41CF4E00813D20 /* UserModel.swift in Sources */,
+				CA1FE2062C6B33AF00C3414B /* ImagePickerView.swift in Sources */,
 				CA86A0A22C5DF85D0096819C /* PlanetNineUser.swift in Sources */,
 				CACD59172C48DD1200813D20 /* WelcomeView.swift in Sources */,
 				CACD591D2C48DFDD00813D20 /* PlanetNineView.swift in Sources */,

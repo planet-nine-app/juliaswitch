@@ -11,7 +11,7 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var users: [User]
-    @State private var viewState = 0
+    @State private var viewState = 3
     @State var receiverUUID = ""
     
     func updateViewState(newState: Int) {
@@ -59,6 +59,7 @@ struct ContentView: View {
                 }
         case 2: ChatView(viewState: $viewState, receiverUUID: $receiverUUID)
             //StripeBottomSheet()
+        case 3: ImagePickerView()
         default: Button("To 0", role: .none) {
             self.viewState = 0
         }

@@ -26,6 +26,9 @@
         }
       }
     },
+    "No image selected" : {
+
+    },
     "noConnections" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -157,6 +160,9 @@
           }
         }
       }
+    },
+    "Select Image" : {
+
     },
     "To 0" : {
 
