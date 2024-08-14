@@ -17,7 +17,8 @@ struct JuliaChatApp: App {
 //            AssociatedKeys.self,
             Prompt.self,
             User.self,
-            PlanetNineUser.self
+            PlanetNineUser.self,
+            Preferences.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

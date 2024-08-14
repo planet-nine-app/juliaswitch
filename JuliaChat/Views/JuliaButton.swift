@@ -16,19 +16,13 @@ struct JuliaButton: View {
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
                 .frame(width: 160, height: 48, alignment: .center)
-                .background(.green)
                 .foregroundColor(.white)
                 .cornerRadius(10)
                 .opacity(configuration.isPressed ? 0.5 : 1)
                 .overlay(
                     RoundedRectangle(cornerRadius: 24)
-                        .stroke(   LinearGradient(
-                            colors: [.purple, .green, .purple],
-                            startPoint: .top,
-                            endPoint: .bottom),
-                            lineWidth: 8)
-                        )
-                        .cornerRadius(24)
+                        .strokeBorder(Color.white, lineWidth: 4)
+                        .cornerRadius(24))
         }
     }
     
@@ -37,6 +31,12 @@ struct JuliaButton: View {
             onPress()
         } label: {
             Text(label)
+                .overlay {
+                    LinearGradient(colors: [.purple, .green], startPoint: .top, endPoint: .bottom)
+                }
+                .mask {
+                    Text(label)
+                }
         }.buttonStyle(JuliaButtonStyle())
     }
     

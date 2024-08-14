@@ -12,6 +12,7 @@
 		CA1FE2022C6A936B00C3414B /* PlanetNine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE2012C6A936B00C3414B /* PlanetNine.swift */; };
 		CA1FE2042C6A937400C3414B /* Pref.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE2032C6A937400C3414B /* Pref.swift */; };
 		CA1FE2062C6B33AF00C3414B /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE2052C6B33AF00C3414B /* ImagePickerView.swift */; };
+		CA1FE2082C6C417D00C3414B /* PreferencesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE2072C6C417D00C3414B /* PreferencesModel.swift */; };
 		CA34DD6D2C4E2E9D0018DBC0 /* DialogBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA34DD6C2C4E2E9D0018DBC0 /* DialogBoxView.swift */; };
 		CA34DD6F2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA34DD6E2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift */; };
 		CA51893C2C4C2D54008EB941 /* ConnectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51893B2C4C2D54008EB941 /* ConnectionsView.swift */; };
@@ -45,6 +46,7 @@
 		CA1FE2012C6A936B00C3414B /* PlanetNine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetNine.swift; sourceTree = "<group>"; };
 		CA1FE2032C6A937400C3414B /* Pref.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pref.swift; sourceTree = "<group>"; };
 		CA1FE2052C6B33AF00C3414B /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		CA1FE2072C6C417D00C3414B /* PreferencesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesModel.swift; sourceTree = "<group>"; };
 		CA34DD6C2C4E2E9D0018DBC0 /* DialogBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBoxView.swift; sourceTree = "<group>"; };
 		CA34DD6E2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBoxTextFieldView.swift; sourceTree = "<group>"; };
 		CA51893B2C4C2D54008EB941 /* ConnectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				CACD590C2C4245D800813D20 /* MessageModel.swift */,
 				CACD59112C47935B00813D20 /* PromptModel.swift */,
 				CACD59132C486F8600813D20 /* AssociateModel.swift */,
+				CA1FE2072C6C417D00C3414B /* PreferencesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				CA7EFB1D2C41C7C6009A8FDD /* ContentView.swift in Sources */,
 				CACD590D2C4245D800813D20 /* MessageModel.swift in Sources */,
 				CA7EFB1F2C41C7C6009A8FDD /* Item.swift in Sources */,
+				CA1FE2082C6C417D00C3414B /* PreferencesModel.swift in Sources */,
 				CA7EFB1B2C41C7C6009A8FDD /* JuliaChatApp.swift in Sources */,
 				CA1FE2022C6A936B00C3414B /* PlanetNine.swift in Sources */,
 				CACD591B2C48DD2C00813D20 /* ChatView.swift in Sources */,
