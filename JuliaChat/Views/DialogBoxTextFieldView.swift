@@ -36,7 +36,7 @@ struct DialogBoxTextFieldView: View {
             ZStack {
                 Rectangle()
                     .modifier(DialogBoxTextFieldStyle())
-                JuliaTextField(enteredText: $enteredText)
+                JuliaTextField(label: "chat", enteredText: $enteredText)
                     .background(.green)
             }
     }

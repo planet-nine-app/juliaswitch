@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Enter Text" : {
-
-    },
     "handleHelpText" : {
       "extractionState" : "manual",
       "localizations" : {

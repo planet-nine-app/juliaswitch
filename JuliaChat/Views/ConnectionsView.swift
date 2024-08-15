@@ -92,14 +92,14 @@ struct ConnectionsView: View {
                     }
                     HStack {
                         VStack {
-                            JuliaTextField(enteredText: $enteredText)
+                            JuliaTextField(label: "prompt", enteredText: $enteredText)
                                 .transition(.push(from: .trailing))
-                            JuliaButton(label: "enterPrompt") {
+                            /*JuliaButton(label: "enterPrompt") {
                                 print("prompt is: \(enteredText)")
                                 Task {
                                     await postPrompt()
                                 }
-                            }
+                            }*/
                         }
                         .transition(.slide)
                         JuliaButton(label: "getPrompt") {

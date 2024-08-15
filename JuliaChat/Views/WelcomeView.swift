@@ -35,7 +35,7 @@ struct WelcomeView: View {
                 
                 if onboardingState > 10 {
                     VStack {
-                        JuliaTextField(enteredText: $enteredText)
+                        JuliaTextField(label: "handle", enteredText: $enteredText)
                         Text(LocalizedStringKey("handleHelpText"))
                             .frame(width: w - 128, height: 64, alignment: .center)
                             .padding(.all, 16)
