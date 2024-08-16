@@ -23,3 +23,28 @@ class Preferences {
         case globalPreferences
     }
 }
+
+class RegisterPreferences {
+    class func payload(preferences: [String: String]) -> Data? {
+        let sessionless = Sessionless()
+        guard let pubKey = sessionless.getKeys() else { return nil }
+        
+        let timestamp = "".getTime()
+        let hash = "thisisthehashwe'llusefornow"
+        let message = "\(timestamp)\(pubKey)\(hash)"
+        let signature = sessionless.sign(message: message) ?? ""
+        
+        var preferencesJSON = "{"
+        for (k, v) in preferences {
+            preferencesJSON = "\(preferencesJSON)\"\(k)\":\"\(v)\","
+        }
+        let _ = preferencesJSON.popLast()
+        preferencesJSON = "\(preferencesJSON)}"
+        
+        let json = """
+            {"timestamp":"\(timestamp)","pubKey":"\(pubKey)","hash":"\(hash)","signature":"\(signature)","preferences":\(preferencesJSON)}
+        """
+        
+        return json.data(using: .utf8)
+    }
+}

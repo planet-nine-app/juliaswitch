@@ -117,6 +117,18 @@ class Network {
         }
     }
     
+    class func registerPref(baseURL: String, preferences: [String: String], callback: @escaping (Error?, Data?) -> Void) async {
+        let sessionless = Sessionless()
+        let keys = sessionless.getKeys()
+        
+        guard let publicKey = keys?.publicKey,
+              let payload = RegisterPreferences.payload(preferences: preferences) else { return }
+        
+        await Network.put(urlString: "\(baseURL)/user/create", payload: payload) { err, data in
+            callback(err, data)
+        }
+    }
+    
     class func getUser(baseURL: String, user: User, callback: @escaping (Error?, Data?) -> Void) async {
         let sessionless = Sessionless()
         let timestamp = "".getTime()

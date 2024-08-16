@@ -15,15 +15,16 @@ struct PrefUser: Codable {
 class Pref {
     
     class func createUser(preferences: [String: String], uiHandler: @escaping (Error?, 
-PrefUser?) -> Void) {
+PrefUser?) -> Void) async {
         let handler = ResponseHandler.handlerForModel(for: PrefUser.self, completion: uiHandler)
         
-        // TODO add to network
-        //await Network.registerWithPref(baseURL: ServiceURLs.pref.rawValue, preferences, callback: handler)
+        await Network.registerPref(baseURL: ServiceURLs.pref.rawValue, preferences: preferences, callback: handler)
     }
     
-    class func savePreferences(prefUser: PrefUser, hash: String, newPreferences: [String: String], uiHandler: @escaping (Error?, [String: String]?) -> Void) {
-        // TODO
+    class func savePreferences(prefUser: PrefUser, newPreferences: [String: String], uiHandler: @escaping (Error?, [String: String]?) -> Void) async {
+        let handler = ResponseHandler.handlerForModel(for: PrefUser.self, completion: uiHandler)
+        
+        await Network.putPreferences(prefUser: prefUser, newPreferences, handler)
     }
     
     class func saveGlobalPreferences(prefUser: PrefUser, newPreferences: [String: String], uiHandler: @escaping (Error?, [String: String]?) -> Void) {

@@ -12,6 +12,7 @@ struct ConnectionsView: View {
     @Environment(\.modelContext) var modelContext
     @Query private var users: [User]
     @Query private var planetNineUsers: [PlanetNineUser]
+    @Query private var prefs: [Pref]
     @State var displayText: String = "noConnections"
     @State var promptsOpen: Bool = false
     @State var enteredText: String = ""
@@ -117,7 +118,7 @@ struct ConnectionsView: View {
                 .position(x: w / 2, y: h * 0.75)
                 HStack {
                     ForEach(users[0].connections(), id: \.uuid) { tuple in
-                        ConnectionView(label: tuple.uuid, imageName: "julia") {
+                        ConnectionView(label: tuple.uuid, handle: tuple.uuid, imageName: "julia", connection: tuple) {
                             print("Tapped a connection")
                             receiverUUID = tuple.uuid
                             viewState = 2
