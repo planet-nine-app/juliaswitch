@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct JuliaButton: View {
     let onPress: () -> Void

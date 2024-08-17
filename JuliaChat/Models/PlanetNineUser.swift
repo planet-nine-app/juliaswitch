@@ -16,7 +16,7 @@ struct PaymentMethod: Codable {
 
 @Model()
 class PlanetNineUser: Codable {
-    @Attribute(.unique) var uuid = ""
+    @Attribute(.unique) var planetNineUUID = ""
     
     var pubKey = ""
     var handle = ""
@@ -40,7 +40,7 @@ class PlanetNineUser: Codable {
     
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: ConfigKeys.self)
-        self.uuid = try values.decodeIfPresent(String.self, forKey: .uuid)!
+        self.planetNineUUID = try values.decodeIfPresent(String.self, forKey: .uuid)!
         self.pubKey = try values.decodeIfPresent(String.self, forKey: .pubKey)!
         self.paymentMethods = try values.decodeIfPresent([PaymentMethod].self, forKey: .paymentMethods)!
         self.mp = try values.decode(Int.self, forKey: .mp)
@@ -52,7 +52,7 @@ class PlanetNineUser: Codable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: ConfigKeys.self)
-        try container.encode(uuid, forKey: .uuid)
+        try container.encode(planetNineUUID, forKey: .uuid)
         try container.encode(pubKey, forKey: .pubKey)
         try container.encode(paymentMethods, forKey: .paymentMethods)
         try container.encode(mp, forKey: .mp)

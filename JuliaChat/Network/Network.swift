@@ -15,6 +15,7 @@ enum ServiceURLs: String {
     case julia = "http://localhost:3000"
     case planetNine = "http://localhost:3001"
     case pref = "http://localhost:3002"
+    case bdo = "http://localhost:3003"
 }
 
 class Network {
@@ -118,11 +119,16 @@ class Network {
     }
     
     class func registerPref(baseURL: String, preferences: [String: String], callback: @escaping (Error?, Data?) -> Void) async {
-        let sessionless = Sessionless()
-        let keys = sessionless.getKeys()
+        guard let payload = RegisterPreferences.payload(preferences: preferences) else { return }
         
-        guard let publicKey = keys?.publicKey,
-              let payload = RegisterPreferences.payload(preferences: preferences) else { return }
+        await Network.put(urlString: "\(baseURL)/user/create", payload: payload) { err, data in
+            callback(err, data)
+        }
+    }
+    
+    class func registerBDO(baseURL: String, bdo: [String: Any]?, callback: @escaping (Error?, Data?) -> Void) async {
+        
+        guard let payload = RegisterBDO.payload(bdo: bdo) else { return }
         
         await Network.put(urlString: "\(baseURL)/user/create", payload: payload) { err, data in
             callback(err, data)
@@ -132,17 +138,17 @@ class Network {
     class func getUser(baseURL: String, user: User, callback: @escaping (Error?, Data?) -> Void) async {
         let sessionless = Sessionless()
         let timestamp = "".getTime()
-        let signature = sessionless.sign(message: "\(timestamp)\(user.uuid)") ?? ""
+        let signature = sessionless.sign(message: "\(timestamp)\(user.juliaUUID)") ?? ""
         
-        await Network.get(urlString: "\(baseURL)/user/\(user.uuid)?timestamp=\(timestamp)&signature=\(signature)", callback: callback)
+        await Network.get(urlString: "\(baseURL)/user/\(user.juliaUUID)?timestamp=\(timestamp)&signature=\(signature)", callback: callback)
     }
     
     class func getPrompt(baseURL: String, user: User, callback: @escaping (Error?, Data?) -> Void) async {
         let sessionless = Sessionless()
         let timestamp = "".getTime()
-        let message = "\(timestamp)\(user.uuid)"
+        let message = "\(timestamp)\(user.juliaUUID)"
         let signature = sessionless.sign(message: message) ?? ""
-        await Network.get(urlString: "\(baseURL)/user/\(user.uuid)/associate/prompt?timestamp=\(timestamp)&signature=\(signature)", callback: {err, data in
+        await Network.get(urlString: "\(baseURL)/user/\(user.juliaUUID)/associate/prompt?timestamp=\(timestamp)&signature=\(signature)", callback: {err, data in
             callback(err, data)
         })
     }
@@ -151,9 +157,9 @@ class Network {
         let sessionless = Sessionless()
         
         guard let publicKey = sessionless.getKeys()?.publicKey,
-              let payload = PostPrompt(timestamp: "".getTime(), uuid: user.uuid, pubKey: publicKey, prompt: prompt).toData() else { return }
+              let payload = PostPrompt(timestamp: "".getTime(), uuid: user.juliaUUID, pubKey: publicKey, prompt: prompt).toData() else { return }
         
-        await Network.post(urlString: "\(baseURL)/user/\(user.uuid)/associate/signedPrompt", payload: payload, callback: {err, data in
+        await Network.post(urlString: "\(baseURL)/user/\(user.juliaUUID)/associate/signedPrompt", payload: payload, callback: {err, data in
             callback(err, data)
         })
     }
@@ -163,13 +169,12 @@ class Network {
         
         guard let payload = PostAssociate(timestamp: timestamp, newTimestamp: signedPrompt.timestamp, newUUID: signedPrompt.uuid, newPubKey: signedPrompt.pubKey, prompt: signedPrompt.prompt, newSignature: signedPrompt.signature, signature: "").toData() else { return }
         
-        await Network.post(urlString: "\(baseURL)/user/\(user.uuid)/associate", payload: payload, callback: callback)
+        await Network.post(urlString: "\(baseURL)/user/\(user.juliaUUID)/associate", payload: payload, callback: callback)
     }
     
     class func sendMessage(baseURL: String, user: User, content: String, receiverUUID: String, callback: @escaping (Error?, Data?) -> Void) async {
-        let sessionless = Sessionless()
         
-        guard let payload = PostableMessage(timestamp: "".getTime(), senderUUID: user.uuid, receiverUUID: receiverUUID, content: content).toData() else { return }
+        guard let payload = PostableMessage(timestamp: "".getTime(), senderUUID: user.juliaUUID, receiverUUID: receiverUUID, content: content).toData() else { return }
         
         await Network.post(urlString: "\(baseURL)/message", payload: payload, callback: callback)
     }
@@ -177,10 +182,18 @@ class Network {
     class func getMessages(baseURL: String, user: User, callback: @escaping (Error?, Data?) -> Void) async {
         let sessionless = Sessionless()
         let timestamp = "".getTime()
-        let message = "\(timestamp)\(user.uuid)"
+        let message = "\(timestamp)\(user.juliaUUID)"
         guard let signature = sessionless.sign(message: message) else { return }
         
-        await Network.get(urlString: "\(baseURL)/messages/user/\(user.uuid)?timestamp=\(timestamp)&signature=\(signature)", callback: callback)
+        await Network.get(urlString: "\(baseURL)/messages/user/\(user.juliaUUID)?timestamp=\(timestamp)&signature=\(signature)", callback: callback)
+    }
+    
+    class func putPreferences(baseURL: String, prefUser: PrefUser, newPreferences: [String: String], callback: @escaping (Error?, Data?) -> Void) async {
+        let timestamp = "".getTime()
+        
+        guard let payload = PostablePreferences(timestamp: timestamp, prefUUID: prefUser.prefUUID, preferences: newPreferences).toData() else { return }
+                
+        await Network.put(urlString: baseURL, payload: payload, callback: callback)
     }
 }
 

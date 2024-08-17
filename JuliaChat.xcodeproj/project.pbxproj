@@ -15,6 +15,13 @@
 		CA1FE2082C6C417D00C3414B /* PreferencesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE2072C6C417D00C3414B /* PreferencesModel.swift */; };
 		CA34DD6D2C4E2E9D0018DBC0 /* DialogBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA34DD6C2C4E2E9D0018DBC0 /* DialogBoxView.swift */; };
 		CA34DD6F2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA34DD6E2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift */; };
+		CA433AE82C7064A400CDECC4 /* BLETwoWayPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AE42C7064A400CDECC4 /* BLETwoWayPeripheral.swift */; };
+		CA433AE92C7064A400CDECC4 /* BLEUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AE52C7064A400CDECC4 /* BLEUtils.swift */; };
+		CA433AEA2C7064A400CDECC4 /* BLETwoWayCentral.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AE62C7064A400CDECC4 /* BLETwoWayCentral.swift */; };
+		CA433AEB2C7064A400CDECC4 /* BLEMAGICPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AE72C7064A400CDECC4 /* BLEMAGICPeripheral.swift */; };
+		CA433AED2C7064FC00CDECC4 /* BLEMAGICCentral.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AEC2C7064FC00CDECC4 /* BLEMAGICCentral.swift */; };
+		CA433AEF2C707B3000CDECC4 /* BDO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AEE2C707B3000CDECC4 /* BDO.swift */; };
+		CA433AF12C707EA100CDECC4 /* BDOModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AF02C707EA100CDECC4 /* BDOModel.swift */; };
 		CA51893C2C4C2D54008EB941 /* ConnectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51893B2C4C2D54008EB941 /* ConnectionsView.swift */; };
 		CA51893E2C4C3A2B008EB941 /* JuliaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51893D2C4C3A2B008EB941 /* JuliaButton.swift */; };
 		CA5189402C4C5FF3008EB941 /* JuliaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51893F2C4C5FF3008EB941 /* JuliaTextField.swift */; };
@@ -49,6 +56,13 @@
 		CA1FE2072C6C417D00C3414B /* PreferencesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesModel.swift; sourceTree = "<group>"; };
 		CA34DD6C2C4E2E9D0018DBC0 /* DialogBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBoxView.swift; sourceTree = "<group>"; };
 		CA34DD6E2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBoxTextFieldView.swift; sourceTree = "<group>"; };
+		CA433AE42C7064A400CDECC4 /* BLETwoWayPeripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETwoWayPeripheral.swift; sourceTree = "<group>"; };
+		CA433AE52C7064A400CDECC4 /* BLEUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEUtils.swift; sourceTree = "<group>"; };
+		CA433AE62C7064A400CDECC4 /* BLETwoWayCentral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETwoWayCentral.swift; sourceTree = "<group>"; };
+		CA433AE72C7064A400CDECC4 /* BLEMAGICPeripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEMAGICPeripheral.swift; sourceTree = "<group>"; };
+		CA433AEC2C7064FC00CDECC4 /* BLEMAGICCentral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEMAGICCentral.swift; sourceTree = "<group>"; };
+		CA433AEE2C707B3000CDECC4 /* BDO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDO.swift; sourceTree = "<group>"; };
+		CA433AF02C707EA100CDECC4 /* BDOModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDOModel.swift; sourceTree = "<group>"; };
 		CA51893B2C4C2D54008EB941 /* ConnectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsView.swift; sourceTree = "<group>"; };
 		CA51893D2C4C3A2B008EB941 /* JuliaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuliaButton.swift; sourceTree = "<group>"; };
 		CA51893F2C4C5FF3008EB941 /* JuliaTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuliaTextField.swift; sourceTree = "<group>"; };
@@ -87,6 +101,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA433AE32C70649600CDECC4 /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				CA433AEC2C7064FC00CDECC4 /* BLEMAGICCentral.swift */,
+				CA433AE72C7064A400CDECC4 /* BLEMAGICPeripheral.swift */,
+				CA433AE62C7064A400CDECC4 /* BLETwoWayCentral.swift */,
+				CA433AE42C7064A400CDECC4 /* BLETwoWayPeripheral.swift */,
+				CA433AE52C7064A400CDECC4 /* BLEUtils.swift */,
+			);
+			path = BLE;
+			sourceTree = "<group>";
+		};
 		CA7EFB0E2C41C7C6009A8FDD = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +132,7 @@
 		CA7EFB192C41C7C6009A8FDD /* JuliaChat */ = {
 			isa = PBXGroup;
 			children = (
+				CA433AE32C70649600CDECC4 /* BLE */,
 				CACD591E2C4A310900813D20 /* Localizations */,
 				CACD59152C48DCFC00813D20 /* Views */,
 				CACD590E2C478CE200813D20 /* Network */,
@@ -138,6 +165,7 @@
 				CACD59112C47935B00813D20 /* PromptModel.swift */,
 				CACD59132C486F8600813D20 /* AssociateModel.swift */,
 				CA1FE2072C6C417D00C3414B /* PreferencesModel.swift */,
+				CA433AF02C707EA100CDECC4 /* BDOModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -150,6 +178,7 @@
 				CA1FE1FF2C6A935F00C3414B /* Julia.swift */,
 				CA1FE2012C6A936B00C3414B /* PlanetNine.swift */,
 				CA1FE2032C6A937400C3414B /* Pref.swift */,
+				CA433AEE2C707B3000CDECC4 /* BDO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -270,6 +299,7 @@
 				CA34DD6D2C4E2E9D0018DBC0 /* DialogBoxView.swift in Sources */,
 				CA7EFB1D2C41C7C6009A8FDD /* ContentView.swift in Sources */,
 				CACD590D2C4245D800813D20 /* MessageModel.swift in Sources */,
+				CA433AE82C7064A400CDECC4 /* BLETwoWayPeripheral.swift in Sources */,
 				CA7EFB1F2C41C7C6009A8FDD /* Item.swift in Sources */,
 				CA1FE2082C6C417D00C3414B /* PreferencesModel.swift in Sources */,
 				CA7EFB1B2C41C7C6009A8FDD /* JuliaChatApp.swift in Sources */,
@@ -278,19 +308,25 @@
 				CA34DD6F2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift in Sources */,
 				CACD590B2C41CF4E00813D20 /* UserModel.swift in Sources */,
 				CA1FE2062C6B33AF00C3414B /* ImagePickerView.swift in Sources */,
+				CA433AEA2C7064A400CDECC4 /* BLETwoWayCentral.swift in Sources */,
 				CA86A0A22C5DF85D0096819C /* PlanetNineUser.swift in Sources */,
+				CA433AED2C7064FC00CDECC4 /* BLEMAGICCentral.swift in Sources */,
 				CACD59172C48DD1200813D20 /* WelcomeView.swift in Sources */,
 				CACD591D2C48DFDD00813D20 /* PlanetNineView.swift in Sources */,
 				CA51893C2C4C2D54008EB941 /* ConnectionsView.swift in Sources */,
 				CA86A0A02C5DC2C10096819C /* PaymentView.swift in Sources */,
+				CA433AE92C7064A400CDECC4 /* BLEUtils.swift in Sources */,
 				CACD59102C478CF600813D20 /* Network.swift in Sources */,
+				CA433AF12C707EA100CDECC4 /* BDOModel.swift in Sources */,
 				CA5189422C4E2429008EB941 /* ConnectionView.swift in Sources */,
 				CA1FE2002C6A935F00C3414B /* Julia.swift in Sources */,
 				CA5189402C4C5FF3008EB941 /* JuliaTextField.swift in Sources */,
 				CA1FE2042C6A937400C3414B /* Pref.swift in Sources */,
+				CA433AEF2C707B3000CDECC4 /* BDO.swift in Sources */,
 				CAE7E7702C41CA62002B761A /* Sessionless.swift in Sources */,
 				CA51893E2C4C3A2B008EB941 /* JuliaButton.swift in Sources */,
 				CACD59142C486F8600813D20 /* AssociateModel.swift in Sources */,
+				CA433AEB2C7064A400CDECC4 /* BLEMAGICPeripheral.swift in Sources */,
 				CACD59122C47935B00813D20 /* PromptModel.swift in Sources */,
 				CA1FE1FE2C6A90D200C3414B /* ResponseHandler.swift in Sources */,
 			);

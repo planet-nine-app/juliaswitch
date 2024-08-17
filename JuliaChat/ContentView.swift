@@ -39,7 +39,7 @@ struct ContentView: View {
             .onAppear {
             if users.count > 0 {
                 let _ = print("there's a user now")
-                let _ = print(users[0].uuid)
+                let _ = print(users[0].juliaUUID)
                 let _ = updateViewState(newState: 1)
             }
         } /*return Button("To 1", role: .none) {

@@ -8,7 +8,7 @@
 import Foundation
 
 struct PrefUser: Codable {
-    var uuid = ""
+    var prefUUID = ""
     var preferences = [String: String]()
 }
 
@@ -21,10 +21,10 @@ PrefUser?) -> Void) async {
         await Network.registerPref(baseURL: ServiceURLs.pref.rawValue, preferences: preferences, callback: handler)
     }
     
-    class func savePreferences(prefUser: PrefUser, newPreferences: [String: String], uiHandler: @escaping (Error?, [String: String]?) -> Void) async {
+    class func savePreferences(prefUser: PrefUser, newPreferences: [String: String], uiHandler: @escaping (Error?, PrefUser?) -> Void) async {
         let handler = ResponseHandler.handlerForModel(for: PrefUser.self, completion: uiHandler)
         
-        await Network.putPreferences(prefUser: prefUser, newPreferences, handler)
+        await Network.putPreferences(baseURL: ServiceURLs.pref.rawValue, prefUser: prefUser, newPreferences: newPreferences, callback: handler)
     }
     
     class func saveGlobalPreferences(prefUser: PrefUser, newPreferences: [String: String], uiHandler: @escaping (Error?, [String: String]?) -> Void) {

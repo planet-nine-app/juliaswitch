@@ -10,7 +10,7 @@ struct StripeBottomSheet: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> some UIViewController {
         let vc = CheckoutViewController()
-        vc.uuid = planetNineUsers[0].uuid
+        vc.uuid = planetNineUsers[0].planetNineUUID
         return vc
     }
     

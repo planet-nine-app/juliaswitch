@@ -6,17 +6,18 @@
 //
 
 import SwiftUI
-
-import SwiftUI
+import SwiftData
 
 struct ConnectionView: View {
+    @Environment(\.modelContext) var modelContext
+    @Query private var preferences: [Preferences]
     @State var textfieldOn = false
     @State var enteredText = ""
-    @State var handle: String
-    let connection: KeyTuple
+    @State var handle = ""
+    var connection = KeyTuple(uuid: "foo", pubKey: "bar")
     let onPress: () -> Void
-    let label: String
-    let imageName: String
+    var label = ""
+    var imageName = ""
     
     struct CircularConnectionStyle: ViewModifier {
         func body(content: Content) -> some View {
@@ -64,6 +65,21 @@ struct ConnectionView: View {
                     .onSubmit {
                         print("take care of pref here")
                         print(enteredText)
+                        let preferences = preferences[0]
+                        preferences.appPreferences["\(connection.uuid)Handle"] = enteredText
+                        modelContext.insert(preferences)
+                        try? modelContext.save()
+                        
+                        Task(priority: .background) {
+                            do {
+                                let prefUser = PrefUser(prefUUID: preferences.prefUUID, preferences: preferences.appPreferences)
+                                await Pref.savePreferences(prefUser: prefUser, newPreferences: prefUser.preferences) { err, prefUser in
+                                    print("ignore response here")
+                                }
+                            } catch {
+                                // do nothing
+                            }
+                        }
                     }
             } else {
                 Text(label)

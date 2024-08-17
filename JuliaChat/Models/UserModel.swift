@@ -66,7 +66,7 @@ struct AssociatedKeys: Codable {
 
 @Model()
 class User: Codable {
-    @Attribute(.unique) var uuid = ""
+    @Attribute(.unique) var juliaUUID = ""
     var keys = AssociatedKeys(interactingKeys: [:], coordinatingKeys: [:])
     var messages = [Message]()
     var pubKey = ""
@@ -83,14 +83,14 @@ class User: Codable {
     }
     
     init(uuid: String = "", keys: AssociatedKeys = AssociatedKeys(interactingKeys: [:], coordinatingKeys: [:]), messages: [Message] = [Message]()) {
-        self.uuid = uuid
+        self.juliaUUID = uuid
         self.keys = keys
         self.messages = messages
     }
     
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: ConfigKeys.self)
-        self.uuid = try values.decodeIfPresent(String.self, forKey: .uuid)!
+        self.juliaUUID = try values.decodeIfPresent(String.self, forKey: .uuid)!
         self.keys = try values.decodeIfPresent(AssociatedKeys.self, forKey: .keys)!
         self.messages = try values.decodeIfPresent([Message].self, forKey: .messages)!
         self.pubKey = try values.decode(String.self, forKey: .pubKey)
@@ -100,7 +100,7 @@ class User: Codable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: ConfigKeys.self)
-        try container.encode(uuid, forKey: .uuid)
+        try container.encode(juliaUUID, forKey: .uuid)
         try container.encode(keys, forKey: .keys)
         try container.encode(messages, forKey: .messages)
         try container.encode(pubKey, forKey: .pubKey)
