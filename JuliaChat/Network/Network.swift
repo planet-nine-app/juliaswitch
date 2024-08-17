@@ -94,7 +94,7 @@ class Network {
         }
     }
     
-    class func register(baseURL: String, handle: String, callback: @escaping (Error?, Data?) -> Void) async {
+    class func registerJulia(baseURL: String, handle: String, callback: @escaping (Error?, Data?) -> Void) async {
         let sessionless = Sessionless()
         let keys = sessionless.generateKeys()
         
@@ -126,7 +126,7 @@ class Network {
         }
     }
     
-    class func registerBDO(baseURL: String, bdo: [String: Any]?, callback: @escaping (Error?, Data?) -> Void) async {
+    class func registerBDO(baseURL: String, bdo: [String: JSON]?, callback: @escaping (Error?, Data?) -> Void) async {
         
         guard let payload = RegisterBDO.payload(bdo: bdo) else { return }
         

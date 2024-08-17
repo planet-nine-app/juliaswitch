@@ -17,7 +17,7 @@ class Julia {
     class func createUser(handle: String, uiHandler: @escaping (Error?, User?) -> Void) async {
         let handler = ResponseHandler.handlerForModel(for: User.self, completion: uiHandler)
         
-        await Network.register(baseURL: ServiceURLs.julia.rawValue, handle: handle, callback: handler)
+        await Network.registerJulia(baseURL: ServiceURLs.julia.rawValue, handle: handle, callback: handler)
     }
     
     class func syncKeys(user: User, uiHandler: @escaping (Error?, User?) -> Void) async {

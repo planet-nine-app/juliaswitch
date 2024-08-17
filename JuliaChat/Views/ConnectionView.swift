@@ -65,6 +65,24 @@ struct ConnectionView: View {
                     .onSubmit {
                         print("take care of pref here")
                         print(enteredText)
+                        if preferences.count < 1 {
+                            var newPreferences = Preferences(appPreferences: ["\(connection.uuid)Handle": enteredText], globalPreferences: [String: String]())
+                            
+                            Task(priority: .background) {
+                                do {
+                                    await Pref.createUser(preferences: newPreferences.appPreferences) { err, prefUser in
+                                        if let err = err {
+                                            print(err)
+                                            return
+                                        }
+                                        guard let prefUser = prefUser else { return }
+                                        newPreferences.prefUUID = prefUser.prefUUID
+                                        modelContext.insert(newPreferences)
+                                        try? modelContext.save()
+                                    }
+                                }
+                            }
+                        }
                         let preferences = preferences[0]
                         preferences.appPreferences["\(connection.uuid)Handle"] = enteredText
                         modelContext.insert(preferences)

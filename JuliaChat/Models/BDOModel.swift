@@ -63,7 +63,7 @@ struct PostableBDO {
 }
 
 class RegisterBDO {
-    class func payload(preferences: [String: String]) -> Data? {
+    class func payload(bdo: [String: JSON]?) -> Data? {
         let sessionless = Sessionless()
         guard let pubKey = sessionless.getKeys() else { return nil }
         
