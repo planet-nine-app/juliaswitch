@@ -7,8 +7,150 @@
 
 import Foundation
 
-struct Spell {
-    // TODO
+public struct GatewayAddition: Codable {
+    let timestamp: String
+    let gatewayUUID: String
+    let gatewayName: String
+    let minimumCost: Int
+    let ordinal: Int
+    var gatewaySignature: String
+    let additions: [String]
+    
+    init(timestamp: String, gatewayUUID: String, gatewayName: String, minimumCost: Int, ordinal: Int, additions: [String]) {
+        self.timestamp = timestamp
+        self.gatewayUUID = gatewayUUID
+        self.gatewayName = gatewayName
+        self.minimumCost = minimumCost
+        self.ordinal = ordinal
+        self.gatewaySignature = ""
+        self.additions = additions
+        
+        self.sign()
+    }
+    
+    func toString() -> String {
+        return """
+            {"timestamp":"\(timestamp)","gatewayUUID":"\(gatewayUUID)","gatewayName":"\(gatewayName)","minimumCost":\(minimumCost),"ordinal":"\(ordinal)","additions":"\(additions.joined())"}
+        """
+    }
+    
+    mutating func sign() {
+        let sessionless = Sessionless()
+        guard let signature = sessionless.sign(message: self.toString()) else { return }
+        self.gatewaySignature = signature
+    }
+}
+
+public struct GatewayMVP: Codable {
+    let timestamp: String
+    let uuid: String
+    let minimumCost: Int
+    let ordinal: Int
+    var signature: String
+    
+    init(timestamp: String, uuid: String, minimumCost: Int, ordinal: Int) {
+        self.timestamp = timestamp
+        self.uuid = uuid
+        self.minimumCost = minimumCost
+        self.ordinal = ordinal
+        self.signature = ""
+        
+        self.sign()
+    }
+    
+    func toString() -> String {
+        let message = """
+        {"timestamp":"\(timestamp)","uuid":"\(uuid)","minimumCost":\(minimumCost),"ordinal":\(ordinal)}
+        """
+        print("gateway message: \(message)")
+        return message
+    }
+    
+    func toSpellString() -> String {
+        return """
+        {"timestamp":"\(timestamp)","uuid":"\(uuid)","minimumCost":\(minimumCost),"ordinal":\(ordinal),\"signature\":\"\(signature)\"}
+        """
+    }
+    
+    mutating func sign() {
+        let sessionless = Sessionless()
+        guard let signature = sessionless.sign(message: self.toString()) else { return }
+        self.signature = signature
+    }
+}
+
+public struct Spell: Codable {
+    var timestamp: String = ""
+    var spellName: String = ""
+    var casterUUID: String = ""
+    var totalCost: Int = 1
+    var mp: Bool = false
+    var ordinal: Int = 1
+    var casterSignature: String = ""
+    var gateways: [GatewayMVP] = []
+    var additions: [String] = []
+    
+    init() {
+        
+    }
+    
+    init(timestamp: String, spellName: String, casterUUID: String, totalCost: Int, mp: Bool, ordinal: Int, casterSignature: String, gateways: [GatewayMVP], additions: [String]) {
+        self.timestamp = timestamp
+        self.spellName = spellName
+        self.casterUUID = casterUUID
+        self.totalCost = totalCost
+        self.mp = mp
+        self.ordinal = ordinal
+        self.casterSignature = casterSignature
+        self.gateways = gateways
+        self.additions = additions
+        
+        //self.sign()
+
+    }
+    
+    init(spellData: Data) {
+        var decodedSpell = Spell()
+        do {
+            decodedSpell = try JSONDecoder().decode(Spell.self, from: spellData)
+        } catch {
+            print("Error getting gateway")
+            print(error)
+        }
+        self = decodedSpell
+    }
+    
+    public func toString() -> String {
+        var gatewaysMapped = gateways.map { gateway in
+            return "\(gateway.toSpellString()),"
+        }
+        var gatewaysAsStrings = gatewaysMapped.joined()
+        gatewaysAsStrings.popLast()
+        let gatewaysAsStringsArray = "[\(gatewaysAsStrings)]"
+        
+        print(gatewaysAsStringsArray)
+        
+        let spellString = """
+            {"timestamp":"\(timestamp)","spell":"\(spellName)","casterUUID":"\(casterUUID)","totalCost":\(totalCost),"mp":\(1),"ordinal":\(ordinal),"gateways":\(gatewaysAsStringsArray),"additions":"\(additions.joined())","casterSignature":"\(casterSignature)"}
+        """
+        
+        print(spellString)
+        return spellString
+    }
+    
+    public func toMessageString() -> String {
+        let spellString = """
+        {"timestamp":"\(timestamp)","spell":"\(spellName)","casterUUID":"\(casterUUID)","totalCost":\(totalCost),"mp":\(1),"ordinal":"\(ordinal)"}
+        """
+        
+        return spellString
+    }
+    
+    mutating func sign() {
+        let sessionless = Sessionless()
+        guard let signature = sessionless.sign(message: self.toMessageString()) else { return }
+        self.casterSignature = signature
+    }
 }
 
 struct Success: Codable {

@@ -8,7 +8,7 @@
 import Foundation
 
 struct PrefUser: Codable {
-    var prefUUID = ""
+    var uuid = ""
     var preferences = [String: String]()
 }
 

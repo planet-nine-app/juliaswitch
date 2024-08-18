@@ -246,7 +246,7 @@ struct BDOUser: Codable {
 
 class BDO {
     
-    class func createUser(bdo: [String: Any]?, uiHandler: @escaping (Error?,
+    class func createUser(bdo: [String: JSON]?, uiHandler: @escaping (Error?,
 BDOUser?) -> Void) async {
         let handler = ResponseHandler.handlerForModel(for: BDOUser.self, completion: uiHandler)
         

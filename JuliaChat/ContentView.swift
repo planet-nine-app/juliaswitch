@@ -60,6 +60,7 @@ struct ContentView: View {
         case 2: ChatView(viewState: $viewState, receiverUUID: $receiverUUID)
             //StripeBottomSheet()
         case 3: ImagePickerView()
+        case 9: ParticleCanvasView()
         default: Button("To 0", role: .none) {
             self.viewState = 0
         }

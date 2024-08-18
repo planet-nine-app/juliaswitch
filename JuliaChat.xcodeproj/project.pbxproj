@@ -22,6 +22,10 @@
 		CA433AED2C7064FC00CDECC4 /* BLEMAGICCentral.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AEC2C7064FC00CDECC4 /* BLEMAGICCentral.swift */; };
 		CA433AEF2C707B3000CDECC4 /* BDO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AEE2C707B3000CDECC4 /* BDO.swift */; };
 		CA433AF12C707EA100CDECC4 /* BDOModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AF02C707EA100CDECC4 /* BDOModel.swift */; };
+		CA433AF42C71512D00CDECC4 /* ParticleCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AF32C71512D00CDECC4 /* ParticleCanvasView.swift */; };
+		CA433AF72C71514E00CDECC4 /* CircleParticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AF62C71514E00CDECC4 /* CircleParticleView.swift */; };
+		CA433AF92C716F6F00CDECC4 /* ImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AF82C716F6E00CDECC4 /* ImageButtonView.swift */; };
+		CA433AFC2C71B9CE00CDECC4 /* SpellbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AFB2C71B9CE00CDECC4 /* SpellbookView.swift */; };
 		CA51893C2C4C2D54008EB941 /* ConnectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51893B2C4C2D54008EB941 /* ConnectionsView.swift */; };
 		CA51893E2C4C3A2B008EB941 /* JuliaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51893D2C4C3A2B008EB941 /* JuliaButton.swift */; };
 		CA5189402C4C5FF3008EB941 /* JuliaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51893F2C4C5FF3008EB941 /* JuliaTextField.swift */; };
@@ -63,6 +67,11 @@
 		CA433AEC2C7064FC00CDECC4 /* BLEMAGICCentral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEMAGICCentral.swift; sourceTree = "<group>"; };
 		CA433AEE2C707B3000CDECC4 /* BDO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDO.swift; sourceTree = "<group>"; };
 		CA433AF02C707EA100CDECC4 /* BDOModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDOModel.swift; sourceTree = "<group>"; };
+		CA433AF32C71512D00CDECC4 /* ParticleCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleCanvasView.swift; sourceTree = "<group>"; };
+		CA433AF62C71514E00CDECC4 /* CircleParticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleParticleView.swift; sourceTree = "<group>"; };
+		CA433AF82C716F6E00CDECC4 /* ImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButtonView.swift; sourceTree = "<group>"; };
+		CA433AFA2C717EB900CDECC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CA433AFB2C71B9CE00CDECC4 /* SpellbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellbookView.swift; sourceTree = "<group>"; };
 		CA51893B2C4C2D54008EB941 /* ConnectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsView.swift; sourceTree = "<group>"; };
 		CA51893D2C4C3A2B008EB941 /* JuliaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuliaButton.swift; sourceTree = "<group>"; };
 		CA51893F2C4C5FF3008EB941 /* JuliaTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuliaTextField.swift; sourceTree = "<group>"; };
@@ -113,6 +122,23 @@
 			path = BLE;
 			sourceTree = "<group>";
 		};
+		CA433AF22C71510400CDECC4 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				CA433AF52C71513E00CDECC4 /* Particles */,
+				CA433AF32C71512D00CDECC4 /* ParticleCanvasView.swift */,
+			);
+			path = Effects;
+			sourceTree = "<group>";
+		};
+		CA433AF52C71513E00CDECC4 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				CA433AF62C71514E00CDECC4 /* CircleParticleView.swift */,
+			);
+			path = Particles;
+			sourceTree = "<group>";
+		};
 		CA7EFB0E2C41C7C6009A8FDD = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +158,8 @@
 		CA7EFB192C41C7C6009A8FDD /* JuliaChat */ = {
 			isa = PBXGroup;
 			children = (
+				CA433AFA2C717EB900CDECC4 /* Info.plist */,
+				CA433AF22C71510400CDECC4 /* Effects */,
 				CA433AE32C70649600CDECC4 /* BLE */,
 				CACD591E2C4A310900813D20 /* Localizations */,
 				CACD59152C48DCFC00813D20 /* Views */,
@@ -197,6 +225,8 @@
 				CA34DD6E2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift */,
 				CA86A09F2C5DC2C10096819C /* PaymentView.swift */,
 				CA1FE2052C6B33AF00C3414B /* ImagePickerView.swift */,
+				CA433AF82C716F6E00CDECC4 /* ImageButtonView.swift */,
+				CA433AFB2C71B9CE00CDECC4 /* SpellbookView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -300,14 +330,17 @@
 				CA7EFB1D2C41C7C6009A8FDD /* ContentView.swift in Sources */,
 				CACD590D2C4245D800813D20 /* MessageModel.swift in Sources */,
 				CA433AE82C7064A400CDECC4 /* BLETwoWayPeripheral.swift in Sources */,
+				CA433AF42C71512D00CDECC4 /* ParticleCanvasView.swift in Sources */,
 				CA7EFB1F2C41C7C6009A8FDD /* Item.swift in Sources */,
 				CA1FE2082C6C417D00C3414B /* PreferencesModel.swift in Sources */,
 				CA7EFB1B2C41C7C6009A8FDD /* JuliaChatApp.swift in Sources */,
+				CA433AF72C71514E00CDECC4 /* CircleParticleView.swift in Sources */,
 				CA1FE2022C6A936B00C3414B /* PlanetNine.swift in Sources */,
 				CACD591B2C48DD2C00813D20 /* ChatView.swift in Sources */,
 				CA34DD6F2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift in Sources */,
 				CACD590B2C41CF4E00813D20 /* UserModel.swift in Sources */,
 				CA1FE2062C6B33AF00C3414B /* ImagePickerView.swift in Sources */,
+				CA433AF92C716F6F00CDECC4 /* ImageButtonView.swift in Sources */,
 				CA433AEA2C7064A400CDECC4 /* BLETwoWayCentral.swift in Sources */,
 				CA86A0A22C5DF85D0096819C /* PlanetNineUser.swift in Sources */,
 				CA433AED2C7064FC00CDECC4 /* BLEMAGICCentral.swift in Sources */,
@@ -316,6 +349,7 @@
 				CA51893C2C4C2D54008EB941 /* ConnectionsView.swift in Sources */,
 				CA86A0A02C5DC2C10096819C /* PaymentView.swift in Sources */,
 				CA433AE92C7064A400CDECC4 /* BLEUtils.swift in Sources */,
+				CA433AFC2C71B9CE00CDECC4 /* SpellbookView.swift in Sources */,
 				CACD59102C478CF600813D20 /* Network.swift in Sources */,
 				CA433AF12C707EA100CDECC4 /* BDOModel.swift in Sources */,
 				CA5189422C4E2429008EB941 /* ConnectionView.swift in Sources */,
@@ -461,6 +495,9 @@
 				DEVELOPMENT_TEAM = RLJ2FY35FD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JuliaChat/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Just because we named these things, doesn't take away from the fact that they're invisible wave of energy floating around that you can tap into.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "And once we've tapped into the waves, we can use them for magic!";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -498,6 +535,9 @@
 				DEVELOPMENT_TEAM = RLJ2FY35FD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JuliaChat/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Just because we named these things, doesn't take away from the fact that they're invisible wave of energy floating around that you can tap into.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "And once we've tapped into the waves, we can use them for magic!";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

@@ -17,6 +17,7 @@ class BLETwoWayCentral: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     var writeCharacteristic: CBCharacteristic?
     var notifyCharacteristic: CBCharacteristic?
     var readCallback: ((String) -> Void)?
+    var writeCallback: ((String) -> Void)?
     var notifyCallback: ((String) -> Void)?
     
     override init() {
@@ -141,7 +142,13 @@ class BLETwoWayCentral: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         print("Apparently you wrote the value")
+        
         //peripheral.readValue(for: readCharacteristic!)
+        guard let data = characteristic.value,
+              let value = String(data: data, encoding: .utf8),
+              let writeCallback = writeCallback else { return }
+        
+        writeCallback(value)
     }
     
     func respondToGateway(userUUID: String, ordinal: Int, timestamp: String, signature: String) {

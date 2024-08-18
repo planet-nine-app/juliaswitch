@@ -63,6 +63,8 @@ struct PostablePreferences {
             {"timestamp":"\(timestamp)","hash":"\(hash)","signature":"\(signature)","preferences":\(preferencesJSON)}
         """
         
+        print("sending preferences \(json)")
+        
         return json.data(using: .utf8)
     }
     
@@ -71,7 +73,7 @@ struct PostablePreferences {
 class RegisterPreferences {
     class func payload(preferences: [String: String]) -> Data? {
         let sessionless = Sessionless()
-        guard let pubKey = sessionless.getKeys() else { return nil }
+        guard let pubKey = sessionless.getKeys()?.publicKey else { return nil }
         
         let timestamp = "".getTime()
         let hash = "thisisthehashwe'llusefornow"
@@ -88,6 +90,8 @@ class RegisterPreferences {
         let json = """
             {"timestamp":"\(timestamp)","pubKey":"\(pubKey)","hash":"\(hash)","signature":"\(signature)","preferences":\(preferencesJSON)}
         """
+        
+        print("registering preferences: \(json)")
         
         return json.data(using: .utf8)
     }

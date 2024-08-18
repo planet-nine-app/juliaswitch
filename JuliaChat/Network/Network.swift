@@ -191,7 +191,7 @@ class Network {
     class func putPreferences(baseURL: String, prefUser: PrefUser, newPreferences: [String: String], callback: @escaping (Error?, Data?) -> Void) async {
         let timestamp = "".getTime()
         
-        guard let payload = PostablePreferences(timestamp: timestamp, prefUUID: prefUser.prefUUID, preferences: newPreferences).toData() else { return }
+        guard let payload = PostablePreferences(timestamp: timestamp, prefUUID: prefUser.uuid, preferences: newPreferences).toData() else { return }
                 
         await Network.put(urlString: baseURL, payload: payload, callback: callback)
     }

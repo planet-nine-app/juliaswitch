@@ -76,26 +76,25 @@ struct ConnectionView: View {
                                             return
                                         }
                                         guard let prefUser = prefUser else { return }
-                                        newPreferences.prefUUID = prefUser.prefUUID
+                                        newPreferences.prefUUID = prefUser.uuid
                                         modelContext.insert(newPreferences)
                                         try? modelContext.save()
                                     }
                                 }
                             }
-                        }
-                        let preferences = preferences[0]
-                        preferences.appPreferences["\(connection.uuid)Handle"] = enteredText
-                        modelContext.insert(preferences)
-                        try? modelContext.save()
-                        
-                        Task(priority: .background) {
-                            do {
-                                let prefUser = PrefUser(prefUUID: preferences.prefUUID, preferences: preferences.appPreferences)
-                                await Pref.savePreferences(prefUser: prefUser, newPreferences: prefUser.preferences) { err, prefUser in
-                                    print("ignore response here")
+                        } else {
+                            let preferences = preferences[0]
+                            preferences.appPreferences["\(connection.uuid)Handle"] = enteredText
+                            modelContext.insert(preferences)
+                            try? modelContext.save()
+                            
+                            Task(priority: .background) {
+                                do {
+                                    let prefUser = PrefUser(uuid: preferences.prefUUID, preferences: preferences.appPreferences)
+                                    await Pref.savePreferences(prefUser: prefUser, newPreferences: prefUser.preferences) { err, prefUser in
+                                        print("ignore response here")
+                                    }
                                 }
-                            } catch {
-                                // do nothing
                             }
                         }
                     }
