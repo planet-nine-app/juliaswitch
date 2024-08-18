@@ -28,6 +28,13 @@ struct SpellbookSpell: Identifiable {
 
 struct Spellbook {
     let spells: [SpellbookSpell]
+    
+    func spellForSpellName(juliaUUID: String, spellName: String) -> Spell {
+        switch spellName {
+        case "connect": return Spell(timestamp: "".getTime(), spellName: "connect", casterUUID: juliaUUID, totalCost: 500, mp: true, ordinal: 1, casterSignature: "", gateways: [], additions: [])
+        default: return Spell()
+        }
+    }
 }
 
 struct SpellbookView: View {

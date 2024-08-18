@@ -60,6 +60,19 @@ struct ContentView: View {
         case 2: ChatView(viewState: $viewState, receiverUUID: $receiverUUID)
             //StripeBottomSheet()
         case 3: ImagePickerView()
+        case 4: CasterView(readCallback: { value in
+            print("received gateway value: \(value)")
+            return Spell()
+        }, spellCastCallback: {
+            print("cast spell")
+        }, notifyCallback: { value in
+            print("notification value: \(value)")
+        }, spellName: "connect")
+        case 5: GatewayView(readRequestCallback: {
+            return "Foo"
+        }, spellReceivedCallback: { spell in
+            print("got spell: \(spell.toString())")
+        })
         case 9: ParticleCanvasView()
         default: Button("To 0", role: .none) {
             self.viewState = 0

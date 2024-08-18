@@ -150,6 +150,14 @@ class BLETwoWayCentral: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         
         writeCallback(value)
     }
+   
+    func writeToGateway(data: Data) {
+        guard let peripherals = peripherals,
+              let writeCharacteristic = writeCharacteristic,
+                peripherals.count > 0 else { return }
+        let peripheral = peripherals[0]
+        peripheral.writeValue(data, for: writeCharacteristic, type: .withoutResponse)
+    }
     
     func respondToGateway(userUUID: String, ordinal: Int, timestamp: String, signature: String) {
         //let gatewayResponse = GatewayResponse(userUUID: userUUID, ordinal: ordinal, signature: signature, timestamp: timestamp, ongoing: true)

@@ -88,13 +88,13 @@ public struct Spell: Codable {
     var ordinal: Int = 1
     var casterSignature: String = ""
     var gateways: [GatewayMVP] = []
-    var additions: [String] = []
+    var additions: [JSON] = []
     
     init() {
         
     }
     
-    init(timestamp: String, spellName: String, casterUUID: String, totalCost: Int, mp: Bool, ordinal: Int, casterSignature: String, gateways: [GatewayMVP], additions: [String]) {
+    init(timestamp: String, spellName: String, casterUUID: String, totalCost: Int, mp: Bool, ordinal: Int, casterSignature: String, gateways: [GatewayMVP], additions: [JSON]) {
         self.timestamp = timestamp
         self.spellName = spellName
         self.casterUUID = casterUUID
@@ -105,7 +105,7 @@ public struct Spell: Codable {
         self.gateways = gateways
         self.additions = additions
         
-        //self.sign()
+        self.sign()
 
     }
     
@@ -128,14 +128,22 @@ public struct Spell: Codable {
         gatewaysAsStrings.popLast()
         let gatewaysAsStringsArray = "[\(gatewaysAsStrings)]"
         
+        var additionsAsStrings = additions.map({ runEncode($0) })
+        let additionsAsString = additionsAsStrings.joined(separator: ",")
+        let additionsAsStringsArray = "[\(additionsAsString)]"
+        
         print(gatewaysAsStringsArray)
         
         let spellString = """
-            {"timestamp":"\(timestamp)","spell":"\(spellName)","casterUUID":"\(casterUUID)","totalCost":\(totalCost),"mp":\(1),"ordinal":\(ordinal),"gateways":\(gatewaysAsStringsArray),"additions":"\(additions.joined())","casterSignature":"\(casterSignature)"}
+            {"timestamp":"\(timestamp)","spell":"\(spellName)","casterUUID":"\(casterUUID)","totalCost":\(totalCost),"mp":\(1),"ordinal":\(ordinal),"gateways":\(gatewaysAsStringsArray),"additions":"\(additionsAsStringsArray)","casterSignature":"\(casterSignature)"}
         """
         
         print(spellString)
         return spellString
+    }
+    
+    public func toData() -> Data? {
+        return self.toString().data(using: .utf8)
     }
     
     public func toMessageString() -> String {

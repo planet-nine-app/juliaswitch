@@ -11,13 +11,15 @@ import CoreBluetooth
 
 class BLEMAGICPeripheral {
     var twoWayPeripheral: BLETwoWayPeripheral!
+    let readRequestCallback: () -> String
     let spellReceivedCallback: (_ spell: Spell) -> Void
     let bleCharacteristics = BLECharacteristics()
     var shouldListenForSpell = false
     var incomingSpell: Data!
     
-    init(spellReceivedCallback: @escaping (_ spell: Spell) -> Void) {
+    init(readRequestCallback: @escaping () -> String, spellReceivedCallback: @escaping (_ spell: Spell) -> Void) {
         twoWayPeripheral = BLETwoWayPeripheral()
+        self.readRequestCallback = readRequestCallback
         self.spellReceivedCallback = spellReceivedCallback
         twoWayPeripheral.readCallback = self.readCallback
         twoWayPeripheral.writeCallback = self.writeCallback
