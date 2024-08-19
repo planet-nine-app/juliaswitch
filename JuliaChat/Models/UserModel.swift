@@ -118,6 +118,12 @@ class User: Codable {
         return prompts
     }
     
+    func mostRecentPrompt() -> String? {
+        let prompts = self.promptsAsArray()
+        guard prompts.count > 0 else { return nil }
+        return prompts.filter({ $0.newPubKey == nil }).sorted(by: { $0.timestamp > $1.timestamp })[0].prompt
+    }
+    
     func connections() -> [KeyTuple] {
         var connections = [KeyTuple]()
         for (key, value) in self.keys.interactingKeys {

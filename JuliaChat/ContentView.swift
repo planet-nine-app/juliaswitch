@@ -62,6 +62,14 @@ struct ContentView: View {
         case 3: ImagePickerView()
         case 4: CasterView(readCallback: { value in
             print("received gateway value: \(value)")
+            Task {
+                do {
+                    await Julia.postPrompt(user: users[0], prompt: value) { err, user in
+                        print("the callback happens")
+                    }
+                }
+            }
+            print("and then the spell I hope")
             return Spell()
         }, spellCastCallback: {
             print("cast spell")
@@ -69,11 +77,27 @@ struct ContentView: View {
             print("notification value: \(value)")
         }, spellName: "connect")
         case 5: GatewayView(readRequestCallback: {
-            return "Foo"
+            return users[0].mostRecentPrompt() ?? ""
         }, spellReceivedCallback: { spell in
             print("got spell: \(spell.toString())")
+            Task {
+                do {
+                    await Julia.syncKeys(user: users[0]) { err, user in
+                        Task {
+                            do {
+                                let prompts = users[0].promptsAsArray().filter({ $0.newPubKey != nil })
+                                guard prompts.count > 0 else { return }
+                                let prompt = prompts[0]
+                                let postPrompt = PostPrompt(timestamp: prompt.timestamp, uuid: prompt.newUUID ?? "", pubKey: prompt.newPubKey ?? "", prompt: prompt.prompt ?? "", signature: prompt.newSignature ?? "")
+                                await Julia.associate(user: users[0], signedPrompt: postPrompt) { err, user in
+                                    print("Associated!")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         })
-        case 9: ParticleCanvasView()
         default: Button("To 0", role: .none) {
             self.viewState = 0
         }

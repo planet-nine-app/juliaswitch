@@ -12,8 +12,10 @@ struct ParticleCanvasView: View {
     let particleCount: Int
     let startingParticleOffsets: [CGFloat]
     let startingParticleAlphas: [CGFloat]
+    @Binding var emitterColor: Color
     
-    init(particleCount: Int = 200, movementDuration: Double = 3.0) {
+    init(emitterColor: Binding<Color>, particleCount: Int = 200, movementDuration: Double = 3.0) {
+        self._emitterColor = emitterColor
         self.particleCount = particleCount
         self.movementDuration = movementDuration
         self.startingParticleOffsets = Array(0..<particleCount).map {_ in CGFloat.random(in: 0...1)}
@@ -47,7 +49,7 @@ struct ParticleCanvasView: View {
                     context.draw(particleSymbol, at: positionAndAlpha.0, anchor: .center)
                 }
             } symbols: {
-                CircleParticleView()
+                CircleParticleView(color: $emitterColor)
                     .tag(0)
             }
         }
@@ -55,6 +57,3 @@ struct ParticleCanvasView: View {
     }
 }
 
-#Preview {
-    ParticleCanvasView()
-}

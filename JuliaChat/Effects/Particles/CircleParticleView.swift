@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct CircleParticleView: View {
+    @Binding var color: Color
+    
     var body: some View {
-        Circle().fill(Color.purple.opacity(0.4))
+        Circle().fill(color.opacity(0.4))
             .frame(width:35, height:35)
             .blendMode(.plusLighter)
             .blur(radius: 10)
     }
 }
 
-#Preview {
-    CircleParticleView()
-}
+

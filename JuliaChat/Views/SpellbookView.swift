@@ -42,9 +42,11 @@ struct SpellbookView: View {
         SpellbookSpell(name: "connect", effect: "connect")
     ])
     @Binding var isPresented: Bool
+    @Binding var viewState: Int
     
     @State private var animationProgress: CGFloat = 0
     @State private var contentOpacity: Double = 0
+    @State var emitterColor = Color.purple
     
     var body: some View {
         ZStack {
@@ -54,7 +56,10 @@ struct SpellbookView: View {
                         HStack {
                             Text(spell.name)
                             Spacer()
-                            ParticleCanvasView()
+                            ParticleCanvasView(emitterColor: $emitterColor)
+                        }
+                        .onTapGesture {
+                            viewState = 4
                         }
                     }
                 }

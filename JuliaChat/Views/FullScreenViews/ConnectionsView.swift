@@ -150,6 +150,14 @@ struct ConnectionsView: View {
                             if preferences.count > 0 && preferences[0].appPreferences["magical"] != nil {
                                 GatewayButton {
                                     print("gateway it up")
+                                    Task {
+                                        do {
+                                            await Julia.getPrompt(user: users[0]) { err, user in
+                                                viewState = 5
+                                            }
+                                        }
+                                    }
+                                    
                                 }
                             }
                         }
@@ -187,7 +195,7 @@ struct ConnectionsView: View {
                     }
                 }
                 let _ = print("should \(openSpellbook ? "" : "not ") open up spellbook")
-                SpellbookView(isPresented: $openSpellbook)
+                SpellbookView(isPresented: $openSpellbook, viewState: $viewState)
                     .frame(width: 200, height: 200)
                     .background(.purple)
             }
