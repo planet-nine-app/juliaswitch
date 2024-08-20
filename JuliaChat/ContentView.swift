@@ -99,7 +99,8 @@ struct ContentView: View {
                                     let updatedUser = users[0]
                                     guard let mostRecentSignedPrompt = updatedUser.mostRecentSignedPrompt(),
                                           let prompt = updatedUser.pendingPrompts[mostRecentSignedPrompt] else { return }
-                                    let postPrompt = PostPrompt(timestamp: prompt.timestamp, uuid: prompt.newUUID ?? "", pubKey: prompt.newPubKey ?? "", prompt: prompt.prompt ?? "", signature: prompt.newSignature ?? "")
+                                    log = "\(log)\nsignedPrompt signature: \(prompt.newSignature)"
+                                    let postPrompt = PostPrompt(timestamp: prompt.newTimestamp ?? "", uuid: prompt.newUUID ?? "", pubKey: prompt.newPubKey ?? "", prompt: prompt.prompt ?? "", signature: prompt.newSignature ?? "")
                                     log = "\(log)\ntrying to associate \(postPrompt)"
                                     await Julia.associate(user: users[0], signedPrompt: postPrompt) { err, user in
                                         log = "\(log)\nAssociated!"

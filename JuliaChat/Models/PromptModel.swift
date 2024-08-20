@@ -75,8 +75,11 @@ struct PostPrompt {
         self.uuid = uuid
         self.pubKey = pubKey
         self.prompt = prompt
+        self.signature = signature
         
-        self.signature = self.sign()
+        if self.signature == "" {
+            self.signature = self.sign()
+        }
     }
     
     func toString() -> String {
