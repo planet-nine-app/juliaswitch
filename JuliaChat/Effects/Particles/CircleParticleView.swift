@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CircleParticleView: View {
-    @Binding var color: Color
+    let color: Color
     
     var body: some View {
         Circle().fill(color.opacity(0.4))

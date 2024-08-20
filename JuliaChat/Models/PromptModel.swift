@@ -13,6 +13,7 @@ class Prompt: Codable {
     var timestamp: String = ""
     var prompter: String = ""
     var prompt: String?
+    var newTimestamp: String?
     var newPubKey: String?
     var newUUID: String?
     var newSignature: String?
@@ -38,6 +39,7 @@ class Prompt: Codable {
         print(self.timestamp)
         self.prompter = try values.decodeIfPresent(String.self, forKey: .prompter) ?? "no prompter"
         self.prompt = try values.decodeIfPresent(String.self, forKey: .prompt) ?? "no prompt"
+        self.newTimestamp = try? values.decodeIfPresent(String.self, forKey: .newTimestamp)
         self.newPubKey = try? values.decode(String.self, forKey: .newPubKey)
         self.newUUID = try? values.decode(String.self, forKey: .newUUID)
         self.newSignature = try? values.decode(String.self, forKey: .newSignature)
@@ -48,6 +50,7 @@ class Prompt: Codable {
         try container.encode(timestamp, forKey: .timestamp)
         try container.encode(prompter, forKey: .prompter)
         try container.encodeIfPresent(prompt, forKey: .prompt)
+        try container.encodeIfPresent(newTimestamp, forKey: .newTimestamp)
         try container.encodeIfPresent(newPubKey, forKey: .newPubKey)
         try container.encodeIfPresent(newUUID, forKey: .newUUID)
         try container.encodeIfPresent(newSignature, forKey: .newSignature)

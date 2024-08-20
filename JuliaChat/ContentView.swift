@@ -13,6 +13,7 @@ struct ContentView: View {
     @Query private var users: [User]
     @State private var viewState = 0
     @State var receiverUUID = ""
+    @State var log = "start..."
     
     func updateViewState(newState: Int) {
         viewState = newState
@@ -60,37 +61,54 @@ struct ContentView: View {
         case 2: ChatView(viewState: $viewState, receiverUUID: $receiverUUID)
             //StripeBottomSheet()
         case 3: ImagePickerView()
-        case 4: CasterView(readCallback: { value in
+        case 4: CasterView(log: $log, readCallback: { value in
+            log = "\(log)\nreceived gateway value: \(value)"
             print("received gateway value: \(value)")
-            Task {
+            //Task {
                 do {
                     await Julia.postPrompt(user: users[0], prompt: value) { err, user in
+                        log = "\(log)\nthe callback happens"
                         print("the callback happens")
                     }
                 }
-            }
+            //}
+            log = "\(log)\nand then the spell I hope"
             print("and then the spell I hope")
             return Spell()
         }, spellCastCallback: {
+            log = "\(log)\ncast spell"
             print("cast spell")
         }, notifyCallback: { value in
+            log = "\(log)\nnotification value: \(value)"
             print("notification value: \(value)")
         }, spellName: "connect")
-        case 5: GatewayView(readRequestCallback: {
+        case 5: GatewayView(log: $log, readRequestCallback: {
             return users[0].mostRecentPrompt() ?? ""
         }, spellReceivedCallback: { spell in
+            log = "\(log)\ngot spell: \(spell.toString())"
             print("got spell: \(spell.toString())")
             Task {
                 do {
                     await Julia.syncKeys(user: users[0]) { err, user in
-                        Task {
-                            do {
-                                let prompts = users[0].promptsAsArray().filter({ $0.newPubKey != nil })
-                                guard prompts.count > 0 else { return }
-                                let prompt = prompts[0]
-                                let postPrompt = PostPrompt(timestamp: prompt.timestamp, uuid: prompt.newUUID ?? "", pubKey: prompt.newPubKey ?? "", prompt: prompt.prompt ?? "", signature: prompt.newSignature ?? "")
-                                await Julia.associate(user: users[0], signedPrompt: postPrompt) { err, user in
-                                    print("Associated!")
+                        if let user = user {
+                            modelContext.insert(user)
+                            try? modelContext.save()
+                            
+                            Task {
+                                do {
+                                    let updatedUser = users[0]
+                                    guard let mostRecentSignedPrompt = updatedUser.mostRecentSignedPrompt(),
+                                          let prompt = updatedUser.pendingPrompts[mostRecentSignedPrompt] else { return }
+                                    let postPrompt = PostPrompt(timestamp: prompt.timestamp, uuid: prompt.newUUID ?? "", pubKey: prompt.newPubKey ?? "", prompt: prompt.prompt ?? "", signature: prompt.newSignature ?? "")
+                                    log = "\(log)\ntrying to associate \(postPrompt)"
+                                    await Julia.associate(user: users[0], signedPrompt: postPrompt) { err, user in
+                                        log = "\(log)\nAssociated!"
+                                        print("Associated!")
+                                        if let user = user {
+                                            modelContext.insert(user)
+                                            try? modelContext.save()
+                                        }
+                                    }
                                 }
                             }
                         }

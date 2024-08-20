@@ -16,7 +16,7 @@ class BLETwoWayCentral: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     var readCharacteristic: CBCharacteristic?
     var writeCharacteristic: CBCharacteristic?
     var notifyCharacteristic: CBCharacteristic?
-    var readCallback: ((String) -> Void)?
+    var readCallback: ((String) async -> Void)?
     var writeCallback: ((String) -> Void)?
     var notifyCallback: ((String) -> Void)?
     
@@ -132,7 +132,11 @@ class BLETwoWayCentral: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         print(characteristic.uuid)
         print(readCharacteristic?.uuid)
         if characteristic.uuid == readCharacteristic?.uuid {
-            readCallback(value)
+            Task {
+                do {
+                    await readCallback(value)
+                }
+            }
         } else if characteristic.uuid == notifyCharacteristic?.uuid {
             
             guard let notifyCallback = notifyCallback else { return }
@@ -156,7 +160,7 @@ class BLETwoWayCentral: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
               let writeCharacteristic = writeCharacteristic,
                 peripherals.count > 0 else { return }
         let peripheral = peripherals[0]
-        peripheral.writeValue(data, for: writeCharacteristic, type: .withoutResponse)
+        peripheral.writeValue(data, for: writeCharacteristic, type: .withResponse)
     }
     
     func respondToGateway(userUUID: String, ordinal: Int, timestamp: String, signature: String) {

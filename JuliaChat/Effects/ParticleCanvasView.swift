@@ -13,6 +13,7 @@ struct ParticleCanvasView: View {
     let startingParticleOffsets: [CGFloat]
     let startingParticleAlphas: [CGFloat]
     @Binding var emitterColor: Color
+    @State var tagState = 0
     
     init(emitterColor: Binding<Color>, particleCount: Int = 200, movementDuration: Double = 3.0) {
         self._emitterColor = emitterColor
@@ -41,7 +42,7 @@ struct ParticleCanvasView: View {
             let timeInterval = context.date.timeIntervalSinceReferenceDate;
             
             Canvas { context, size in
-                let particleSymbol = context.resolveSymbol(id: 0)!
+                let particleSymbol = context.resolveSymbol(id: tagState)!
                 
                 for i in 0..<particleCount {
                     let positionAndAlpha = particlePositionAndAlpha(index: i, timeInterval: timeInterval, canvasSize: size)
@@ -49,11 +50,33 @@ struct ParticleCanvasView: View {
                     context.draw(particleSymbol, at: positionAndAlpha.0, anchor: .center)
                 }
             } symbols: {
-                CircleParticleView(color: $emitterColor)
+                CircleParticleView(color: emitterColor)
                     .tag(0)
+                CircleParticleView(color: .orange)
+                    .tag(1)
+                CircleParticleView(color: .blue)
+                    .tag(2)
+                CircleParticleView(color: .green)
+                    .tag(3)
+                CircleParticleView(color: .yellow)
+                    .tag(4)
+            }
+            .onChange(of: emitterColor) {
+                switch emitterColor {
+                case .orange: tagState = 1
+                    break
+                case .blue: tagState = 2
+                    break
+                case .green: tagState = 3
+                    break
+                case .yellow: tagState = 4
+                    break
+                default: tagState = 0
+                }
             }
         }
         .background(.black)
     }
 }
+
 

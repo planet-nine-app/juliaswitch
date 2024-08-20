@@ -197,7 +197,7 @@ struct ConnectionsView: View {
                 let _ = print("should \(openSpellbook ? "" : "not ") open up spellbook")
                 SpellbookView(isPresented: $openSpellbook, viewState: $viewState)
                     .frame(width: 200, height: 200)
-                    .background(.purple)
+                    .background()
             }
             .onAppear {
                 let user = users[0]

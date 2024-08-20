@@ -113,6 +113,9 @@ class User: Codable {
         for (prompt, pendingPrompt) in self.pendingPrompts {
             print("got prompt: \(prompt)")
             print("and pendingPrompt: \(pendingPrompt)")
+            if pendingPrompt.prompt == "no prompt" { // this is temporary. Remove soon
+                continue
+            }
             prompts.append(pendingPrompt)
         }
         return prompts
@@ -122,6 +125,12 @@ class User: Codable {
         let prompts = self.promptsAsArray()
         guard prompts.count > 0 else { return nil }
         return prompts.filter({ $0.newPubKey == nil }).sorted(by: { $0.timestamp > $1.timestamp })[0].prompt
+    }
+    
+    func mostRecentSignedPrompt() -> String? {
+        let prompts = self.promptsAsArray()
+        guard prompts.count > 0 else { return nil }
+        return prompts.filter({ $0.newPubKey != nil }).sorted(by: { $0.timestamp > $1.timestamp })[0].prompt
     }
     
     func connections() -> [KeyTuple] {

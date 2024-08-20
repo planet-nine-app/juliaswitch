@@ -12,16 +12,23 @@ struct GatewayView: View {
     let spellReceivedCallback: (_ spell: Spell) -> Void
     var gateway: BLEMAGICPeripheral?
     @State var emitterColor = Color.purple
+    @Binding var log: String
     
     
     
     var body: some View {
-        ParticleCanvasView(emitterColor: $emitterColor)
+        ZStack {
+            ParticleCanvasView(emitterColor: $emitterColor)
+            Text(log)
+                .foregroundColor(.white)
+                .background(.blue)
+        }
     }
     
-    init(readRequestCallback: @escaping () -> String, spellReceivedCallback: @escaping (_ spell: Spell) -> Void, gateway: BLEMAGICPeripheral? = nil) {
+    init(log: Binding<String>, readRequestCallback: @escaping () -> String, spellReceivedCallback: @escaping (_ spell: Spell) -> Void, gateway: BLEMAGICPeripheral? = nil) {
         self.readRequestCallback = readRequestCallback
         self.spellReceivedCallback = spellReceivedCallback
+        self._log = log
         self.gateway = BLEMAGICPeripheral(readRequestCallback: readCallback, spellReceivedCallback: spellCallback(_:))
     }
     

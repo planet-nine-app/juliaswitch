@@ -10,14 +10,14 @@ import CoreBluetooth
 
 class BLEMAGICCentral {
     var twoWayCentral: BLETwoWayCentral!
-    let gatewayReadCallback: (_ value: String) -> Spell
+    let gatewayReadCallback: (_ value: String) async -> Spell
     let spellCastCallback: () -> Void
     let gatewayNotifyCallback: (_ value: String) -> Void
     let bleCharacteristics = BLECharacteristics()
     var shouldListenForSpell = false
     var incomingSpell: Data!
     
-    init(gatewayReadCallback: @escaping (_ value: String) -> Spell, spellCastCallback: @escaping () -> Void, gatewayNotifyCallback: @escaping (_ value: String) -> Void) {
+    init(gatewayReadCallback: @escaping (_ value: String) async -> Spell, spellCastCallback: @escaping () -> Void, gatewayNotifyCallback: @escaping (_ value: String) -> Void) {
         twoWayCentral = BLETwoWayCentral()
         self.gatewayReadCallback = gatewayReadCallback
         self.spellCastCallback = spellCastCallback
@@ -31,12 +31,12 @@ class BLEMAGICCentral {
         twoWayCentral.writeToGateway(data: spellData)
     }
     
-    func readCallback(value: String) -> Void {
+    func readCallback(value: String) async -> Void {
         // In a real implementation, you may use this to negotiate some sort of
         // sense that this gateway, and your caster are part of the same network
         print("got a read request")
-        let spell = gatewayReadCallback(value)
-        
+        let spell = await gatewayReadCallback(value)
+        castSpell(spell: spell)
     }
     
     func notifyCallback(value: String) -> Void {
