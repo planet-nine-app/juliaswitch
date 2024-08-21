@@ -179,6 +179,19 @@ class Network {
         await Network.post(urlString: "\(baseURL)/user/\(user.juliaUUID)/associate", payload: payload, callback: callback)
     }
     
+    class func disassociate(baseURL: String, user: User, keyToDisassociate: KeyTuple, callback: @escaping (Error?, Data?) -> Void) async {
+        
+        guard let payload = Disassociate(associatedUUID: keyToDisassociate.uuid, uuid: user.juliaUUID).toData() else { return }
+        
+        await Network.delete(urlString: "\(baseURL)/associated/\(keyToDisassociate.uuid)/user/\(user.juliaUUID)", payload: payload, callback: callback)
+    }
+    
+    class func deleteJuliaUser(baseURL: String, user: User, callback: @escaping (Error?, Data?) -> Void) async {
+        guard let payload = DeleteJuliaUser(uuid: user.juliaUUID).toData() else { return }
+        
+        await Network.delete(urlString: "\(baseURL)/user/\(user.juliaUUID)", payload: payload, callback: callback)
+    }
+    
     class func sendMessage(baseURL: String, user: User, content: String, receiverUUID: String, callback: @escaping (Error?, Data?) -> Void) async {
         
         guard let payload = PostableMessage(timestamp: "".getTime(), senderUUID: user.juliaUUID, receiverUUID: receiverUUID, content: content).toData() else { return }

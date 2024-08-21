@@ -182,6 +182,29 @@ struct RegisterUser: Codable {
     }
 }
 
-
+struct DeleteJuliaUser {
+    let timestamp = "".getTime()
+    let uuid: String
+    var signature = ""
+    
+    init(uuid: String) {
+        self.uuid = uuid
+        
+        self.signature = self.sign()
+    }
+    
+    func sign() -> String {
+        let sessionless = Sessionless()
+        return sessionless.sign(message: "\(timestamp)\(uuid)") ?? ""
+    }
+    
+    func toData() -> Data? {
+        let json = """
+        {"timestamp":"\(timestamp)","signature":"\(signature)"}
+        """
+        
+        return json.data(using: .utf8)
+    }
+}
 
 

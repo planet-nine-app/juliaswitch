@@ -1,6 +1,23 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Cancel" : {
+
+    },
+    "disassociate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want to disassociate?"
+          }
+        }
+      }
+    },
+    "disassociated" : {
+
+    },
     "handleHelpText" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -36,6 +53,9 @@
           }
         }
       }
+    },
+    "OK" : {
+
     },
     "onboarding1" : {
       "extractionState" : "manual",

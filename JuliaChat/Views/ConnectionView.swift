@@ -10,10 +10,12 @@ import SwiftData
 
 struct ConnectionView: View {
     @Environment(\.modelContext) var modelContext
+    @Query private var users: [User]
     @Query private var preferences: [Preferences]
     @State var textfieldOn = false
     @State var enteredText = ""
     @State var handle = ""
+    @State var showDisassociateAlert = false
     var connection = KeyTuple(uuid: "foo", pubKey: "bar")
     let onPress: () -> Void
     var label = ""
@@ -56,9 +58,39 @@ struct ConnectionView: View {
                     .aspectRatio(contentMode: .fit)
                     .padding(30)
                     .foregroundColor(.white)
+                    .gesture(
+                                LongPressGesture(minimumDuration: 0.5)
+                                    .onEnded { _ in
+                                        showDisassociateAlert = true
+                                    }
+                            )
+                    
             }
             .buttonStyle(PlainButtonStyle())
             .modifier(CircularConnectionStyle())
+//            .onLongPressGesture {
+//                showDisassociateAlert = true
+//            }
+            .alert(LocalizedStringKey("disassociated"), isPresented: $showDisassociateAlert) {
+                Button("Cancel", role: .cancel) {
+                    print("Alert canceled")
+                    showDisassociateAlert = false
+                }
+                Button("OK") {
+                    print("Alert confirmed")
+                    Task {
+                        do {
+                            await Julia.disassociate(user: users[0], keyToDisassociate: connection) { err, user in
+                                if let user = user {
+                                    modelContext.insert(user)
+                                    try? modelContext.save()
+                                }
+                            }
+                        }
+                    }
+                    showDisassociateAlert = false
+                }
+            }
             
             if textfieldOn {
                 JuliaTextField(label: handle, enteredText: $enteredText)

@@ -45,3 +45,34 @@ struct PostAssociate {
         return json.data(using: .utf8)
     }
 }
+
+struct Disassociate {
+    let timestamp = "".getTime()
+    let associatedUUID: String
+    let uuid: String
+    var signature = ""
+    
+    init(associatedUUID: String, uuid: String) {
+        self.associatedUUID = associatedUUID
+        self.uuid = uuid
+        
+        self.signature = self.sign()
+    }
+    
+    func toString() -> String {
+        return "\(timestamp)\(associatedUUID)\(uuid)"
+    }
+    
+    func sign() -> String {
+        let sessionless = Sessionless()
+        return sessionless.sign(message: self.toString()) ?? ""
+    }
+    
+    func toData() -> Data? {
+        let json = """
+        {"timestamp":"\(timestamp)","associatedUUID":"\(associatedUUID)","uuid":"\(uuid)","signature":"\(signature)"}
+        """
+        
+        return json.data(using: .utf8)
+    }
+}

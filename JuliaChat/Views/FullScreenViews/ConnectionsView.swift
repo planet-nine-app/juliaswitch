@@ -14,7 +14,7 @@ struct ConnectionsView: View {
     @Query private var users: [User]
     @Query private var planetNineUsers: [PlanetNineUser]
     @Query private var preferences: [Preferences]
-    @State var displayText: String = "noConnections"
+    @State var displayText: String = ""
     @State var promptsOpen: Bool = false
     @State var enteredText: String = ""
     @State var openSpellbook: Bool = false
@@ -70,28 +70,29 @@ struct ConnectionsView: View {
             let w = geometry.size.width
             let h = geometry.size.height
             ZStack {
-                PlanetNineView(displayText: $displayText)
+                if displayText != "" {
+                    PlanetNineView(displayText: $displayText)
+                } else {
+                    Image(backgroundImage)
+                }
                 VStack {
                     Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    if !users[0].pendingPrompts.isEmpty {
-                        ForEach(users[0].promptsAsArray()) { prompt in
-                            if prompt.newPubKey != nil {
-                                let _ = print("boom! add that button")
-                                JuliaButton(label: "Accept \(prompt.prompt)") {
-                                    print("Accept the prompt here")
-                                    Task {
-                                        await acceptPrompt(prompt: prompt)
-                                    }
-                                }
-                            } else {
-                                let _ = print("If it's getting here, what heck is \(prompt.toString())")
+                    if displayText != "" {
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                    }
+                    HStack {
+                        ForEach(users[0].connections(), id: \.uuid) { tuple in
+                            
+                            let handle = preferences.count > 0 && preferences[0].appPreferences["\(tuple.uuid)Handle"] != nil ? preferences[0].appPreferences["\(tuple.uuid)Handle"]! : tuple.uuid
+                            ConnectionView(label: tuple.uuid, handle: handle, imageName: "julia", connection: tuple) {
+                                print("Tapped a connection")
+                                receiverUUID = tuple.uuid
+                                viewState = 2
                             }
                         }
-                    } else {
-                        Spacer()
                     }
                     HStack {
                         VStack {
@@ -183,21 +184,10 @@ struct ConnectionsView: View {
                // .background(.blue)
                 .frame(width: 160, height: 48, alignment: .center)
                 .position(x: w / 2, y: h * 0.75)
-                HStack {
-                    ForEach(users[0].connections(), id: \.uuid) { tuple in
-                        
-                        let handle = preferences.count > 0 && preferences[0].appPreferences["\(tuple.uuid)Handle"] != nil ? preferences[0].appPreferences["\(tuple.uuid)Handle"]! : tuple.uuid
-                        ConnectionView(label: tuple.uuid, handle: handle, imageName: "julia", connection: tuple) {
-                            print("Tapped a connection")
-                            receiverUUID = tuple.uuid
-                            viewState = 2
-                        }
-                    }
-                }
                 let _ = print("should \(openSpellbook ? "" : "not ") open up spellbook")
                 SpellbookView(isPresented: $openSpellbook, viewState: $viewState)
                     .frame(width: 200, height: 200)
-                    .background()
+                    .background(.clear)
             }
             .onAppear {
                 let user = users[0]

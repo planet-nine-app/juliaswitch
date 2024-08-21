@@ -44,13 +44,13 @@ class Julia {
         await Network.postPrompt(baseURL: ServiceURLs.julia.rawValue, user: user, prompt: prompt, callback: handler)
     }
     
-    class func deleteKey() {
-        // TODO
+    class func disassociate(user: User, keyToDisassociate: KeyTuple, uiHandler: @escaping (Error?, User?) -> Void) async {
+        let handler = ResponseHandler.handlerForModel(for: User.self, completion: uiHandler)
+        
+        await Network.disassociate(baseURL: ServiceURLs.julia.rawValue, user: user, keyToDisassociate: keyToDisassociate, callback: handler)
     }
     
-    class func deleteUser(uuid: String) {
-        
-        // TODO
-        
+    class func deleteJuliaUser(user: User, uiHandler: @escaping (Error?, Data?) -> Void) async {
+        await Network.deleteJuliaUser(baseURL: ServiceURLs.julia.rawValue, user: user, callback: uiHandler)
     }
 }
