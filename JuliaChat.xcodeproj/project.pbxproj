@@ -51,6 +51,8 @@
 		CACD59202C4A312B00813D20 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CACD591F2C4A312B00813D20 /* Localizable.xcstrings */; };
 		CAE7E76F2C41CA62002B761A /* crypto.js in Resources */ = {isa = PBXBuildFile; fileRef = CAE7E76D2C41CA62002B761A /* crypto.js */; };
 		CAE7E7702C41CA62002B761A /* Sessionless.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE7E76E2C41CA62002B761A /* Sessionless.swift */; };
+		CAF2B40E2C77E9390087DE2F /* CircularImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2B40D2C77E9390087DE2F /* CircularImagePickerView.swift */; };
+		CAF2B4102C77EEAC0087DE2F /* EightBitImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2B40F2C77EEAC0087DE2F /* EightBitImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +102,8 @@
 		CACD591F2C4A312B00813D20 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		CAE7E76D2C41CA62002B761A /* crypto.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = crypto.js; sourceTree = "<group>"; };
 		CAE7E76E2C41CA62002B761A /* Sessionless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sessionless.swift; sourceTree = "<group>"; };
+		CAF2B40D2C77E9390087DE2F /* CircularImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularImagePickerView.swift; sourceTree = "<group>"; };
+		CAF2B40F2C77EEAC0087DE2F /* EightBitImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EightBitImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +156,7 @@
 				CA1FE2052C6B33AF00C3414B /* ImagePickerView.swift */,
 				CA433B002C7260C300CDECC4 /* CasterView.swift */,
 				CA433B022C7260D000CDECC4 /* GatewayView.swift */,
+				CAF2B40D2C77E9390087DE2F /* CircularImagePickerView.swift */,
 			);
 			path = FullScreenViews;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 				CACD59132C486F8600813D20 /* AssociateModel.swift */,
 				CA1FE2072C6C417D00C3414B /* PreferencesModel.swift */,
 				CA433AF02C707EA100CDECC4 /* BDOModel.swift */,
+				CAF2B40F2C77EEAC0087DE2F /* EightBitImage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -349,6 +355,7 @@
 				CA433B012C7260C300CDECC4 /* CasterView.swift in Sources */,
 				CA1FE2082C6C417D00C3414B /* PreferencesModel.swift in Sources */,
 				CA7EFB1B2C41C7C6009A8FDD /* JuliaChatApp.swift in Sources */,
+				CAF2B40E2C77E9390087DE2F /* CircularImagePickerView.swift in Sources */,
 				CA433AF72C71514E00CDECC4 /* CircleParticleView.swift in Sources */,
 				CA433B032C7260D000CDECC4 /* GatewayView.swift in Sources */,
 				CA1FE2022C6A936B00C3414B /* PlanetNine.swift in Sources */,
@@ -372,6 +379,7 @@
 				CA1FE2002C6A935F00C3414B /* Julia.swift in Sources */,
 				CA5189402C4C5FF3008EB941 /* JuliaTextField.swift in Sources */,
 				CA1FE2042C6A937400C3414B /* Pref.swift in Sources */,
+				CAF2B4102C77EEAC0087DE2F /* EightBitImage.swift in Sources */,
 				CA433AEF2C707B3000CDECC4 /* BDO.swift in Sources */,
 				CAE7E7702C41CA62002B761A /* Sessionless.swift in Sources */,
 				CA51893E2C4C3A2B008EB941 /* JuliaButton.swift in Sources */,

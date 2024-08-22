@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Add Image" : {
+
+    },
     "Cancel" : {
 
     },
@@ -179,6 +182,9 @@
       }
     },
     "Select Image" : {
+
+    },
+    "Tap to select image" : {
 
     },
     "To 0" : {

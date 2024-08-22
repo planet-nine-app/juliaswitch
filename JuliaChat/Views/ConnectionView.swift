@@ -16,6 +16,7 @@ struct ConnectionView: View {
     @State var enteredText = ""
     @State var handle = ""
     @State var showDisassociateAlert = false
+    let addOrUpdateImage: () -> Void
     var connection = KeyTuple(uuid: "foo", pubKey: "bar")
     let onPress: () -> Void
     var label = ""
@@ -93,43 +94,51 @@ struct ConnectionView: View {
             }
             
             if textfieldOn {
-                JuliaTextField(label: handle, enteredText: $enteredText)
-                    .onSubmit {
-                        print("take care of pref here")
-                        print(enteredText)
-                        if preferences.count < 1 {
-                            var newPreferences = Preferences(appPreferences: ["\(connection.uuid)Handle": enteredText], globalPreferences: [String: String]())
-                            
-                            Task(priority: .background) {
-                                do {
-                                    await Pref.createUser(preferences: newPreferences.appPreferences) { err, prefUser in
-                                        if let err = err {
-                                            print(err)
-                                            return
+                VStack {
+                    JuliaTextField(label: handle, enteredText: $enteredText)
+                        .onSubmit {
+                            print("take care of pref here")
+                            print(enteredText)
+                            if preferences.count < 1 {
+                                var newPreferences = Preferences(appPreferences: ["\(connection.uuid)Handle": enteredText], globalPreferences: [String: String]())
+                                
+                                Task(priority: .background) {
+                                    do {
+                                        await Pref.createUser(preferences: newPreferences.appPreferences) { err, prefUser in
+                                            if let err = err {
+                                                print(err)
+                                                return
+                                            }
+                                            guard let prefUser = prefUser else { return }
+                                            newPreferences.prefUUID = prefUser.uuid
+                                            modelContext.insert(newPreferences)
+                                            try? modelContext.save()
                                         }
-                                        guard let prefUser = prefUser else { return }
-                                        newPreferences.prefUUID = prefUser.uuid
-                                        modelContext.insert(newPreferences)
-                                        try? modelContext.save()
                                     }
                                 }
-                            }
-                        } else {
-                            let preferences = preferences[0]
-                            preferences.appPreferences["\(connection.uuid)Handle"] = enteredText
-                            modelContext.insert(preferences)
-                            try? modelContext.save()
-                            
-                            Task(priority: .background) {
-                                do {
-                                    let prefUser = PrefUser(uuid: preferences.prefUUID, preferences: preferences.appPreferences)
-                                    await Pref.savePreferences(prefUser: prefUser, newPreferences: prefUser.preferences) { err, prefUser in
-                                        print("ignore response here")
+                            } else {
+                                let preferences = preferences[0]
+                                preferences.appPreferences["\(connection.uuid)Handle"] = enteredText
+                                modelContext.insert(preferences)
+                                try? modelContext.save()
+                                
+                                Task(priority: .background) {
+                                    do {
+                                        let prefUser = PrefUser(uuid: preferences.prefUUID, preferences: preferences.appPreferences)
+                                        await Pref.savePreferences(prefUser: prefUser, newPreferences: prefUser.preferences) { err, prefUser in
+                                            print("ignore response here")
+                                        }
                                     }
                                 }
                             }
                         }
+                        Button() {
+                            self.addOrUpdateImage()
+                        } label: {
+                            Text("Add Image")
+                        }
                     }
+                
             } else {
                 Text(label)
                     .frame(width: 140, height: 24)
@@ -143,7 +152,8 @@ struct ConnectionView: View {
         }
     }
     
-    init(label: String, handle: String, imageName: String, connection: KeyTuple, onPress: @escaping () -> Void) {
+    init(label: String, handle: String, imageName: String, connection: KeyTuple, addOrUpdateImage: @escaping () -> Void, onPress: @escaping () -> Void) {
+        self.addOrUpdateImage = addOrUpdateImage
         self.onPress = onPress
         self.label = label
         self.handle = handle
@@ -157,7 +167,7 @@ struct ConnectionView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            ConnectionView(label: "Connect", handle: "foo", imageName: "network", connection: tuple, onPress: {})
+            ConnectionView(label: "Connect", handle: "foo", imageName: "network", connection: tuple, addOrUpdateImage: {}, onPress: {})
         }
     }
 }

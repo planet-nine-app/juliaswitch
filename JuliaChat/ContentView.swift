@@ -34,7 +34,7 @@ struct ContentView: View {
     }
 
     var body: some View {
-        
+        let _ = print("switching to viewState \(viewState)")
         switch viewState {
         case 0: WelcomeView(viewState: $viewState)
             .onAppear {
@@ -117,6 +117,7 @@ struct ContentView: View {
                 }
             }
         })
+        case 9: CircularImagePicker()
         default: Button("To 0", role: .none) {
             self.viewState = 0
         }

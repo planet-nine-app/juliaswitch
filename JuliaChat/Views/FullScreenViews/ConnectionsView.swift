@@ -87,7 +87,9 @@ struct ConnectionsView: View {
                         ForEach(users[0].connections(), id: \.uuid) { tuple in
                             
                             let handle = preferences.count > 0 && preferences[0].appPreferences["\(tuple.uuid)Handle"] != nil ? preferences[0].appPreferences["\(tuple.uuid)Handle"]! : tuple.uuid
-                            ConnectionView(label: tuple.uuid, handle: handle, imageName: "julia", connection: tuple) {
+                            ConnectionView(label: tuple.uuid, handle: handle, imageName: "julia", connection: tuple, addOrUpdateImage: {
+                                viewState = 9
+                            }) {
                                 print("Tapped a connection")
                                 receiverUUID = tuple.uuid
                                 viewState = 2
