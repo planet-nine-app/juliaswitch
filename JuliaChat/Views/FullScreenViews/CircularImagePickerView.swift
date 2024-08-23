@@ -11,13 +11,15 @@ import UIKit
 struct CircularImagePicker: View {
     @State var selectedImage: UIImage?
     @State private var showImagePicker = false
+    @State var eightBitImage: EightBitImage?
+    @Binding var viewState: Int
     
     let circleSize: CGFloat = 200 // Adjust this to change the size of the circle
     
     var body: some View {
         VStack {
             ZStack {
-                if let image = EightBitImage(originalImagePath: "", image: selectedImage).image {
+                if let image = eightBitImage?.image {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFill()
@@ -38,12 +40,23 @@ struct CircularImagePicker: View {
                     .stroke(Color.blue, lineWidth: 4)
             )
             .onTapGesture {
+                if let selectedImage = selectedImage {
+                    viewState = 1
+                }
                 showImagePicker = true
             }
+            .onChange(of: selectedImage) { newImage in
+                        if let newImage = newImage {
+                            eightBitImage = EightBitImage(originalImagePath: "", image: newImage)
+                        }
+                    }
             
             Text("Tap to select image")
                 .foregroundColor(.blue)
                 .padding(.top)
+                .onTapGesture {
+                    showImagePicker = true
+                }
         }
         .sheet(isPresented: $showImagePicker) {
             UICircularImagePicker(image: $selectedImage)

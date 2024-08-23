@@ -52,13 +52,13 @@ struct ConnectionView: View {
     }
     
     var body: some View {
+        let _ = print("should display image: \(imageName)")
         VStack {
             Button(action: onPress) {
-                Image(imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(30)
-                    .foregroundColor(.white)
+                Image(uiImage: (UIImage(contentsOfFile: imageName) ?? UIImage(named: "julia")) ?? UIImage())                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 120, height: 120)
+                    .clipShape(Circle())
                     .gesture(
                                 LongPressGesture(minimumDuration: 0.5)
                                     .onEnded { _ in

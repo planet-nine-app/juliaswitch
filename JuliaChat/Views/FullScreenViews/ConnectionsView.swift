@@ -18,6 +18,9 @@ struct ConnectionsView: View {
     @State var promptsOpen: Bool = false
     @State var enteredText: String = ""
     @State var openSpellbook: Bool = false
+    @State var showImagePicker: Bool = false
+    @State var selectedImage: UIImage?
+    @State var selectedTuple: KeyTuple?
     @Binding var viewState: Int
     @Binding var receiverUUID: String
     
@@ -87,8 +90,10 @@ struct ConnectionsView: View {
                         ForEach(users[0].connections(), id: \.uuid) { tuple in
                             
                             let handle = preferences.count > 0 && preferences[0].appPreferences["\(tuple.uuid)Handle"] != nil ? preferences[0].appPreferences["\(tuple.uuid)Handle"]! : tuple.uuid
-                            ConnectionView(label: tuple.uuid, handle: handle, imageName: "julia", connection: tuple, addOrUpdateImage: {
-                                viewState = 9
+                                
+                            ConnectionView(label: tuple.uuid, handle: handle, imageName: preferences[0].appPreferences["\(tuple.uuid)Image"] ?? "julia", connection: tuple, addOrUpdateImage: {
+                                selectedTuple = tuple
+                                showImagePicker = true
                             }) {
                                 print("Tapped a connection")
                                 receiverUUID = tuple.uuid
@@ -195,6 +200,28 @@ struct ConnectionsView: View {
                 let user = users[0]
                 if user.keys.interactingKeys.count == 0 {
                     displayText = "noConnections"
+                }
+            }
+            .sheet(isPresented: $showImagePicker) {
+                UICircularImagePicker(image: $selectedImage)
+            }
+            .onChange(of: selectedImage) {
+                if let image = selectedImage,
+                   let tuple = selectedTuple {
+                    var eightBitImage = EightBitImage(originalImagePath: "", image: image)
+                    eightBitImage.saveImage()
+                    preferences[0].appPreferences["\(tuple.uuid)Image"] = eightBitImage.filePath
+                    modelContext.insert(preferences[0])
+                    try? modelContext.save()
+                    
+                    Task(priority: .background) {
+                        do {
+                            let prefUser = PrefUser(uuid: preferences[0].prefUUID, preferences: preferences[0].appPreferences)
+                            await Pref.savePreferences(prefUser: prefUser, newPreferences: prefUser.preferences) { err, prefUser in
+                                print("ignore response here")
+                            }
+                        }
+                    }
                 }
             }
         }

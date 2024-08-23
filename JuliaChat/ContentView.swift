@@ -117,7 +117,7 @@ struct ContentView: View {
                 }
             }
         })
-        case 9: CircularImagePicker()
+        case 9: CircularImagePicker(viewState: $viewState)
         default: Button("To 0", role: .none) {
             self.viewState = 0
         }

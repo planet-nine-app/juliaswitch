@@ -10,6 +10,7 @@ import UIKit
 
 struct EightBitImage {
     let originalImagePath: String
+    var filePath: String?
     var image: UIImage?
     private var snesColors: [ESColor]!
     private var nesColors: [String: [ESColor]]!
@@ -293,6 +294,23 @@ struct EightBitImage {
             return modifiedImage
         } else {
             return image
+        }
+    }
+    
+    mutating func saveImage() {
+        guard let image = image else { return }
+            
+        let imageName = UUID().uuidString
+        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("\(imageName).jpg")
+        filePath = fileURL.path
+            
+        if let jpegData = image.jpegData(compressionQuality: 0.8) {
+            do {
+                try jpegData.write(to: fileURL)
+                print("Image saved successfully at: \(filePath)")
+            } catch {
+                print("Failed to save image: \(error)")
+            }
         }
     }
     
