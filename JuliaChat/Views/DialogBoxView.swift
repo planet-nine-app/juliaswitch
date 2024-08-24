@@ -49,26 +49,54 @@ struct DialogBoxStyle: ViewModifier {
 }
 
 struct DialogBoxView: View {
+    let imagePath: String
     let content: String
+    let eightBitImage: UIImage?
+    
+    @State private var displayedText = ""
+    @State private var currentIndex = 0
+        
+    let typewriterSpeed: Double = 0.05
 
-    
-    
     var body: some View {
-        Text(content)
-            .psDialogBox()
-            .foregroundColor(.white)
-            .padding()
+           GeometryReader { geometry in
+               ZStack(alignment: .bottomLeading) {
+                   Text(displayedText)
+                       .psDialogBox()
+                       .foregroundColor(.white)
+                       .padding()
+                   
+                   Image(uiImage: eightBitImage ?? UIImage(named: "gateway") ?? UIImage())
+                       .resizable()
+                       .scaledToFill()
+                       .frame(width: 80, height: 80)
+                       .clipShape(Circle())
+                       .overlay(Circle().stroke(Color.white, lineWidth: 3))
+                       .offset(x: 10, y: 40)
+               }
+               .frame(height: 160)
+               .frame(maxWidth: .infinity)
+               .onAppear(perform: animateText)
+           }
+       }
+    
+    private func animateText() {
+        guard currentIndex < content.count else { return }
+           
+        displayedText += String(content[content.index(content.startIndex, offsetBy: currentIndex)])
+        currentIndex += 1
+           
+        DispatchQueue.main.asyncAfter(deadline: .now() + typewriterSpeed) {
+            animateText()
+        }
+    }
+    
+
+    init(imagePath: String, content: String, eightBitImage: UIImage?) {
+        self.imagePath = imagePath
+        self.content = content
+        self.eightBitImage = ImageLoader.loadImage(fromPath: imagePath)
     }
 }
 
-#Preview {
-    VStack {
-        Spacer()
-        DialogBoxView(content: "Here is what this looks like. What happens when the string gets really long and it reads like a paragraph? I wonder if there should be any arbitrary length limit or something like that")
-        Spacer()
-        Spacer()
-        Spacer()
-        Spacer()
-    }
-    
-}
+

@@ -53,6 +53,7 @@
 		CAE7E7702C41CA62002B761A /* Sessionless.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE7E76E2C41CA62002B761A /* Sessionless.swift */; };
 		CAF2B40E2C77E9390087DE2F /* CircularImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2B40D2C77E9390087DE2F /* CircularImagePickerView.swift */; };
 		CAF2B4102C77EEAC0087DE2F /* EightBitImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2B40F2C77EEAC0087DE2F /* EightBitImage.swift */; };
+		CAF2B4122C7968110087DE2F /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2B4112C7968110087DE2F /* ImageLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +105,7 @@
 		CAE7E76E2C41CA62002B761A /* Sessionless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sessionless.swift; sourceTree = "<group>"; };
 		CAF2B40D2C77E9390087DE2F /* CircularImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularImagePickerView.swift; sourceTree = "<group>"; };
 		CAF2B40F2C77EEAC0087DE2F /* EightBitImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EightBitImage.swift; sourceTree = "<group>"; };
+		CAF2B4112C7968110087DE2F /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +219,7 @@
 				CA1FE2072C6C417D00C3414B /* PreferencesModel.swift */,
 				CA433AF02C707EA100CDECC4 /* BDOModel.swift */,
 				CAF2B40F2C77EEAC0087DE2F /* EightBitImage.swift */,
+				CAF2B4112C7968110087DE2F /* ImageLoader.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				CA433B032C7260D000CDECC4 /* GatewayView.swift in Sources */,
 				CA1FE2022C6A936B00C3414B /* PlanetNine.swift in Sources */,
 				CACD591B2C48DD2C00813D20 /* ChatView.swift in Sources */,
+				CAF2B4122C7968110087DE2F /* ImageLoader.swift in Sources */,
 				CA34DD6F2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift in Sources */,
 				CACD590B2C41CF4E00813D20 /* UserModel.swift in Sources */,
 				CA1FE2062C6B33AF00C3414B /* ImagePickerView.swift in Sources */,

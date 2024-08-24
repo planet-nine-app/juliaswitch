@@ -117,6 +117,7 @@ struct ContentView: View {
                 }
             }
         })
+        case 6: Text("hello world")
         case 9: CircularImagePicker(viewState: $viewState)
         default: Button("To 0", role: .none) {
             self.viewState = 0

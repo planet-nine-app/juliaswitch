@@ -16,6 +16,7 @@ struct ConnectionView: View {
     @State var enteredText = ""
     @State var handle = ""
     @State var showDisassociateAlert = false
+    @State var startPressTime = ""
     let addOrUpdateImage: () -> Void
     var connection = KeyTuple(uuid: "foo", pubKey: "bar")
     let onPress: () -> Void
@@ -55,24 +56,38 @@ struct ConnectionView: View {
         let _ = print("should display image: \(imageName)")
         VStack {
             Button(action: onPress) {
-                Image(uiImage: (UIImage(contentsOfFile: imageName) ?? UIImage(named: "julia")) ?? UIImage())                    .resizable()
+                Image(uiImage: ImageLoader.loadImage(fromPath: imageName))                    .resizable()
                     .scaledToFill()
                     .frame(width: 120, height: 120)
                     .clipShape(Circle())
                     .gesture(
-                                LongPressGesture(minimumDuration: 0.5)
-                                    .onEnded { _ in
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { _ in
+                                if startPressTime == "" {
+                                    startPressTime = "".getTime()
+                                }
+                            }
+                            .onEnded { value in
+                                let now = "".getTime()
+                                print("diff: \((Int(now) ?? 1) - (Int(startPressTime) ?? 1))")
+                                if let now = Int(now),
+                                   let start = Int(startPressTime),
+                                   now - start < 200 {
+                                        startPressTime = ""
+                                        self.onPress()
+                                    } else {
+                                        startPressTime = ""
                                         showDisassociateAlert = true
                                     }
+                                }
                             )
-                    
             }
             .buttonStyle(PlainButtonStyle())
             .modifier(CircularConnectionStyle())
 //            .onLongPressGesture {
 //                showDisassociateAlert = true
 //            }
-            .alert(LocalizedStringKey("disassociated"), isPresented: $showDisassociateAlert) {
+            .alert(LocalizedStringKey("disassociate"), isPresented: $showDisassociateAlert) {
                 Button("Cancel", role: .cancel) {
                     print("Alert canceled")
                     showDisassociateAlert = false
@@ -126,7 +141,10 @@ struct ConnectionView: View {
                                     do {
                                         let prefUser = PrefUser(uuid: preferences.prefUUID, preferences: preferences.appPreferences)
                                         await Pref.savePreferences(prefUser: prefUser, newPreferences: prefUser.preferences) { err, prefUser in
-                                            print("ignore response here")
+                                            if let err = err {
+                                                print("ignore response here")
+                                                print(err)
+                                            }
                                         }
                                     }
                                 }

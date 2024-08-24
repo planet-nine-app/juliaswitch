@@ -194,7 +194,10 @@ class Network {
     
     class func sendMessage(baseURL: String, user: User, content: String, receiverUUID: String, callback: @escaping (Error?, Data?) -> Void) async {
         
-        guard let payload = PostableMessage(timestamp: "".getTime(), senderUUID: user.juliaUUID, receiverUUID: receiverUUID, content: content).toData() else { return }
+        guard let payload = PostableMessage(timestamp: "".getTime(), senderUUID: user.juliaUUID, receiverUUID: receiverUUID, content: content).toData() else { 
+            callback(NetworkError.networkError, nil)
+            return
+        }
         
         await Network.post(urlString: "\(baseURL)/message", payload: payload, callback: callback)
     }
@@ -213,7 +216,7 @@ class Network {
         
         guard let payload = PostablePreferences(timestamp: timestamp, prefUUID: prefUser.uuid, preferences: newPreferences).toData() else { return }
                 
-        await Network.put(urlString: baseURL, payload: payload, callback: callback)
+        await Network.put(urlString: "\(baseURL)/user/\(prefUser.uuid)/preferences", payload: payload, callback: callback)
     }
 }
 

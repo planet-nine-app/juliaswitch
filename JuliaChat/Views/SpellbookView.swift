@@ -32,6 +32,7 @@ struct Spellbook {
     func spellForSpellName(juliaUUID: String, spellName: String) -> Spell {
         switch spellName {
         case "connect": return Spell(timestamp: "".getTime(), spellName: "connect", casterUUID: juliaUUID, totalCost: 500, mp: true, ordinal: 1, casterSignature: "", gateways: [], additions: [])
+        case "imbue": return Spell(timestamp: "".getTime(), spellName: "connect", casterUUID: juliaUUID, totalCost: 500, mp: true, ordinal: 1, casterSignature: "", gateways: [], additions: [])
         default: return Spell()
         }
     }
@@ -39,7 +40,8 @@ struct Spellbook {
 
 struct SpellbookView: View {
     let spellbook = Spellbook(spells: [
-        SpellbookSpell(name: "connect", effect: "connect")
+        SpellbookSpell(name: "connect", effect: "connect"),
+        SpellbookSpell(name: "imbue", effect: "imbue")
     ])
     @Binding var isPresented: Bool
     @Binding var viewState: Int
@@ -47,6 +49,16 @@ struct SpellbookView: View {
     @State private var animationProgress: CGFloat = 0
     @State private var contentOpacity: Double = 0
     @State var emitterColor = Color.purple
+    
+    func dispatchSpell(_ spell: SpellbookSpell) {
+        switch spell.name {
+        case "connect": viewState = 4
+            break
+        case "imbue": viewState = 6
+            break
+        default: return
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -59,7 +71,7 @@ struct SpellbookView: View {
                             ParticleCanvasView(emitterColor: $emitterColor)
                         }
                         .onTapGesture {
-                            viewState = 4
+                            dispatchSpell(spell)
                         }
                     }
                 }

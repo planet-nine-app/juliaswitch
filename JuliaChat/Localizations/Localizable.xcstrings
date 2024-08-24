@@ -18,9 +18,6 @@
         }
       }
     },
-    "disassociated" : {
-
-    },
     "handleHelpText" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -31,6 +28,9 @@
           }
         }
       }
+    },
+    "hello world" : {
+
     },
     "letsGo" : {
       "extractionState" : "manual",

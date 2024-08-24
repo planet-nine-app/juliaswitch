@@ -82,10 +82,11 @@ struct ConnectionsView: View {
                     Spacer()
                     if displayText != "" {
                         Spacer()
-                        Spacer()
-                        Spacer()
-                        Spacer()
                     }
+                    let _ = print("should \(openSpellbook ? "" : "not ") open up spellbook")
+                    SpellbookView(isPresented: $openSpellbook, viewState: $viewState)
+                        .frame(width: 200, height: 200)
+                        .background(.clear)
                     HStack {
                         ForEach(users[0].connections(), id: \.uuid) { tuple in
                             
@@ -190,11 +191,8 @@ struct ConnectionsView: View {
                 }
                // .background(.blue)
                 .frame(width: 160, height: 48, alignment: .center)
-                .position(x: w / 2, y: h * 0.75)
-                let _ = print("should \(openSpellbook ? "" : "not ") open up spellbook")
-                SpellbookView(isPresented: $openSpellbook, viewState: $viewState)
-                    .frame(width: 200, height: 200)
-                    .background(.clear)
+                .position(x: w / 2, y: h * 0.55)
+                Spacer()
             }
             .onAppear {
                 let user = users[0]
