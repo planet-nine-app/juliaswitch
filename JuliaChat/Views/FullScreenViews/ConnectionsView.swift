@@ -75,8 +75,12 @@ struct ConnectionsView: View {
             ZStack {
                 if displayText != "" {
                     PlanetNineView(displayText: $displayText)
+                        .edgesIgnoringSafeArea(.all)
                 } else {
                     Image(backgroundImage)
+                        .resizable()
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
                 }
                 VStack {
                     Spacer()
@@ -192,8 +196,27 @@ struct ConnectionsView: View {
                // .background(.blue)
                 .frame(width: 160, height: 48, alignment: .center)
                 .position(x: w / 2, y: h * 0.55)
-                Spacer()
-            }
+                VStack {
+                   HStack {
+                       Spacer()
+                       Button(action: {
+                           print("Pref button tapped!")
+                           viewState = 7
+                       }) {
+                           Text("Pref")
+                               .padding(8)
+                               .background(.blue)
+                               .foregroundColor(.white)
+                               .cornerRadius(8)
+                       }
+                       .padding()
+                   }
+                   .padding(.top, 100)
+                   .padding(.trailing, 100)
+                   Spacer()
+               }
+           }
+           .edgesIgnoringSafeArea(.all)
             .onAppear {
                 let user = users[0]
                 if user.keys.interactingKeys.count == 0 {

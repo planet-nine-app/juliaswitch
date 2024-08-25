@@ -13,6 +13,7 @@
 		CA1FE2042C6A937400C3414B /* Pref.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE2032C6A937400C3414B /* Pref.swift */; };
 		CA1FE2062C6B33AF00C3414B /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE2052C6B33AF00C3414B /* ImagePickerView.swift */; };
 		CA1FE2082C6C417D00C3414B /* PreferencesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE2072C6C417D00C3414B /* PreferencesModel.swift */; };
+		CA26B1B72C7B017000794313 /* PrefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA26B1B62C7B017000794313 /* PrefView.swift */; };
 		CA34DD6D2C4E2E9D0018DBC0 /* DialogBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA34DD6C2C4E2E9D0018DBC0 /* DialogBoxView.swift */; };
 		CA34DD6F2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA34DD6E2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift */; };
 		CA433AE82C7064A400CDECC4 /* BLETwoWayPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA433AE42C7064A400CDECC4 /* BLETwoWayPeripheral.swift */; };
@@ -63,6 +64,7 @@
 		CA1FE2032C6A937400C3414B /* Pref.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pref.swift; sourceTree = "<group>"; };
 		CA1FE2052C6B33AF00C3414B /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		CA1FE2072C6C417D00C3414B /* PreferencesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesModel.swift; sourceTree = "<group>"; };
+		CA26B1B62C7B017000794313 /* PrefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefView.swift; sourceTree = "<group>"; };
 		CA34DD6C2C4E2E9D0018DBC0 /* DialogBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBoxView.swift; sourceTree = "<group>"; };
 		CA34DD6E2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBoxTextFieldView.swift; sourceTree = "<group>"; };
 		CA433AE42C7064A400CDECC4 /* BLETwoWayPeripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETwoWayPeripheral.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				CA433B002C7260C300CDECC4 /* CasterView.swift */,
 				CA433B022C7260D000CDECC4 /* GatewayView.swift */,
 				CAF2B40D2C77E9390087DE2F /* CircularImagePickerView.swift */,
+				CA26B1B62C7B017000794313 /* PrefView.swift */,
 			);
 			path = FullScreenViews;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				CA433AEB2C7064A400CDECC4 /* BLEMAGICPeripheral.swift in Sources */,
 				CACD59122C47935B00813D20 /* PromptModel.swift in Sources */,
 				CA1FE1FE2C6A90D200C3414B /* ResponseHandler.swift in Sources */,
+				CA26B1B72C7B017000794313 /* PrefView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

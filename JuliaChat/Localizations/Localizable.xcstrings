@@ -18,6 +18,17 @@
         }
       }
     },
+    "eject" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eject"
+          }
+        }
+      }
+    },
     "handleHelpText" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -180,6 +191,9 @@
           }
         }
       }
+    },
+    "Pref" : {
+
     },
     "Select Image" : {
 
