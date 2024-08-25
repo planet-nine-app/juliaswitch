@@ -70,7 +70,7 @@ struct PrefView: View {
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
             
-            Button(action: {
+            JuliaButton(label: "eject") {
                 Task {
                     do {
                         await Julia.deleteJuliaUser(user: users[0])
@@ -81,8 +81,6 @@ struct PrefView: View {
                         }
                     }
                 }
-            }) {
-                Text(LocalizedStringKey("eject"))
             }
         }
     }

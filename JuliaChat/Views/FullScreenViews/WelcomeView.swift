@@ -42,6 +42,9 @@ struct WelcomeView: View {
                         JuliaButton(label: "letsGo") {
                             print("button pressed")
                             Task {
+                                let preference = Preferences(appPreferences: [String: String](), globalPreferences: [String: String]())
+                                modelContext.insert(preference)
+                                try? modelContext.save()
                                 await Julia.createUser(handle: enteredText) { err, user in
                                     if let err = err {
                                         return

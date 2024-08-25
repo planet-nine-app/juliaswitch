@@ -220,7 +220,7 @@ struct ConnectionsView: View {
             .onAppear {
                 let user = users[0]
                 if user.keys.interactingKeys.count == 0 {
-                    displayText = "noConnections"
+                    //displayText = "noConnections"
                 }
             }
             .sheet(isPresented: $showImagePicker) {

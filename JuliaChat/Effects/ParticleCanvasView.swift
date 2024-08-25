@@ -13,10 +13,12 @@ struct ParticleCanvasView: View {
     let startingParticleOffsets: [CGFloat]
     let startingParticleAlphas: [CGFloat]
     @Binding var emitterColor: Color
+    @Binding var log: String
     @State var tagState = 0
     
-    init(emitterColor: Binding<Color>, particleCount: Int = 200, movementDuration: Double = 3.0) {
+    init(emitterColor: Binding<Color>, log: Binding<String>, particleCount: Int = 200, movementDuration: Double = 3.0) {
         self._emitterColor = emitterColor
+        self._log = log
         self.particleCount = particleCount
         self.movementDuration = movementDuration
         self.startingParticleOffsets = Array(0..<particleCount).map {_ in CGFloat.random(in: 0...1)}
@@ -62,6 +64,7 @@ struct ParticleCanvasView: View {
                     .tag(4)
             }
             .onChange(of: emitterColor) {
+                log = "\(log)\nin particle effect deal: \(emitterColor)"
                 switch emitterColor {
                 case .orange: tagState = 1
                     break

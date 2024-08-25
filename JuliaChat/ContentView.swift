@@ -61,7 +61,7 @@ struct ContentView: View {
         case 2: ChatView(viewState: $viewState, receiverUUID: $receiverUUID)
             //StripeBottomSheet()
         case 3: ImagePickerView()
-        case 4: CasterView(log: $log, readCallback: { value in
+        case 4: CasterView(viewState: $viewState, readCallback: { value in
             log = "\(log)\nreceived gateway value: \(value)"
             print("received gateway value: \(value)")
             //Task {
@@ -82,7 +82,7 @@ struct ContentView: View {
             log = "\(log)\nnotification value: \(value)"
             print("notification value: \(value)")
         }, spellName: "connect")
-        case 5: GatewayView(log: $log, readRequestCallback: {
+        case 5: GatewayView(viewState: $viewState, readRequestCallback: {
             return users[0].mostRecentPrompt() ?? ""
         }, spellReceivedCallback: { spell in
             log = "\(log)\ngot spell: \(spell.toString())"

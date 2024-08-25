@@ -43,6 +43,7 @@ struct SpellbookView: View {
         SpellbookSpell(name: "connect", effect: "connect"),
         SpellbookSpell(name: "imbue", effect: "imbue")
     ])
+    @State var log = ""
     @Binding var isPresented: Bool
     @Binding var viewState: Int
     
@@ -68,7 +69,7 @@ struct SpellbookView: View {
                         HStack {
                             Text(spell.name)
                             Spacer()
-                            ParticleCanvasView(emitterColor: $emitterColor)
+                            ParticleCanvasView(emitterColor: $emitterColor, log: $log)
                         }
                         .onTapGesture {
                             dispatchSpell(spell)

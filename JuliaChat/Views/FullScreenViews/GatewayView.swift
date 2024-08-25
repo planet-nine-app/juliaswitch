@@ -7,43 +7,55 @@
 
 import SwiftUI
 
-struct GatewayView: View {
+class GatewayViewModel: ObservableObject {
+    @Published var emitterColor: Color = .purple
+    @Published var log: String = ""
+    
     let readRequestCallback: () -> String
-    let spellReceivedCallback: (_ spell: Spell) -> Void
+    let spellReceivedCallback: (Spell) -> Void
     var gateway: BLEMAGICPeripheral?
-    @State var emitterColor = Color.purple
-    @Binding var log: String
     
-    
-    
-    var body: some View {
-        ZStack {
-            ParticleCanvasView(emitterColor: $emitterColor)
-            Text(log)
-                .foregroundColor(.white)
-                .background(.blue)
-        }
-    }
-    
-    init(log: Binding<String>, readRequestCallback: @escaping () -> String, spellReceivedCallback: @escaping (_ spell: Spell) -> Void, gateway: BLEMAGICPeripheral? = nil) {
+    init(readRequestCallback: @escaping () -> String, spellReceivedCallback: @escaping (Spell) -> Void) {
         self.readRequestCallback = readRequestCallback
         self.spellReceivedCallback = spellReceivedCallback
-        self._log = log
-        self.gateway = BLEMAGICPeripheral(readRequestCallback: readCallback, spellReceivedCallback: spellCallback(_:))
+        self.gateway = BLEMAGICPeripheral(readRequestCallback: self.readCallback, spellReceivedCallback: self.spellCallback)
     }
     
-    func changeEmitterColor() -> Void {
-        emitterColor = emitterColor == Color.purple ? Color.orange : Color.pink
+    func changeEmitterColor() {
+        emitterColor = emitterColor == .purple ? .orange : .pink
+        log += "\nshould change emitterColor to: \(emitterColor)"
     }
     
     func readCallback() -> String {
         changeEmitterColor()
-        return self.readRequestCallback()
+        return readRequestCallback()
     }
     
-    func spellCallback(_ spell: Spell) -> Void {
+    func spellCallback(_ spell: Spell) {
         changeEmitterColor()
-        self.spellReceivedCallback(spell)
+        spellReceivedCallback(spell)
+    }
+}
+
+struct GatewayView: View {
+    @StateObject private var viewModel: GatewayViewModel
+    @Binding var viewState: Int
+    
+    init(viewState: Binding<Int>, readRequestCallback: @escaping () -> String, spellReceivedCallback: @escaping (Spell) -> Void) {
+        self._viewState = viewState
+        _viewModel = StateObject(wrappedValue: GatewayViewModel(readRequestCallback: readRequestCallback, spellReceivedCallback: spellReceivedCallback))
+    }
+    
+    var body: some View {
+        ZStack {
+            ParticleCanvasView(emitterColor: $viewModel.emitterColor, log: $viewModel.log)
+            Text(viewModel.log)
+                .foregroundColor(.white)
+                .background(.blue)
+                .onTapGesture {
+                    viewState = 1
+                }
+        }
     }
 }
 
