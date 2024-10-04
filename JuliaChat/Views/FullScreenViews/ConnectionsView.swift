@@ -21,6 +21,7 @@ struct ConnectionsView: View {
     @State var showImagePicker: Bool = false
     @State var selectedImage: UIImage?
     @State var selectedTuple: KeyTuple?
+    @State var nfcReader: NFCReader!
     @Binding var viewState: Int
     @Binding var receiverUUID: String
     
@@ -38,6 +39,9 @@ struct ConnectionsView: View {
     }
     
     func getPrompt() async {
+        nfcReader = NFCReader()
+        nfcReader.startScanning()
+        print("starting the NFC scanning")
         Task {
             await Julia.getPrompt(user: users[0]) { err, user in
                 if let err = err {

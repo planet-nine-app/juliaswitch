@@ -35,6 +35,15 @@ class GatewayViewModel: ObservableObject {
         changeEmitterColor()
         spellReceivedCallback(spell)
     }
+    
+    func foo(_ dict: [String: String]) {
+        print(dict)
+    }
+    
+    func bar() {
+        foo(["changeMe": "value"])
+        foo(["changeMe": "anotherValue"])
+    }
 }
 
 struct GatewayView: View {

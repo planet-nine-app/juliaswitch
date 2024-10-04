@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA14C4202CA993F300056DA0 /* NFCMAGIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA14C41F2CA993F300056DA0 /* NFCMAGIC.swift */; };
 		CA1FE1FE2C6A90D200C3414B /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE1FD2C6A90D200C3414B /* ResponseHandler.swift */; };
 		CA1FE2002C6A935F00C3414B /* Julia.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE1FF2C6A935F00C3414B /* Julia.swift */; };
 		CA1FE2022C6A936B00C3414B /* PlanetNine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1FE2012C6A936B00C3414B /* PlanetNine.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA14C41F2CA993F300056DA0 /* NFCMAGIC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCMAGIC.swift; sourceTree = "<group>"; };
 		CA1FE1FD2C6A90D200C3414B /* ResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHandler.swift; sourceTree = "<group>"; };
 		CA1FE1FF2C6A935F00C3414B /* Julia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Julia.swift; sourceTree = "<group>"; };
 		CA1FE2012C6A936B00C3414B /* PlanetNine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetNine.swift; sourceTree = "<group>"; };
@@ -122,6 +124,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA14C41E2CA993D600056DA0 /* NFC */ = {
+			isa = PBXGroup;
+			children = (
+				CA14C41F2CA993F300056DA0 /* NFCMAGIC.swift */,
+			);
+			path = NFC;
+			sourceTree = "<group>";
+		};
 		CA433AE32C70649600CDECC4 /* BLE */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +195,7 @@
 		CA7EFB192C41C7C6009A8FDD /* JuliaChat */ = {
 			isa = PBXGroup;
 			children = (
+				CA14C41E2CA993D600056DA0 /* NFC */,
 				CA433AFA2C717EB900CDECC4 /* Info.plist */,
 				CA433AF22C71510400CDECC4 /* Effects */,
 				CA433AE32C70649600CDECC4 /* BLE */,
@@ -369,6 +380,7 @@
 				CAF2B4122C7968110087DE2F /* ImageLoader.swift in Sources */,
 				CA34DD6F2C50D29D0018DBC0 /* DialogBoxTextFieldView.swift in Sources */,
 				CACD590B2C41CF4E00813D20 /* UserModel.swift in Sources */,
+				CA14C4202CA993F300056DA0 /* NFCMAGIC.swift in Sources */,
 				CA1FE2062C6B33AF00C3414B /* ImagePickerView.swift in Sources */,
 				CA433AF92C716F6F00CDECC4 /* ImageButtonView.swift in Sources */,
 				CA433AEA2C7064A400CDECC4 /* BLETwoWayCentral.swift in Sources */,
@@ -528,6 +540,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JuliaChat/Info.plist;
+				INFOPLIST_KEY_NFCReaderUsageDescription = "To make connections";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Just because we named these things, doesn't take away from the fact that they're invisible wave of energy floating around that you can tap into.";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "And once we've tapped into the waves, we can use them for magic!";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -568,6 +581,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JuliaChat/Info.plist;
+				INFOPLIST_KEY_NFCReaderUsageDescription = "To make connections";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Just because we named these things, doesn't take away from the fact that they're invisible wave of energy floating around that you can tap into.";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "And once we've tapped into the waves, we can use them for magic!";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
