@@ -1,12 +1,26 @@
+use julia_rs::{Julia, JuliaUser};
 use sessionless::hex::IntoHex;
 use sessionless::{Sessionless};
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
-fn greet(name: &str) -> String {
+async fn greet(name: &str) -> Result<String, String> {
     let sessionless = Sessionless::new();
 println!("foo");
-    format!("Hello, {}! You've been greeted from Rust!", sessionless.private_key().to_hex())
+    let julia = Julia::new(Some("http://localhost:3000/".to_string()));
+    let public_key = julia.sessionless.public_key().to_hex();
+    let handle = "handle1".to_string();
+    let julia_user = JuliaUser::new(public_key, handle);
+    let result = julia.create_user(julia_user).await;
+
+    match result {
+      Ok(user) => {
+          Ok(format!("hello, {}! You've been greeted from Rust!", user.uuid))
+      },
+      Err(error) => {
+	Ok("ERROR".to_string())
+      }
+    }
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]

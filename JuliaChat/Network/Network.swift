@@ -11,19 +11,19 @@ enum NetworkError: Error {
     case networkError
 }
 
-/*enum ServiceURLs: String {
+enum ServiceURLs: String {
     case julia = "http://localhost:3000"
     case planetNine = "http://localhost:3001"
     case pref = "http://localhost:3002"
     case bdo = "http://localhost:3003"
-}*/
+}
 
-enum ServiceURLs: String {
+/*enum ServiceURLs: String {
     case julia = "http://192.168.68.111:3000"
     case planetNine = "http://192.168.68.111:3001"
     case pref = "http://192.168.68.111:3002"
     case bdo = "http://192.168.68.111:3003"
-}
+}*/
 
 class Network {
     class func get(urlString: String, callback: @escaping (Error?, Data?) -> Void) async {
